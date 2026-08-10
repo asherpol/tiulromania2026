@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>תוכנית טיול מפורטת - רומניה 2026</title>
+    <title>תוכנית טיול משפחות מפורטת - 2026</title>
     <style>
         :root {
             --primary: #1e3a8a;
@@ -28,13 +28,13 @@
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         header {
             text-align: center;
-            padding: 30px 20px;
+            padding: 35px 20px;
             background: linear-gradient(135deg, #1e3a8a 0%, #0284c7 100%);
             color: white;
             border-radius: 16px;
@@ -79,10 +79,21 @@
         .day-card {
             background: var(--card-bg);
             border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
             border-top: 6px solid var(--accent);
+            overflow: hidden;
+        }
+
+        .day-image {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .day-content {
+            padding: 25px;
         }
 
         .day-header {
@@ -97,7 +108,7 @@
         }
 
         .day-title {
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             font-weight: bold;
             color: var(--primary);
         }
@@ -119,7 +130,7 @@
 
         .schedule-item {
             position: relative;
-            padding-right: 30px;
+            padding-right: 28px;
             margin-bottom: 15px;
         }
 
@@ -179,8 +190,9 @@
         @media (max-width: 600px) {
             body { padding: 10px; }
             header h1 { font-size: 1.6rem; }
-            .day-card { padding: 15px; }
+            .day-content { padding: 15px; }
             .day-title { font-size: 1.15rem; }
+            .day-image { height: 180px; }
         }
     </style>
 </head>
@@ -188,7 +200,7 @@
 
 <div class="container">
     <header>
-        <h1>🇷🇴 תוכנית טיול משפחות מפורטת ברומניה 2026</h1>
+        <h1>מסלול טיול משפחות מפורט - 2026</h1>
         <p>19/09/2026 – 28/09/2026 (10 ימים / 9 לילות)</p>
     </header>
 
@@ -209,231 +221,261 @@
 
     <!-- יום 1 -->
     <div class="day-card" style="border-top-color: #ef4444;">
-        <div class="day-header">
-            <span class="day-title">יום 1 | נחיתה ונסיעה לרכס ההרים</span>
-            <span class="day-date">שבת, 19/09/2026</span>
+        <img class="day-image" src="https://images.unsplash.com/photo-1584646098378-0874589d76b1?auto=format&fit=crop&w=1000&q=80" alt="בראשוב העיר העתיקה">
+        <div class="day-content">
+            <div class="day-header">
+                <span class="day-title">יום 1 | נחיתה ונסיעה לרכס ההרים</span>
+                <span class="day-date">שבת, 19/09/2026</span>
+            </div>
+            <ul class="schedule">
+                <li class="schedule-item">
+                    <span class="time">14:00</span> נחיתה בנמל התעופה בוקרשט אוטופני (OTP), איסוף הרכב השכור ויציאה לדרך.
+                    <div class="drive-badge">🚘 נסיעה מנמל התעופה לבראשוב: ~150 ק"מ | ⏱️ כ-2.5 עד 3.5 שעות (כביש DN1)</div>
+                </li>
+                <li class="schedule-item">
+                    <span class="time">18:30 – 20:00</span> הגעה לבראשוב, צ'ק-אין בדירה והתרעננות.
+                    <div class="drive-badge">🚘 נסיעה מהדירה לעיר העתיקה: ~3 ק"מ | ⏱️ כ-8–10 דקות</div>
+                </li>
+                <li class="schedule-item">
+                    <span class="time">ערב</span> סיור רגלי בכיכר המועצה (Piața Sfatului) וברחוב הרפובליקה (Strada Republicii), וארוחת ערב פתיחה בעיר העתיקה.
+                </li>
+            </ul>
         </div>
-        <ul class="schedule">
-            <li class="schedule-item">
-                <span class="time">14:00</span> נחיתה בנמל התעופה בוקרשט אוטופני (OTP), איסוף הרכב השכור ויציאה לדרך.
-                <div class="drive-badge">🚘 נסיעה מנמל התעופה לבראשוב: ~150 ק"מ | ⏱️ כ-2.5 עד 3.5 שעות (כביש DN1)</div>
-            </li>
-            <li class="schedule-item">
-                <span class="time">18:30 – 20:00</span> הגעה לבראשוב, צ'ק-אין בדירה והתרעננות.
-                <div class="drive-badge">🚘 נסיעה מהדירה לעיר העתיקה: ~3 ק"מ | ⏱️ כ-8–10 דקות</div>
-            </li>
-            <li class="schedule-item">
-                <span class="time">ערב</span> סיור רגלי בכיכר המועצה (Piața Sfatului) וברחוב הרפובליקה (Strada Republicii), וארוחת ערב פתיחה בעיר העתיקה.
-            </li>
-        </ul>
     </div>
 
     <!-- יום 2 -->
     <div class="day-card" style="border-top-color: #f97316;">
-        <div class="day-header">
-            <span class="day-title">יום 2 | בוקר אלפיני, קארטינג והיערכות לערב יום כיפור</span>
-            <span class="day-date">ראשון, 20/09/2026</span>
+        <img class="day-image" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1000&q=80" alt="הר טמפה ותצפית">
+        <div class="day-content">
+            <div class="day-header">
+                <span class="day-title">יום 2 | בוקר אלפיני, קארטינג והיערכות לערב יום כיפור</span>
+                <span class="day-date">ראשון, 20/09/2026</span>
+            </div>
+            <ul class="schedule">
+                <li class="schedule-item">
+                    <span class="time">09:00 – 12:00</span> פעילות בוקר קלה בבראשוב וסביבתה (בחירה מתוך האפשרויות):
+                    <div class="options-list">
+                        <h4>אפשרויות לבחירה:</h4>
+                        <ul>
+                            <li><strong>חלופה א' (תצפית):</strong> עלייה ברכבל לתצפית מהר טמפה (Tâmpa) מעל העיר העתיקה (~10 דקות נסיעה).</li>
+                            <li><strong>חלופה ב' (אקסטרים מקורה):</strong> קארטינג מקורה ב-Vmax Karting Brașov (~12 דקות נסיעה).</li>
+                            <li><strong>חלופה ג' (טבע ואוויר הרים):</strong> ענידה ברכב לעיירת הנופש פואיאנה בראשוב (Poiana Brașov) לסיור סביב האגם (~20 דקות נסיעה).</li>
+                            <li><strong>שילוב קל:</strong> סיור ברחוב השוט (Strada Sforii – הצר באירופה) ובמגדל השחור/הלבן.</li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="schedule-item">
+                    <span class="time">12:30 – 15:00</span> הצטיידות בסופרמרקט גדול (Carrefour / Kaufland / Auchan) במזון, שתייה ומוצרים למוצאי הצום.
+                    <div class="drive-badge">🚘 נסיעה מהסופרמרקט חזרה לדירה: ~4 ק"מ | ⏱️ כ-10 דקות</div>
+                </li>
+                <li class="schedule-item">
+                    <span class="time">15:00</span> סיום נסיעות ופעילויות מוחלט, מנוחה בדירה והכנה לארוחה מפסקת.
+                </li>
+            </ul>
         </div>
-        <ul class="schedule">
-            <li class="schedule-item">
-                <span class="time">09:00 – 12:00</span> פעילות בוקר קלה בבראשוב וסביבתה (בחירה מתוך האפשרויות):
-                <div class="options-list">
-                    <h4>אפשרויות לבחירה:</h4>
-                    <ul>
-                        <li><strong>חלופה א' (תצפית):</strong> עלייה ברכבל לתצפית מהר טמפה (Tâmpa) מעל העיר העתיקה (~10 דקות נסיעה).</li>
-                        <li><strong>חלופה ב' (אקסטרים מקורה):</strong> קארטינג מקורה ב-Vmax Karting Brașov (~12 דקות נסיעה).</li>
-                        <li><strong>חלופה ג' (טבע ואוויר הרים):</strong> ענידה ברכב לעיירת הנופש פואיאנה בראשוב (Poiana Brașov) לסיור סביב האגם (~20 דקות נסיעה).</li>
-                        <li><strong>שילוב קל:</strong> סיור ברחוב השוט (Strada Sforii – הצר באירופה) ובמגדל השחור/הלבן.</li>
-                    </ul>
-                </div>
-            </li>
-            <li class="schedule-item">
-                <span class="time">12:30 – 15:00</span> הצטיידות בסופרמרקט גדול (Carrefour / Kaufland / Auchan) במזון, שתייה ומוצרים למוצאי הצום.
-                <div class="drive-badge">🚘 נסיעה מהסופרמרקט חזרה לדירה: ~4 ק"מ | ⏱️ כ-10 דקות</div>
-            </li>
-            <li class="schedule-item">
-                <span class="time">15:00</span> סיום נסיעות ופעילויות מוחלט, מנוחה בדירה והכנה לארוחה מפסקת.
-            </li>
-        </ul>
     </div>
 
     <!-- יום 3 -->
     <div class="day-card" style="border-top-color: #64748b;">
-        <div class="day-header">
-            <span class="day-title">יום 3 | יום כיפור (יום מנוחה וצום)</span>
-            <span class="day-date">שני, 21/09/2026</span>
+        <img class="day-image" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80" alt="יום מנוחה ורוגע">
+        <div class="day-content">
+            <div class="day-header">
+                <span class="day-title">יום 3 | יום כיפור (יום מנוחה וצום)</span>
+                <span class="day-date">שני, 21/09/2026</span>
+            </div>
+            <div class="drive-badge" style="background:#f1f5f9; border-color:#94a3b8; color:#475569;">
+                🚘 מרחק וזמן נסיעה: 0 ק"מ (ללא נסיעות)
+            </div>
+            <ul class="schedule">
+                <li class="schedule-item">
+                    <span class="time">מהלך היום</span> יום מנוחה מלא בדירה המאובזרת בבראשוב.
+                </li>
+                <li class="schedule-item">
+                    <span class="time">אפשרות (רשות)</span> טיול רגלי קל ורגוע בסביבה הקרובה של הדירה או בסמטאות העיר העתיקה.
+                </li>
+                <li class="schedule-item">
+                    <span class="time">ערב (מוצאי הצום)</span> ארוחה קלה בדירה מהמזון שהוכן מראש.
+                </li>
+            </ul>
         </div>
-        <div class="drive-badge" style="background:#f1f5f9; border-color:#94a3b8; color:#475569;">
-            🚘 מרחק וזמן נסיעה: 0 ק"מ (ללא נסיעות)
-        </div>
-        <ul class="schedule">
-            <li class="schedule-item">
-                <span class="time">מהלך היום</span> יום מנוחה מלא בדירה המאובזרת בבראשוב.
-            </li>
-            <li class="schedule-item">
-                <span class="time">אפשרות (רשות)</span> טיול רגלי קל ורגוע בסביבה הקרובה של הדירה או בסמטאות העיר העתיקה.
-            </li>
-            <li class="schedule-item">
-                <span class="time">ערב (מוצאי הצום)</span> ארוחה קלה בדירה מהמזון שהוכן מראש.
-            </li>
-        </ul>
     </div>
 
     <!-- יום 4 -->
     <div class="day-card" style="border-top-color: #10b981;">
-        <div class="day-header">
-            <span class="day-title">יום 4 | שמורת הדובים, טירת בראן ואקסטרים</span>
-            <span class="day-date">שלישי, 22/09/2026</span>
-        </div>
-        <ul class="schedule">
-            <li class="schedule-item">
-                <span class="time">08:45 – 12:00</span> סיור מודרך בשמורת הדובים בזרנשט (Libearty Bear Sanctuary).
-                <div class="drive-badge">🚘 נסיעה מבראשוב לזרנשט: ~30 ק"מ | ⏱️ כ-35–40 דקות</div>
-            </li>
-            <li class="schedule-item">
-                <span class="time">12:30 – 14:30</span> ביקור בטירת בראן ("טירת דרקולה") ובשוק המקומי למרגלותיה.
-                <div class="drive-badge">🚘 נסיעה מזרנשט לבראן: ~15 ק"מ | ⏱️ כ-20 דקות</div>
-            </li>
-            <li class="schedule-item">
-                <span class="time">15:30 – 18:00</span> אקסטרים משפחתי: פארק החבלים Parc Aventura Brașov או קארטינג (Prejmer / Vmax).
-                <div class="drive-badge">🚘 נסיעה מבראן לפארק האקסטרים: ~30 ק"מ | ⏱️ כ-35 דקות</div>
-            </li>
-        </ul>
-        <div class="alert-box">
-            <strong>⚠️ דגשים קריטיים:</strong>
-            1. בשמורת הדובים חובה להזמין כרטיסים מראש באינטרנט.
-            2. הכניסה לילדים מתחת לגיל 5 אסורה בהחלט מטעמי בטיחות (יש להציג דרכונים בכניסה).
+        <img class="day-image" src="https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=1000&q=80" alt="טירת בראן ושמורת הדובים">
+        <div class="day-content">
+            <div class="day-header">
+                <span class="day-title">יום 4 | שמורת הדובים, טירת בראן ואקסטרים</span>
+                <span class="day-date">שלישי, 22/09/2026</span>
+            </div>
+            <ul class="schedule">
+                <li class="schedule-item">
+                    <span class="time">08:45 – 12:00</span> סיור מודרך בשמורת הדובים בזרנשט (Libearty Bear Sanctuary).
+                    <div class="drive-badge">🚘 נסיעה מבראשוב לזרנשט: ~30 ק"מ | ⏱️ כ-35–40 דקות</div>
+                </li>
+                <li class="schedule-item">
+                    <span class="time">12:30 – 14:30</span> ביקור בטירת בראן ("טירת דרקולה") ובשוק המקומי למרגלותיה.
+                    <div class="drive-badge">🚘 נסיעה מזרנשט לבראן: ~15 ק"מ | ⏱️ כ-20 דקות</div>
+                </li>
+                <li class="schedule-item">
+                    <span class="time">15:30 – 18:00</span> אקסטרים משפחתי: פארק החבלים Parc Aventura Brașov או קארטינג (Prejmer / Vmax).
+                    <div class="drive-badge">🚘 נסיעה מבראן לפארק האקסטרים: ~30 ק"מ | ⏱️ כ-35 דקות</div>
+                </li>
+            </ul>
+            <div class="alert-box">
+                <strong>⚠️ דגשים קריטיים:</strong>
+                1. בשמורת הדובים חובה להזמין כרטיסים מראש באינטרנט.
+                2. הכניסה לילדים מתחת לגיל 5 אסורה בהחלט מטעמי בטיחות (יש להציג דרכונים בכניסה).
+            </div>
         </div>
     </div>
 
     <!-- יום 5 -->
     <div class="day-card" style="border-top-color: #06b6d4;">
-        <div class="day-header">
-            <span class="day-title">יום 5 | קניון 7 הסולמות, חוות דייג ושופינג</span>
-            <span class="day-date">רביעי, 23/09/2026</span>
+        <img class="day-image" src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1000&q=80" alt="קניון 7 הסולמות וטבע">
+        <div class="day-content">
+            <div class="day-header">
+                <span class="day-title">יום 5 | קניון 7 הסולמות, חוות דייג ושופינג</span>
+                <span class="day-date">רביעי, 23/09/2026</span>
+            </div>
+            <ul class="schedule">
+                <li class="schedule-item">
+                    <span class="time">09:30 – 13:30</span> מסלול הליכה ביער וטיפוס בסולמות מתכת בקניון 7 הסולמות (Canionul 7 Scări).
+                    <div class="drive-badge">🚘 נסיעה מבראשוב לחניית הקניון בדולנשט: ~12 ק"מ | ⏱️ כ-15–20 דקות</div>
+                </li>
+                <li class="schedule-item">
+                    <span class="time">14:30 – 17:00</span> דייג עצמאי ולאחריו ארוחת צהריים/ערב של הדגים שתדוגו בחוות הפורלים (Păstrăvărie Râșnov).
+                    <div class="drive-badge">🚘 נסיעה מהקניון לחוות הדייג: ~25 ק"מ | ⏱️ כ-25–30 דקות</div>
+                </li>
+                <li class="schedule-item">
+                    <span class="time">18:00 – 20:00</span> קניות וזמן חופשי במרכז המסחרי Coresi Shopping Resort בבראשוב.
+                    <div class="drive-badge">🚘 נסיעה מחוות הדייג לקניון Coresi: ~20 ק"מ | ⏱️ כ-25 דקות</div>
+                </li>
+            </ul>
         </div>
-        <ul class="schedule">
-            <li class="schedule-item">
-                <span class="time">09:30 – 13:30</span> מסלול הליכה ביער וטיפוס בסולמות מתכת בקניון 7 הסולמות (Canionul 7 Scări).
-                <div class="drive-badge">🚘 נסיעה מבראשוב לחניית הקניון בדולנשט: ~12 ק"מ | ⏱️ כ-15–20 דקות</div>
-            </li>
-            <li class="schedule-item">
-                <span class="time">14:30 – 17:00</span> דייג עצמאי ולאחריו ארוחת צהריים/ערב של הדגים שתדוגו בחוות הפורלים (Păstrăvărie Râșnov).
-                <div class="drive-badge">🚘 נסיעה מהקניון לחוות הדייג: ~25 ק"מ | ⏱️ כ-25–30 דקות</div>
-            </li>
-            <li class="schedule-item">
-                <span class="time">18:00 – 20:00</span> קניות וזמן חופשי במרכז המסחרי Coresi Shopping Resort בבראשוב.
-                <div class="drive-badge">🚘 נסיעה מחוות הדייג לקניון Coresi: ~20 ק"מ | ⏱️ כ-25 דקות</div>
-            </li>
-        </ul>
     </div>
 
     <!-- יום 6 -->
     <div class="day-card" style="border-top-color: #3b82f6;">
-        <div class="day-header">
-            <span class="day-title">יום 6 | טראנספגראשן ברכבל + פארק מים בבראשוב</span>
-            <span class="day-date">חמישי, 24/09/2026</span>
+        <img class="day-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80" alt="טראנספגראשן ואגם באליה">
+        <div class="day-content">
+            <div class="day-header">
+                <span class="day-title">יום 6 | טראנספגראשן ברכבל + פארק מים בבראשוב</span>
+                <span class="day-date">חמישי, 24/09/2026</span>
+            </div>
+            <ul class="schedule">
+                <li class="schedule-item">
+                    <span class="time">08:30 – 12:30</span> נסיעה בכביש ההררי ועלייה ברכבל (Bâlea Telecabina) הישר לאגם באליה בגובה 2,034 מטרים.
+                    <div class="drive-badge">🚘 נסיעה מבראשוב לתחנת הרכבל: ~100 ק"מ | ⏱️ כ-1.5 שעות לכל כיוון</div>
+                </li>
+                <li class="schedule-item">
+                    <span class="time">14:30 – 18:30</span> בילוי וכיף בפארק המים Paradisul Acvatic בבראשוב (בריכות מחוממות, מגלשות וג'קוזי).
+                    <div class="drive-badge">🚘 נסיעה חזרה מבאליה לפארק המים בבראשוב: ~100 ק"מ | ⏱️ כ-1.5 שעות</div>
+                </li>
+            </ul>
         </div>
-        <ul class="schedule">
-            <li class="schedule-item">
-                <span class="time">08:30 – 12:30</span> נסיעה בכביש ההררי ועלייה ברכבל (Bâlea Telecabina) הישר לאגם באליה בגובה 2,034 מטרים.
-                <div class="drive-badge">🚘 נסיעה מבראשוב לתחנת הרכבל: ~100 ק"מ | ⏱️ כ-1.5 שעות לכל כיוון</div>
-            </li>
-            <li class="schedule-item">
-                <span class="time">14:30 – 18:30</span> בילוי וכיף בפארק המים Paradisul Acvatic בבראשוב (בריכות מחוממות, מגלשות וג'קוזי).
-                <div class="drive-badge">🚘 נסיעה חזרה מבאליה לפארק המים בבראשוב: ~100 ק"מ | ⏱️ כ-1.5 שעות</div>
-            </li>
-        </ul>
     </div>
 
     <!-- יום 7 -->
     <div class="day-card" style="border-top-color: #8b5cf6;">
-        <div class="day-header">
-            <span class="day-title">יום 7 | עמק פראחובה ומעבר לבוקרשט</span>
-            <span class="day-date">שישי, 25/09/2026</span>
+        <img class="day-image" src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1000&q=80" alt="סינאיה ובוקרשט">
+        <div class="day-content">
+            <div class="day-header">
+                <span class="day-title">יום 7 | עמק פראחובה ומעבר לבוקרשט</span>
+                <span class="day-date">שישי, 25/09/2026</span>
+            </div>
+            <ul class="schedule">
+                <li class="schedule-item">
+                    <span class="time">09:30 – 14:00</span> עלייה ברכבל בסינאיה (גובה 1400/2000 מטר) וגלישה במגלשת ההרים האלפינית (Alpine Coaster Sinaia).
+                    <div class="drive-badge">🚘 נסיעה מבראשוב לסינאיה: ~45 ק"מ | ⏱️ כ-50 דקות</div>
+                </li>
+                <li class="schedule-item">
+                    <span class="time">15:00 – 17:30</span> נסיעה לבוקרשט וצ'ק-אין במלון/דירה.
+                    <div class="drive-badge">🚘 נסיעה מסינאיה לבוקרשט: ~120 ק"מ | ⏱️ כ-2 עד 2.5 שעות (נגד כיוון הפקקים)</div>
+                </li>
+                <li class="schedule-item">
+                    <span class="time">18:00 ומעלה</span> בילוי ערב, שופינג והחלקה על הקרח בקניון AFI Cotroceni בבוקרשט.
+                </li>
+            </ul>
         </div>
-        <ul class="schedule">
-            <li class="schedule-item">
-                <span class="time">09:30 – 14:00</span> עלייה ברכבל בסינאיה (גובה 1400/2000 מטר) וגלישה במגלשת ההרים האלפינית (Alpine Coaster Sinaia).
-                <div class="drive-badge">🚘 נסיעה מבראשוב לסינאיה: ~45 ק"מ | ⏱️ כ-50 דקות</div>
-            </li>
-            <li class="schedule-item">
-                <span class="time">15:00 – 17:30</span> נסיעה לבוקרשט וצ'ק-אין במלון/דירה.
-                <div class="drive-badge">🚘 נסיעה מסינאיה לבוקרשט: ~120 ק"מ | ⏱️ כ-2 עד 2.5 שעות (נגד כיוון הפקקים)</div>
-            </li>
-            <li class="schedule-item">
-                <span class="time">18:00 ומעלה</span> בילוי ערב, שופינג והחלקה על הקרח בקניון AFI Cotroceni בבוקרשט.
-            </li>
-        </ul>
     </div>
 
     <!-- יום 8 -->
     <div class="day-card" style="border-top-color: #ec4899;">
-        <div class="day-header">
-            <span class="day-title">יום 8 | פארק מים Therme ושופינג בבוקרשט</span>
-            <span class="day-date">שבת, 26/09/2026</span>
-        </div>
-        <ul class="schedule">
-            <li class="schedule-item">
-                <span class="time">09:30 – 14:30</span> בילוי משפחתי במתחם ה-Galaxy בפארק המים Therme București.
-                <div class="drive-badge">🚘 נסיעה ממרכז בוקרשט ל-Therme: ~20 ק"מ | ⏱️ כ-25–30 דקות</div>
-            </li>
-            <li class="schedule-item">
-                <span class="time">15:00 – 19:30</span> שופינג ובילוי בקניון Băneasa Shopping City.
-                <div class="drive-badge">🚘 נסיעה מ-Therme לקניון Băneasa: ~10 ק"מ | ⏱️ כ-12–15 דקות</div>
-            </li>
-            <li class="schedule-item">
-                <span class="time">20:00</span> ארוחת ערב וסיור רגלי בסמטאות העיר העתיקה (Lipscani).
-            </li>
-        </ul>
-        <div class="alert-box">
-            <strong>⚠️ חובת הזמנה מראש:</strong> יום שבת עמוס מאוד ב-Therme! חובה להזמין כרטיסים באינטרנט מראש לשעה 09:30 כדי למנוע עמידה בתורים.
+        <img class="day-image" src="https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?auto=format&fit=crop&w=1000&q=80" alt="פארק המים Therme בוקרשט">
+        <div class="day-content">
+            <div class="day-header">
+                <span class="day-title">יום 8 | פארק מים Therme ושופינג בבוקרשט</span>
+                <span class="day-date">שבת, 26/09/2026</span>
+            </div>
+            <ul class="schedule">
+                <li class="schedule-item">
+                    <span class="time">09:30 – 14:30</span> בילוי משפחתי במתחם ה-Galaxy בפארק המים Therme București.
+                    <div class="drive-badge">🚘 נסיעה ממרכז בוקרשט ל-Therme: ~20 ק"מ | ⏱️ כ-25–30 דקות</div>
+                </li>
+                <li class="schedule-item">
+                    <span class="time">15:00 – 19:30</span> שופינג ובילוי בקניון Băneasa Shopping City.
+                    <div class="drive-badge">🚘 נסיעה מ-Therme לקניון Băneasa: ~10 ק"מ | ⏱️ כ-12–15 דקות</div>
+                </li>
+                <li class="schedule-item">
+                    <span class="time">20:00</span> ארוחת ערב וסיור רגלי בסמטאות העיר העתיקה (Lipscani).
+                </li>
+            </ul>
+            <div class="alert-box">
+                <strong>⚠️ חובת הזמנה מראש:</strong> יום שבת עמוס מאוד ב-Therme! חובה להזמין כרטיסים באינטרנט מראש לשעה 09:30 כדי למנוע עמידה בתורים.
+            </div>
         </div>
     </div>
 
     <!-- יום 9 -->
     <div class="day-card" style="border-top-color: #eab308;">
-        <div class="day-header">
-            <span class="day-title">יום 9 | בוקרשט – אטרקציות, קניות וארוחת סיום</span>
-            <span class="day-date">ראשון, 27/09/2026</span>
-        </div>
-        <ul class="schedule">
-            <li class="schedule-item">
-                <span class="time">09:30 – 13:30</span> סיור בארמון הפרלמנט (Palace of Parliament) / מוזיאון החושים בקניון AFI / טיול בפארק הרסטראו.
-                <div class="drive-badge">🚘 נסיעות עירוניות: ~3–5 ק"מ | ⏱️ כ-10–15 דקות</div>
-            </li>
-            <li class="schedule-item">
-                <span class="time">13:30 – 19:30</span> קניות אחרונות, מתנות וזמן חופשי בקניון AFI Cotroceni / ParkLake.
-            </li>
-            <li class="schedule-item">
-                <span class="time">20:00</span> ארוחת ערב חגיגית במסעדת Caru' cu Bere המפורסמת בעיר העתיקה.
-            </li>
-        </ul>
-        <div class="alert-box">
-            <strong>⚠️ דגשים קריטיים:</strong>
-            1. לסיור בפרלמנט חובה להביא דרכונים מקוריים פיזיים לכל בני המשפחה.
-            2. למסעדת Caru' cu Bere מומלץ להזמין שולחן מראש באתר שלהם.
+        <img class="day-image" src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1000&q=80" alt="ארמון הפרלמנט בוקרשט">
+        <div class="day-content">
+            <div class="day-header">
+                <span class="day-title">יום 9 | בוקרשט – אטרקציות, קניות וארוחת סיום</span>
+                <span class="day-date">ראשון, 27/09/2026</span>
+            </div>
+            <ul class="schedule">
+                <li class="schedule-item">
+                    <span class="time">09:30 – 13:30</span> סיור בארמון הפרלמנט (Palace of Parliament) / מוזיאון החושים בקניון AFI / טיול בפארק הרסטראו.
+                    <div class="drive-badge">🚘 נסיעות עירוניות: ~3–5 ק"מ | ⏱️ כ-10–15 דקות</div>
+                </li>
+                <li class="schedule-item">
+                    <span class="time">13:30 – 19:30</span> קניות אחרונות, מתנות וזמן חופשי בקניון AFI Cotroceni / ParkLake.
+                </li>
+                <li class="schedule-item">
+                    <span class="time">20:00</span> ארוחת ערב חגיגית במסעדת Caru' cu Bere המפורסמת בעיר העתיקה.
+                </li>
+            </ul>
+            <div class="alert-box">
+                <strong>⚠️ דגשים קריטיים:</strong>
+                1. לסיור בפרלמנט חובה להביא דרכונים מקוריים פיזיים לכל בני המשפחה.
+                2. למסעדת Caru' cu Bere מומלץ להזמין שולחן מראש באתר שלהם.
+            </div>
         </div>
     </div>
 
     <!-- יום 10 -->
     <div class="day-card" style="border-top-color: #10b981;">
-        <div class="day-header">
-            <span class="day-title">יום 10 | טיסה חזרה לישראל</span>
-            <span class="day-date">שני, 28/09/2026</span>
+        <img class="day-image" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1000&q=80" alt="טיסה חזרה">
+        <div class="day-content">
+            <div class="day-header">
+                <span class="day-title">יום 10 | טיסה חזרה לישראל</span>
+                <span class="day-date">שני, 28/09/2026</span>
+            </div>
+            <ul class="schedule">
+                <li class="schedule-item">
+                    <span class="time">03:30</span> צ'ק-אאוט מהמלון בבוקרשט ויציאה לשדה התעופה.
+                    <div class="drive-badge">🚘 נסיעה לנמל התעופה אוטופני (OTP): ~18 ק"מ | ⏱️ כ-20–25 דקות (כביש פנוי)</div>
+                </li>
+                <li class="schedule-item">
+                    <span class="time">04:00</span> הגעה לשדה OTP, החזרת הרכב השכור, צ'ק-אין וביטחון.
+                </li>
+                <li class="schedule-item">
+                    <span class="time">07:00</span> טיסה חזרה לישראל (חברת AnimaWings).
+                </li>
+            </ul>
         </div>
-        <ul class="schedule">
-            <li class="schedule-item">
-                <span class="time">03:30</span> צ'ק-אאוט מהמלון בבוקרשט ויציאה לשדה התעופה.
-                <div class="drive-badge">🚘 נסיעה לנמל התעופה אוטופני (OTP): ~18 ק"מ | ⏱️ כ-20–25 דקות (כביש פנוי)</div>
-            </li>
-            <li class="schedule-item">
-                <span class="time">04:00</span> הגעה לשדה OTP, החזרת הרכב השכור, צ'ק-אין וביטחון.
-            </li>
-            <li class="schedule-item">
-                <span class="time">07:00</span> טיסה חזרה לישראל (חברת AnimaWings).
-            </li>
-        </ul>
     </div>
 
 </div>
