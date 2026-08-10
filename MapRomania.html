@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מפה אינטראקטיבית - טיול משפחות ברומניה 2026</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        :root {
+            --sidebar-width: 380px;
+            --primary: #1e3a8a;
+            --bg: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background-color: var(--bg);
+            direction: rtl;
+            overflow: hidden;
+        }
+
+        #sidebar {
+            width: var(--sidebar-width);
+            height: 100%;
+            background: #ffffff;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #0284c7 100%);
+            color: white;
+        }
+
+        .sidebar-header h1 {
+            margin: 0 0 5px 0;
+            font-size: 1.4rem;
+        }
+
+        .sidebar-header p {
+            margin: 0;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .filter-container {
+            padding: 10px 15px;
+            background: #f1f5f9;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .filter-btn {
+            padding: 6px 12px;
+            border: none;
+            background: #ffffff;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .places-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .place-card {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #e2e8f0;
+            border-right: 5px solid #cbd5e1;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .place-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .place-title {
+            font-weight: bold;
+            font-size: 1rem;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+
+        .place-day {
+            font-size: 0.75rem;
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .place-drive {
+            font-size: 0.82rem;
+            color: #0284c7;
+            background: #f0f9ff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-top: 6px;
+        }
+
+        .gmaps-link {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: #10b981;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .gmaps-link:hover {
+            text-decoration: underline;
+        }
+
+        #map {
+            flex: 1;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Custom Markers */
+        .custom-pin {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            #sidebar { width: 100%; height: 45%; }
+            #map { height: 55%; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="sidebar">
+    <div class="sidebar-header">
+        <h1>🇷🇴 מפת מסלול רומניה 2026</h1>
+        <p>10 ימים | מרחקים וזמני נסיעה מיעד קודם</p>
+    </div>
+
+    <div class="filter-container" id="filters">
+        <button class="filter-btn active" onclick="filterDay('all')">הכל</button>
+        <button class="filter-btn" onclick="filterDay(1)">יום 1</button>
+        <button class="filter-btn" onclick="filterDay(2)">יום 2</button>
+        <button class="filter-btn" onclick="filterDay(4)">יום 4</button>
+        <button class="filter-btn" onclick="filterDay(5)">יום 5</button>
+        <button class="filter-btn" onclick="filterDay(6)">יום 6</button>
+        <button class="filter-btn" onclick="filterDay(7)">יום 7</button>
+        <button class="filter-btn" onclick="filterDay(8)">יום 8</button>
+        <button class="filter-btn" onclick="filterDay(9)">יום 9</button>
+    </div>
+
+    <div class="places-list" id="placesList"></div>
+</div>
+
+<div id="map"></div>
+
+<script>
+    // צבעים לכל יום
+    const dayColors = {
+        1: '#ef4444', // אדום
+        2: '#f97316', // כתום
+        4: '#10b981', // ירוק
+        5: '#06b6d4', // טורקיז
+        6: '#3b82f6', // כחול
+        7: '#8b5cf6', // סגול
+        8: '#ec4899', // ורוד
+        9: '#eab308'  // זהב
+    };
+
+    // רשימת היעדים המלאה עם מיקומים, מרחקים וזמני נסיעה
+    const locations = [
+        {
+            id: 1,
+            day: 1,
+            title: "נמל התעופה בוקרשט אוטופני (OTP)",
+            lat: 44.5711,
+            lng: 26.0850,
+            drive: "נקודת מוצא - איסוף רכב שכור",
+            gmaps: "https://maps.google.com/?q=Henri+Coand%C4%83+International+Airport"
+        },
+        {
+            id: 2,
+            day: 1,
+            title: "בראשוב - דירת לינה (Brașov)",
+            lat: 45.6579,
+            lng: 25.6012,
+            drive: "🚘 מנמל התעופה: ~150 ק\"מ | ⏱️ 2.5–3.5 שעות",
+            gmaps: "https://maps.google.com/?q=Brasov+Romania"
+        },
+        {
+            id: 3,
+            day: 1,
+            title: "כיכר המועצה והעיר העתיקה (Piața Sfatului)",
+            lat: 45.6427,
+            lng: 25.5887,
+            drive: "🚘 מהדירה בבראשוב: ~3 ק\"מ | ⏱️ 8–10 דקות",
+            gmaps: "https://maps.google.com/?q=Piata+Sfatului+Brasov"
+        },
+        {
+            id: 4,
+            day: 2,
+            title: "רכבל הר טמפה (Telecabina Tâmpa)",
+            lat: 45.6391,
+            lng: 25.5944,
+            drive: "🚘 מהדירה בבראשוב: ~4 ק\"מ | ⏱️ 10 דקות",
+            gmaps: "https://maps.google.com/?q=Telecabina+Tampa+Brasov"
+        },
+        {
+            id: 5,
+            day: 2,
+            title: "קארטינג מקורה Vmax Brașov",
+            lat: 45.6701,
+            lng: 25.6189,
+            drive: "🚘 מהר טמפה: ~5 ק\"מ | ⏱️ 12 דקות",
+            gmaps: "https://maps.google.com/?q=Vmax+Karting+Brasov"
+        },
+        {
+            id: 6,
+            day: 4,
+            title: "שמורת הדובים בזרנשט (Libearty Bear Sanctuary)",
+            lat: 45.5658,
+            lng: 25.3377,
+            drive: "🚘 מבראשוב: ~30 ק\"מ | ⏱️ 35–40 דקות",
+            gmaps: "https://maps.google.com/?q=Libearty+Bear+Sanctuary+Zarnesti"
+        },
+        {
+            id: 7,
+            day: 4,
+            title: "טירת בראן (Bran Castle)",
+            lat: 45.5149,
+            lng: 25.3672,
+            drive: "🚘 משמורת הדובים: ~15 ק\"מ | ⏱️ 20 דקות",
+            gmaps: "https://maps.google.com/?q=Bran+Castle"
+        },
+        {
+            id: 8,
+            day: 4,
+            title: "פארק החבלים Parc Aventura Brașov",
+            lat: 45.6171,
+            lng: 25.6375,
+            drive: "🚘 מטירת בראן: ~30 ק\"מ | ⏱️ 35 דקות",
+            gmaps: "https://maps.google.com/?q=Parc+Aventura+Brasov"
+        },
+        {
+            id: 9,
+            day: 5,
+            title: "קניון 7 הסולמות (Canionul 7 Scări)",
+            lat: 45.5672,
+            lng: 25.6428,
+            drive: "🚘 מבראשוב: ~12 ק\"מ | ⏱️ 15–20 דקות",
+            gmaps: "https://maps.google.com/?q=7+Ladders+Canyon"
+        },
+        {
+            id: 10,
+            day: 5,
+            title: "חוות פורלים לדייג (Păstrăvărie Râșnov)",
+            lat: 45.5788,
+            lng: 25.4412,
+            drive: "🚘 מקניון 7 הסולמות: ~25 ק\"מ | ⏱️ 25–30 דקות",
+            gmaps: "https://maps.google.com/?q=Pastravarie+Rasnov"
+        },
+        {
+            id: 11,
+            day: 5,
+            title: "קניון Coresi Shopping Resort בבראשוב",
+            lat: 45.6705,
+            lng: 25.6145,
+            drive: "🚘 מחוות הדייג: ~20 ק\"מ | ⏱️ 25 דקות",
+            gmaps: "https://maps.google.com/?q=Coresi+Shopping+Resort"
+        },
+        {
+            id: 12,
+            day: 6,
+            title: "רכבל אגם באליה (Bâlea Telecabina)",
+            lat: 45.6358,
+            lng: 24.6158,
+            drive: "🚘 מבראשוב: ~100 ק\"מ | ⏱️ 1.5 שעות",
+            gmaps: "https://maps.google.com/?q=Balea+Telecabina"
+        },
+        {
+            id: 13,
+            day: 6,
+            title: "פארק המים Paradisul Acvatic בבראשוב",
+            lat: 45.6721,
+            lng: 25.5988,
+            drive: "🚘 מרכבל באליה חזרה לבראשוב: ~100 ק\"מ | ⏱️ 1.5 שעות",
+            gmaps: "https://maps.google.com/?q=Paradisul+Acvatic+Brasov"
+        },
+        {
+            id: 14,
+            day: 7,
+            title: "רכבל ומגלשת הרים בסינאיה (Sinaia Alpine Coaster)",
+            lat: 45.3542,
+            lng: 25.5515,
+            drive: "🚘 מבראשוב: ~45 ק\"מ | ⏱️ 50 דקות",
+            gmaps: "https://maps.google.com/?q=Sinaia+Gondola"
+        },
+        {
+            id: 15,
+            day: 7,
+            title: "קניון AFI Cotroceni בבוקרשט",
+            lat: 44.4308,
+            lng: 26.0531,
+            drive: "🚘 מסינאיה לבוקרשט: ~120 ק\"מ | ⏱️ 2–2.5 שעות",
+            gmaps: "https://maps.google.com/?q=AFI+Cotroceni+Bucharest"
+        },
+        {
+            id: 16,
+            day: 8,
+            title: "פארק המים Therme București",
+            lat: 44.6052,
+            lng: 26.0862,
+            drive: "🚘 ממרכז בוקרשט: ~20 ק\"מ | ⏱️ 25–30 דקות",
+            gmaps: "https://maps.google.com/?q=Therme+Bucuresti"
+        },
+        {
+            id: 17,
+            day: 8,
+            title: "קניון Băneasa Shopping City",
+            lat: 44.5068,
+            lng: 26.0898,
+            drive: "🚘 מ-Therme: ~10 ק\"מ | ⏱️ 12–15 דקות",
+            gmaps: "https://maps.google.com/?q=Baneasa+Shopping+City"
+        },
+        {
+            id: 18,
+            day: 9,
+            title: "ארמון הפרלמנט בבוקרשט (Palace of Parliament)",
+            lat: 44.4275,
+            lng: 26.0874,
+            drive: "🚘 ממרכז בוקרשט: ~3–5 ק\"מ | ⏱️ 10–12 דקות",
+            gmaps: "https://maps.google.com/?q=Palace+of+Parliament+Bucharest"
+        },
+        {
+            id: 19,
+            day: 9,
+            title: "מסעדת Caru' cu Bere (העיר העתיקה בוקרשט)",
+            lat: 44.4320,
+            lng: 26.0981,
+            drive: "🚘 מהקניון/פרלמנט: ~5 ק\"מ | ⏱️ 15 דקות",
+            gmaps: "https://maps.google.com/?q=Caru+cu+Bere+Bucharest"
+        }
+    ];
+
+    // אתחול המפה
+    const map = L.map('map').setView([45.2, 25.5], 8);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    let markers = [];
+
+    // יצירת הסיכות והרשימה
+    function initMap() {
+        const listContainer = document.getElementById('placesList');
+        listContainer.innerHTML = '';
+
+        locations.forEach((loc, index) => {
+            const color = dayColors[loc.day] || '#3b82f6';
+
+            // יצירת אייקון מותאם אישית
+            const customIcon = L.divIcon({
+                className: 'custom-pin-wrapper',
+                html: `<div class="custom-pin" style="background-color: ${color}">${loc.day}</div>`,
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+            });
+
+            // הוספת מרקר למפה
+            const marker = L.marker([loc.lat, loc.lng], { icon: customIcon })
+                .addTo(map)
+                .bindPopup(`
+                    <div style="direction:rtl; text-align:right;">
+                        <strong style="color:${color}">יום ${loc.day} | ${loc.title}</strong><br>
+                        <small>${loc.drive}</small><br>
+                        <a href="${loc.gmaps}" target="_blank" style="color:#10b981; font-weight:bold;">📍 ניווט ב-Google Maps</a>
+                    </div>
+                `);
+
+            markers.push({ day: loc.day, marker: marker });
+
+            // יצירת כרטיסייה בסרגל הצדי
+            const card = document.createElement('div');
+            card.className = 'place-card';
+            card.style.borderRightColor = color;
+            card.onclick = () => {
+                map.flyTo([loc.lat, loc.lng], 12);
+                marker.openPopup();
+            };
+
+            card.innerHTML = `
+                <span class="place-day" style="background-color: ${color}">יום ${loc.day}</span>
+                <div class="place-title">${loc.title}</div>
+                <div class="place-drive">${loc.drive}</div>
+                <a href="${loc.gmaps}" target="_blank" class="gmaps-link" onclick="event.stopPropagation()">📍 פתח ב-Google Maps</a>
+            `;
+
+            listContainer.appendChild(card);
+        });
+    }
+
+    // סינון לפי ימים
+    function filterDay(day) {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        markers.forEach(item => {
+            if (day === 'all' || item.day === day) {
+                map.addLayer(item.marker);
+            } else {
+                map.removeLayer(item.marker);
+            }
+        });
+
+        if (day !== 'all') {
+            const dayMarkers = markers.filter(m => m.day === day).map(m => m.marker.getLatLng());
+            if (dayMarkers.length > 0) {
+                const bounds = L.latLngBounds(dayMarkers);
+                map.fitBounds(bounds, { padding: [50, 50] });
+            }
+        } else {
+            map.setView([45.2, 25.5], 8);
+        }
+    }
+
+    initMap();
+</script>
+
+</body>
+</html>
