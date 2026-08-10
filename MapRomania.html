@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מפה אינטראקטיבית - טיול משפחות ברומניה 2026</title>
+    <title>מפה אינטראקטיבית - טיול משפחות 2026</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
@@ -106,7 +106,7 @@
 
         .place-title {
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 0.98rem;
             color: #0f172a;
             margin-bottom: 4px;
         }
@@ -149,7 +149,6 @@
             z-index: 1;
         }
 
-        /* Custom Markers */
         .custom-pin {
             width: 30px;
             height: 30px;
@@ -175,7 +174,7 @@
 
 <div id="sidebar">
     <div class="sidebar-header">
-        <h1>🇷🇴 מפת מסלול רומניה 2026</h1>
+        <h1>מפת מסלול טיול משפחות 2026</h1>
         <p>10 ימים | מרחקים וזמני נסיעה מיעד קודם</p>
     </div>
 
@@ -209,7 +208,7 @@
         9: '#eab308'  // זהב
     };
 
-    // רשימת היעדים המלאה עם מיקומים, מרחקים וזמני נסיעה
+    // רשימת היעדים המלאה והמעודכנת
     const locations = [
         {
             id: 1,
@@ -304,14 +303,23 @@
         {
             id: 11,
             day: 5,
-            title: "קניון Coresi Shopping Resort בבראשוב",
-            lat: 45.6705,
-            lng: 25.6145,
-            drive: "🚘 מחוות הדייג: ~20 ק\"מ | ⏱️ 25 דקות",
-            gmaps: "https://maps.google.com/?q=Coresi+Shopping+Resort"
+            title: "אופציה: הכנסייה המבוצרת פרז'מר (Prejmer Fortified Church)",
+            lat: 45.7218,
+            lng: 25.7744,
+            drive: "🚘 מחוות הדייג / בראשוב: ~18 ק\"מ | ⏱️ 20 דקות",
+            gmaps: "https://maps.google.com/?q=Prejmer+Fortified+Church"
         },
         {
             id: 12,
+            day: 5,
+            title: "קניון Coresi Shopping Resort בבראשוב",
+            lat: 45.6705,
+            lng: 25.6145,
+            drive: "🚘 מפרז'מר / מבראשוב: ~15 ק\"מ | ⏱️ 20 דקות",
+            gmaps: "https://maps.google.com/?q=Coresi+Shopping+Resort"
+        },
+        {
+            id: 13,
             day: 6,
             title: "רכבל אגם באליה (Bâlea Telecabina)",
             lat: 45.6358,
@@ -320,7 +328,7 @@
             gmaps: "https://maps.google.com/?q=Balea+Telecabina"
         },
         {
-            id: 13,
+            id: 14,
             day: 6,
             title: "פארק המים Paradisul Acvatic בבראשוב",
             lat: 45.6721,
@@ -329,7 +337,7 @@
             gmaps: "https://maps.google.com/?q=Paradisul+Acvatic+Brasov"
         },
         {
-            id: 14,
+            id: 15,
             day: 7,
             title: "רכבל ומגלשת הרים בסינאיה (Sinaia Alpine Coaster)",
             lat: 45.3542,
@@ -338,7 +346,16 @@
             gmaps: "https://maps.google.com/?q=Sinaia+Gondola"
         },
         {
-            id: 15,
+            id: 16,
+            day: 7,
+            title: "אופציה: ארמון פלש בסינאיה (Peleș Castle)",
+            lat: 45.3599,
+            lng: 25.5426,
+            drive: "🚘 מהרכבל בסינאיה: ~3 ק\"מ | ⏱️ 5–7 דקות",
+            gmaps: "https://maps.google.com/?q=Peles+Castle+Sinaia"
+        },
+        {
+            id: 17,
             day: 7,
             title: "קניון AFI Cotroceni בבוקרשט",
             lat: 44.4308,
@@ -347,7 +364,7 @@
             gmaps: "https://maps.google.com/?q=AFI+Cotroceni+Bucharest"
         },
         {
-            id: 16,
+            id: 18,
             day: 8,
             title: "פארק המים Therme București",
             lat: 44.6052,
@@ -356,7 +373,7 @@
             gmaps: "https://maps.google.com/?q=Therme+Bucuresti"
         },
         {
-            id: 17,
+            id: 19,
             day: 8,
             title: "קניון Băneasa Shopping City",
             lat: 44.5068,
@@ -365,7 +382,7 @@
             gmaps: "https://maps.google.com/?q=Baneasa+Shopping+City"
         },
         {
-            id: 18,
+            id: 20,
             day: 9,
             title: "ארמון הפרלמנט בבוקרשט (Palace of Parliament)",
             lat: 44.4275,
@@ -374,7 +391,7 @@
             gmaps: "https://maps.google.com/?q=Palace+of+Parliament+Bucharest"
         },
         {
-            id: 19,
+            id: 21,
             day: 9,
             title: "מסעדת Caru' cu Bere (העיר העתיקה בוקרשט)",
             lat: 44.4320,
@@ -393,15 +410,15 @@
 
     let markers = [];
 
-    // יצירת הסיכות והרשימה
+    // יצירת הסיכות והרשימה בסרגל
     function initMap() {
         const listContainer = document.getElementById('placesList');
         listContainer.innerHTML = '';
 
-        locations.forEach((loc, index) => {
+        locations.forEach((loc) => {
             const color = dayColors[loc.day] || '#3b82f6';
 
-            // יצירת אייקון מותאם אישית
+            // יצירת אייקון מותאם
             const customIcon = L.divIcon({
                 className: 'custom-pin-wrapper',
                 html: `<div class="custom-pin" style="background-color: ${color}">${loc.day}</div>`,
@@ -409,7 +426,7 @@
                 iconAnchor: [15, 15]
             });
 
-            // הוספת מרקר למפה
+            // מרקר במפה
             const marker = L.marker([loc.lat, loc.lng], { icon: customIcon })
                 .addTo(map)
                 .bindPopup(`
@@ -422,7 +439,7 @@
 
             markers.push({ day: loc.day, marker: marker });
 
-            // יצירת כרטיסייה בסרגל הצדי
+            // כרטיסייה בסרגל
             const card = document.createElement('div');
             card.className = 'place-card';
             card.style.borderRightColor = color;
@@ -442,7 +459,7 @@
         });
     }
 
-    // סינון לפי ימים
+    // סינון ימים
     function filterDay(day) {
         document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
         event.target.classList.add('active');
