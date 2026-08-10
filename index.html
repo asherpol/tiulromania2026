@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ברוכים הבאים</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Hero Banner */
+        .hero {
+            width: 100%;
+            height: 260px;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                        url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Content Container */
+        .container {
+            max-width: 800px;
+            width: 90%;
+            margin: -40px auto 40px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            z-index: 10;
+        }
+
+        /* Card Styles */
+        .card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 20px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .btn-primary {
+            background-color: #2563eb;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+        }
+
+        .btn-success {
+            background-color: #059669;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #047857;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            color: #888;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- חלק עליון - תמונת רקע וכותרת -->
+    <header class="hero">
+        <div>
+            <h1>ברוכים הבאים!</h1>
+            <p>כל המידע שאתם צריכים במקום אחד</p>
+        </div>
+    </header>
+
+    <!-- תוכן ראשי - כרטיסיות קישור -->
+    <main class="container">
+
+        <!-- כרטיס תוכנית -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=600&q=80" alt="תוכנית" class="card-img">
+            <div class="card-body">
+                <div>
+                    <h2 class="card-title">תוכנית האירוע</h2>
+                    <p class="card-text">לחצו לצפייה בלוח הזמנים המלא, הלו"ז המפורט וכל הפעילויות המתוכננות.</p>
+                </div>
+                <!-- החלף את program.html בקישור הרצוי -->
+                <a href="program.html" class="btn btn-primary">לצפייה בתוכנית</a>
+            </div>
+        </div>
+
+        <!-- כרטיס מפה -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=600&q=80" alt="מפה" class="card-img">
+            <div class="card-body">
+                <div>
+                    <h2 class="card-title">מפת הגעה</h2>
+                    <p class="card-text">לחצו לקבלת הנחיות הגעה, ניווט במפה ונקודות ציון חשובות בשטח.</p>
+                </div>
+                <!-- החלף את map.html בקישור הרצוי (או בקישור ל-Google Maps / Waze) -->
+                <a href="map.html" class="btn btn-success">לצפייה במפה</a>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© כל הזכויות שמורות</p>
+    </footer>
+
+</body>
+</html>
