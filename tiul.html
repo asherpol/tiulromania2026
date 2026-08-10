@@ -24,46 +24,46 @@
             margin: 0;
             padding: 20px;
             direction: rtl;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1050px;
             margin: 0 auto;
         }
 
         header {
             text-align: center;
-            padding: 35px 20px;
+            padding: 30px 20px;
             background: linear-gradient(135deg, #1e3a8a 0%, #0284c7 100%);
             color: white;
             border-radius: 16px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
         header h1 {
-            margin: 0 0 10px 0;
-            font-size: 2.2rem;
+            margin: 0 0 8px 0;
+            font-size: 2.1rem;
         }
 
         header p {
-            margin: 5px 0;
-            font-size: 1.1rem;
+            margin: 4px 0;
+            font-size: 1.05rem;
             opacity: 0.95;
         }
 
         .summary-box {
             background: #ffffff;
-            border: 2px solid #e2e8f0;
+            border: 1px solid #e2e8f0;
             border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
+            padding: 16px;
+            margin-bottom: 25px;
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
-            gap: 15px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            gap: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
         }
 
         .summary-item {
@@ -73,27 +73,45 @@
         .summary-item strong {
             display: block;
             color: var(--primary);
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
+        /* כרטיסיית יום עם עימוד צידי */
         .day-card {
             background: var(--card-bg);
-            border-radius: 12px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
-            border-top: 6px solid var(--accent);
+            border-radius: 14px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06);
+            border-right: 6px solid var(--accent);
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            align-items: stretch;
+        }
+
+        .day-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .day-image-wrapper {
+            width: 220px;
+            min-width: 220px;
+            border-radius: 10px;
             overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            align-self: center;
+            height: 100%;
+            min-height: 180px;
         }
 
         .day-image {
             width: 100%;
-            height: 260px;
+            height: 100%;
             object-fit: cover;
             display: block;
-        }
-
-        .day-content {
-            padding: 25px;
         }
 
         .day-header {
@@ -101,24 +119,24 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 12px;
-            margin-bottom: 20px;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
 
         .day-title {
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             font-weight: bold;
             color: var(--primary);
         }
 
         .day-date {
-            font-size: 0.95rem;
+            font-size: 0.88rem;
             color: #475569;
             background: #e2e8f0;
-            padding: 6px 12px;
-            border-radius: 20px;
+            padding: 4px 10px;
+            border-radius: 16px;
             font-weight: bold;
         }
 
@@ -130,69 +148,86 @@
 
         .schedule-item {
             position: relative;
-            padding-right: 28px;
-            margin-bottom: 15px;
+            padding-right: 24px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
         }
 
         .schedule-item::before {
             content: "•";
             color: var(--accent);
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             position: absolute;
-            right: 5px;
-            top: -5px;
+            right: 4px;
+            top: -6px;
         }
 
         .time {
             font-weight: bold;
             color: #0369a1;
-            margin-left: 8px;
+            margin-left: 6px;
         }
 
         .drive-badge {
             background-color: #f0f9ff;
-            border-right: 4px solid var(--accent);
-            padding: 8px 12px;
-            margin: 8px 0 12px 0;
+            border-right: 3px solid var(--accent);
+            padding: 6px 10px;
+            margin: 6px 0 10px 0;
             border-radius: 4px;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             color: #0369a1;
         }
 
         .options-list {
             background: #fafafa;
             border: 1px dashed #cbd5e1;
-            padding: 15px;
+            padding: 10px 12px;
             border-radius: 8px;
-            margin: 10px 0;
+            margin: 8px 0;
+            font-size: 0.9rem;
         }
 
         .options-list h4 {
-            margin: 0 0 10px 0;
+            margin: 0 0 6px 0;
             color: #334155;
+            font-size: 0.95rem;
+        }
+
+        .options-list ul {
+            margin: 0;
+            padding-right: 18px;
         }
 
         .alert-box {
             background-color: #fef2f2;
             border: 1px solid #fca5a5;
             color: #991b1b;
-            padding: 12px 15px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            margin-top: 12px;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            margin-top: 10px;
         }
 
         .alert-box strong {
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
-        @media (max-width: 600px) {
-            body { padding: 10px; }
-            header h1 { font-size: 1.6rem; }
-            .day-content { padding: 15px; }
-            .day-title { font-size: 1.15rem; }
-            .day-image { height: 180px; }
+        /* מובייל ותצוגה צרה */
+        @media (max-width: 720px) {
+            .day-card {
+                flex-direction: column-reverse;
+                padding: 15px;
+            }
+            .day-image-wrapper {
+                width: 100%;
+                min-width: 100%;
+                height: 160px;
+                min-height: 160px;
+            }
+            .day-title {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
@@ -220,8 +255,7 @@
     </div>
 
     <!-- יום 1 -->
-    <div class="day-card" style="border-top-color: #ef4444;">
-        <img class="day-image" src="https://images.unsplash.com/photo-1584646098378-0874589d76b1?auto=format&fit=crop&w=1000&q=80" alt="בראשוב העיר העתיקה">
+    <div class="day-card" style="border-right-color: #ef4444;">
         <div class="day-content">
             <div class="day-header">
                 <span class="day-title">יום 1 | נחיתה ונסיעה לרכס ההרים</span>
@@ -229,7 +263,7 @@
             </div>
             <ul class="schedule">
                 <li class="schedule-item">
-                    <span class="time">14:00</span> נחיתה בנמל התעופה בוקרשט אוטופני (OTP), איסוף הרכב השכור ויציאה לדרך.
+                    <span class="time">14:00</span> נחיתה בנמל התעופה בבוקרשט אוטופני (OTP), איסוף הרכב השכור ויציאה לדרך.
                     <div class="drive-badge">🚘 נסיעה מנמל התעופה לבראשוב: ~150 ק"מ | ⏱️ כ-2.5 עד 3.5 שעות (כביש DN1)</div>
                 </li>
                 <li class="schedule-item">
@@ -241,11 +275,13 @@
                 </li>
             </ul>
         </div>
+        <div class="day-image-wrapper">
+            <img class="day-image" src="https://images.unsplash.com/photo-1584646098378-0874589d76b1?auto=format&fit=crop&w=600&q=80" alt="בראשוב העיר העתיקה">
+        </div>
     </div>
 
     <!-- יום 2 -->
-    <div class="day-card" style="border-top-color: #f97316;">
-        <img class="day-image" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1000&q=80" alt="הר טמפה ותצפית">
+    <div class="day-card" style="border-right-color: #f97316;">
         <div class="day-content">
             <div class="day-header">
                 <span class="day-title">יום 2 | בוקר אלפיני, קארטינג והיערכות לערב יום כיפור</span>
@@ -273,11 +309,13 @@
                 </li>
             </ul>
         </div>
+        <div class="day-image-wrapper">
+            <img class="day-image" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80" alt="הר טמפה ותצפית">
+        </div>
     </div>
 
     <!-- יום 3 -->
-    <div class="day-card" style="border-top-color: #64748b;">
-        <img class="day-image" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80" alt="יום מנוחה ורוגע">
+    <div class="day-card" style="border-right-color: #64748b;">
         <div class="day-content">
             <div class="day-header">
                 <span class="day-title">יום 3 | יום כיפור (יום מנוחה וצום)</span>
@@ -298,11 +336,13 @@
                 </li>
             </ul>
         </div>
+        <div class="day-image-wrapper">
+            <img class="day-image" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="יום מנוחה">
+        </div>
     </div>
 
     <!-- יום 4 -->
-    <div class="day-card" style="border-top-color: #10b981;">
-        <img class="day-image" src="https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=1000&q=80" alt="טירת בראן ושמורת הדובים">
+    <div class="day-card" style="border-right-color: #10b981;">
         <div class="day-content">
             <div class="day-header">
                 <span class="day-title">יום 4 | שמורת הדובים, טירת בראן ואקסטרים</span>
@@ -328,11 +368,13 @@
                 2. הכניסה לילדים מתחת לגיל 5 אסורה בהחלט מטעמי בטיחות (יש להציג דרכונים בכניסה).
             </div>
         </div>
+        <div class="day-image-wrapper">
+            <img class="day-image" src="https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=600&q=80" alt="טירת בראן">
+        </div>
     </div>
 
     <!-- יום 5 -->
-    <div class="day-card" style="border-top-color: #06b6d4;">
-        <img class="day-image" src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1000&q=80" alt="קניון 7 הסולמות וטבע">
+    <div class="day-card" style="border-right-color: #06b6d4;">
         <div class="day-content">
             <div class="day-header">
                 <span class="day-title">יום 5 | קניון 7 הסולמות, חוות דייג ושופינג</span>
@@ -353,11 +395,13 @@
                 </li>
             </ul>
         </div>
+        <div class="day-image-wrapper">
+            <img class="day-image" src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=600&q=80" alt="קניון 7 הסולמות">
+        </div>
     </div>
 
     <!-- יום 6 -->
-    <div class="day-card" style="border-top-color: #3b82f6;">
-        <img class="day-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80" alt="טראנספגראשן ואגם באליה">
+    <div class="day-card" style="border-right-color: #3b82f6;">
         <div class="day-content">
             <div class="day-header">
                 <span class="day-title">יום 6 | טראנספגראשן ברכבל + פארק מים בבראשוב</span>
@@ -374,11 +418,13 @@
                 </li>
             </ul>
         </div>
+        <div class="day-image-wrapper">
+            <img class="day-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="אגם באליה">
+        </div>
     </div>
 
     <!-- יום 7 -->
-    <div class="day-card" style="border-top-color: #8b5cf6;">
-        <img class="day-image" src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=1000&q=80" alt="סינאיה ובוקרשט">
+    <div class="day-card" style="border-right-color: #8b5cf6;">
         <div class="day-content">
             <div class="day-header">
                 <span class="day-title">יום 7 | עמק פראחובה ומעבר לבוקרשט</span>
@@ -398,11 +444,13 @@
                 </li>
             </ul>
         </div>
+        <div class="day-image-wrapper">
+            <img class="day-image" src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=600&q=80" alt="סינאיה">
+        </div>
     </div>
 
     <!-- יום 8 -->
-    <div class="day-card" style="border-top-color: #ec4899;">
-        <img class="day-image" src="https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?auto=format&fit=crop&w=1000&q=80" alt="פארק המים Therme בוקרשט">
+    <div class="day-card" style="border-right-color: #ec4899;">
         <div class="day-content">
             <div class="day-header">
                 <span class="day-title">יום 8 | פארק מים Therme ושופינג בבוקרשט</span>
@@ -425,11 +473,13 @@
                 <strong>⚠️ חובת הזמנה מראש:</strong> יום שבת עמוס מאוד ב-Therme! חובה להזמין כרטיסים באינטרנט מראש לשעה 09:30 כדי למנוע עמידה בתורים.
             </div>
         </div>
+        <div class="day-image-wrapper">
+            <img class="day-image" src="https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?auto=format&fit=crop&w=600&q=80" alt="Therme בוקרשט">
+        </div>
     </div>
 
     <!-- יום 9 -->
-    <div class="day-card" style="border-top-color: #eab308;">
-        <img class="day-image" src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1000&q=80" alt="ארמון הפרלמנט בוקרשט">
+    <div class="day-card" style="border-right-color: #eab308;">
         <div class="day-content">
             <div class="day-header">
                 <span class="day-title">יום 9 | בוקרשט – אטרקציות, קניות וארוחת סיום</span>
@@ -453,11 +503,13 @@
                 2. למסעדת Caru' cu Bere מומלץ להזמין שולחן מראש באתר שלהם.
             </div>
         </div>
+        <div class="day-image-wrapper">
+            <img class="day-image" src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=600&q=80" alt="ארמון הפרלמנט בוקרשט">
+        </div>
     </div>
 
     <!-- יום 10 -->
-    <div class="day-card" style="border-top-color: #10b981;">
-        <img class="day-image" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1000&q=80" alt="טיסה חזרה">
+    <div class="day-card" style="border-right-color: #10b981;">
         <div class="day-content">
             <div class="day-header">
                 <span class="day-title">יום 10 | טיסה חזרה לישראל</span>
@@ -475,6 +527,9 @@
                     <span class="time">07:00</span> טיסה חזרה לישראל (חברת AnimaWings).
                 </li>
             </ul>
+        </div>
+        <div class="day-image-wrapper">
+            <img class="day-image" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80" alt="טיסה חזרה">
         </div>
     </div>
 
