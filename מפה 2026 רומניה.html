@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מפת מסלול אינטראקטיבית - רומניה 2026</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --bg-light: #f8fafc;
+            --card-bg: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Assistant', 'Rubik', sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        /* Top Bar Header */
+        header {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            color: #ffffff;
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-title h1 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .header-badges {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header-badge {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Main Container */
+        .main-app {
+            display: flex;
+            flex: 1;
+            height: calc(100vh - 60px);
+            position: relative;
+        }
+
+        /* Sidebar Panel */
+        .sidebar {
+            width: 420px;
+            background-color: #ffffff;
+            border-left: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            z-index: 500;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.05);
+        }
+
+        .search-filter-box {
+            padding: 16px;
+            background: #f1f5f9;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-input-wrapper i {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 38px 10px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            outline: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+        }
+
+        .filter-pills {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: thin;
+        }
+
+        .filter-pill {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+            color: var(--text-muted);
+        }
+
+        .filter-pill.active, .filter-pill:hover {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        /* Locations List */
+        .locations-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .day-group-title {
+            font-family: 'Rubik', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--primary-dark);
+            background: #e0f2fe;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-top: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .location-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            border-right: 5px solid #ccc;
+        }
+
+        .location-card:hover, .location-card.active {
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
+            transform: translateX(-3px);
+            background: #f0f9ff;
+        }
+
+        .card-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .card-category {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #e2e8f0;
+            color: var(--text-muted);
+        }
+
+        .card-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .btn-gmaps {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #10b981;
+            color: #ffffff;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .btn-gmaps:hover {
+            background: #059669;
+        }
+
+        /* Map Canvas */
+        .map-wrapper {
+            flex: 1;
+            position: relative;
+            height: 100%;
+            min-height: 450px;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+            min-height: 450px;
+            background-color: #e2e8f0;
+        }
+
+        /* Custom Leaflet Pins */
+        .custom-div-icon {
+            background: none;
+            border: none;
+        }
+
+        .pin-marker {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border: 2px solid #ffffff;
+            transition: transform 0.2s;
+        }
+
+        .pin-marker:hover {
+            transform: scale(1.2);
+        }
+
+        /* Leaflet Popup Styling */
+        .leaflet-popup-content-wrapper {
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            direction: rtl;
+            text-align: right;
+        }
+
+        .popup-card h3 {
+            font-family: 'Rubik', sans-serif;
+            font-size: 16px;
+            color: var(--primary-dark);
+            margin-bottom: 6px;
+        }
+
+        .popup-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        /* Mobile Responsive View Toggle */
+        .mobile-tabs {
+            display: none;
+            background: #ffffff;
+            border-top: 1px solid var(--border-color);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 2000;
+        }
+
+        .mobile-tab-btn {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 14px;
+            border: none;
+            background: none;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .mobile-tab-btn.active {
+            color: var(--primary);
+            border-top: 3px solid var(--primary);
+            background: #f0f9ff;
+        }
+
+        @media (max-width: 768px) {
+            .main-app {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: calc(100vh - 110px);
+                display: flex;
+            }
+
+            .map-wrapper {
+                display: none;
+                height: calc(100vh - 110px);
+            }
+
+            .main-app.show-map .sidebar {
+                display: none;
+            }
+
+            .main-app.show-map .map-wrapper {
+                display: block;
+            }
+
+            .mobile-tabs {
+                display: flex;
+            }
+
+            .header-badges {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Bar -->
+    <header>
+        <div class="header-title">
+            <i class="fa-solid fa-map-location-dot" style="font-size: 24px;"></i>
+            <div>
+                <h1>מפת מסלול טיול משפחות ברומניה</h1>
+                <span style="font-size: 12px; opacity: 0.9;">19/09/2026 – 28/09/2026 (10 ימים)</span>
+            </div>
+        </div>
+        <div class="header-badges">
+            <div class="header-badge"><i class="fa-solid fa-car"></i> רכב שכור מבוקרשט</div>
+            <div class="header-badge"><i class="fa-solid fa-house"></i> 6 לילות בבראשוב + 3 בבוקרשט</div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="main-app" id="mainApp">
+        
+        <!-- Sidebar Panel -->
+        <div class="sidebar">
+            <div class="search-filter-box">
+                <div class="search-input-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="searchInput" class="search-input" placeholder="חפש יעד, עיר או אטרקציה...">
+                </div>
+                <div class="filter-pills" id="filterPills">
+                    <button class="filter-pill active" data-filter="all">הכל</button>
+                    <button class="filter-pill" data-filter="d1-2">ימים 1-2 (כחול)</button>
+                    <button class="filter-pill" data-filter="d4">יום 4 (ירוק)</button>
+                    <button class="filter-pill" data-filter="d5">יום 5 (כתום)</button>
+                    <button class="filter-pill" data-filter="d6">יום 6 (סגול)</button>
+                    <button class="filter-pill" data-filter="d7">יום 7 (ורוד)</button>
+                    <button class="filter-pill" data-filter="d8-9">ימים 8-9 (זהב)</button>
+                </div>
+            </div>
+
+            <!-- Locations List -->
+            <div class="locations-list" id="locationsList">
+                <!-- Content generated via JavaScript -->
+            </div>
+        </div>
+
+        <!-- Interactive Map Canvas -->
+        <div class="map-wrapper">
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <!-- Mobile View Switcher -->
+    <div class="mobile-tabs">
+        <button class="mobile-tab-btn active" id="tabListBtn"><i class="fa-solid fa-list"></i> רשימת יעדים</button>
+        <button class="mobile-tab-btn" id="tabMapBtn"><i class="fa-solid fa-map-marked-alt"></i> מפה אינטראקטיבית</button>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        // --- 1. Locations Data ---
+        const locationsData = [
+            {
+                id: 1,
+                dayGroup: "d1-2",
+                dayTitle: "ימים 1-2: בראשוב והסביבה",
+                color: "#0284c7",
+                pinNum: "1",
+                title: "נמל התעופה בבוקרשט (OTP)",
+                category: "תחבורה",
+                desc: "14:00 - נחיתה, איסוף הרכב השכור ויציאה צפונה על ציר עמק פראחובה לבראשוב.",
+                lat: 44.5711,
+                lng: 26.0850,
+                gmapsUrl: "https://www.google.com/maps/search/?api=1&query=Bucharest+Otopeni+Airport"
+            },
+            {
+                id: 2,
+                dayGroup: "d1-2",
+                dayTitle: "ימים 1-2: בראשוב והסביבה",
+                color: "#0284c7",
+                pinNum: "1",
+                title: "כיכר המועצה והעיר העתיקה (Brașov)",
+                category: "טיול / אוכל",
+                desc: "כיכר Piața Sfatului, רחוב הרפובליקה, מסעדות ואווירה בעיר העתיקה בבראשוב.",
+                lat: 45.6427,
+                lng: 25.5887,
+                gmapsUrl: "https://www.google.com/maps/search/?api=1&query=Brasov+Old+Town+Piata+Sfatului"
+            },
+            {
+                id: 3,
+                dayGroup: "d1-2",
+                dayTitle: "ימים 1-2: בראשוב והסביבה",
+                color: "#0284c7",
+                pinNum: "2",
+                title: "רכבל והר טמפה (Tâmpa Mountain)",
+                category: "תצפית / טבע",
+                desc: "תצפית פנורמית מרהיבה על כל העיר העתיקה של בראשוב וההרים מפסגת הר טמפה.",
+                lat: 45.6385,
+                lng: 25.5950,
+                gmapsUrl: "https://www.google.com/maps/search/?api=1&query=Mount+Tampa+Cable+Car+Brasov"
+            },
+            {
+                id: 4,
+                dayGroup: "d1-2",
+                dayTitle: "ימים 1-2: בראשוב והסביבה",
+                color: "#0284c7",
+                pinNum: "2",
+                title: "ארמון פלש בסינאיה (Peleș Castle)",
+                category: "תרבות / ארמון",
+                desc: "אפשרות חלופית לבוקר יום 2: ביקור בארמון המלכותי המפורסם בסינאיה.",
+                lat: 45.3599,
+                lng: 25.5426,
+                gmapsUrl: "https://www.google.com/maps/search/?api=1&query=Peles+Castle+Sinaia"
+            },
+            {
+                id: 5,
+                dayGroup: "d4",
+                dayTitle: "יום 4: שמורת הדובים, טירת בראן ואקסטרים",
+                color: "#10b981",
+                pinNum: "4",
+                title: "שמורת הדובים בזרנשט (Libearty Sanctuary)",
+                category: "שמורה / חיות",
+                desc: "09:30 - סיור מודרך בשמורת הדובים החופשית. חובה להזמין כרטיסים מראש!",
+                lat: 45.5852,
+                lng: 25.3905,
+                gmapsUrl: "https://www.google.com/maps/search/?api=1&query=Libearty+Bear+Sanctuary+Zarnesti"
+            },
+            {
+                id: 6,
+                dayGroup: "d4",
+                dayTitle: "יום 4: שמורת הדובים, טירת בראן ואקסטרים",
+                color: "#10b981",
+                pinNum: "4",
+                title: "טירת בראן (Bran Castle - דרקולה)",
+                category: "טירה / היסטוריה",
+                desc: "12:30 - סיור בטירה המפורסמת ובשוק הססגוני שלמרגלותיה.",
+                lat: 45.5149,
+                lng: 25.3672,
+                gmapsUrl: "https://www.google.com/maps/search/?api=1&query=Bran+Castle+Romania"
+            },
+            {
+                id: 7,
+                dayGroup: "d4",
+                dayTitle: "יום 4: שמורת הדובים, טירת בראן ואקסטרים",
+                color: "#10b981",
+                pinNum: "4",
+                title: "פארק החבלים Parc Aventura Brașov",
+                category: "אקסטרים / אומגות",
+                desc: "15:30 - פארק חבלים ואומגות ביער לכל המשפחה (או מסלול קארטינג Prejmer).",
+                lat: 45.6178,
+                lng: 25.6322,
+                gmapsUrl: "https://www.google.com/maps/search/?api=1&query=Parc+Aventura+Brasov"
+            },
+            {
+                id: 8,
+                dayGroup: "d5",
+                dayTitle: "יום 5: קניון 7 הסולמות וחוות דייג",
+                color: "#f97316",
+                pinNum: "5",
+                title: "קניון 7 הסולמות (Canionul 7 Scări)",
+                category: "טבע / מסלול",
+                desc: "09:30 - מסלול הליכה ביער וטיפוס בסולמות מתכת לצד מפלים זורמים.",
+                lat: 45.5663,
+                lng: 25.6450,
+                gmapsUrl: "https://www.google.com/maps/search/?api=1&query=Canionul+7+Scari+Romania"
+            },
+            {
+                id: 9,
+                dayGroup: "d5",
+                dayTitle: "יום 5: קניון 7 הסולמות וחוות דייג",
+                color: "#f97316",
+                pinNum: "5",
+                title: "חוות דייג פורלים (Păstrăvărie Râșnov)",
+                category: "אוכל / דייג",
+                desc: "14:30 - דייג עצמאי וארוחת צהריים/ערב של הדגים שתדוגו במקום.",
+                lat: 45.5900,
+                lng: 25.4600,
+                gmapsUrl: "https://www.google.com/maps/search/?api=1&query=Pastravarie+Rasnov"
+            },
+            {
+                id: 10,
+                dayGroup: "d5",
+                dayTitle: "יום 5: קניון 7 הסולמות וחוות דייג",
+                color: "#f97316",
+                pinNum: "5",
+                title: "קניון Coresi Shopping Resort",
+                category: "קניות / בילוי",
+                desc: "18:00 - קניות וזמן חופשי במרכז המסחרי המודרני בבראשוב.",
+                lat: 45.6713,
+                lng: 25.6136,
+                gmapsUrl: "https://www.google.com/maps/search/?api=1&query=Coresi+Shopping+Resort+Brasov"
+            },
+            {
+                id: 11,
+                dayGroup: "d6",
+                dayTitle: "יום 6: כביש טראנספגראשן ואגם באליה",
+                color: "#8b5cf6",
+                pinNum: "6",
+                title: "אגם באליה (Bâlea Lake) - Transfăgărășan",
+                category: "נוף / הרים",
+                desc: "09:00-16:00 - נהיגה בכביש ההררי המפורסם, עצירה באגם בגובה 2,034 מטרים ורכבל.",
+                lat: 45.6041,
+                lng: 24.6172,
+                gmapsUrl: "https://www.google.com/maps/search/?api=1&query=Balea+Lake+Transfagarasan"
+            },
+            {
+                id: 12,
+                dayGroup: "d7",
+                dayTitle: "יום 7: עמק פראחובה ומעבר לבוקרשט",
+                color: "#ec4899",
+                pinNum: "7",
+                title: "רכבל ומגלשת הרים Alpine Coaster (Sinaia)",
+                category: "אקסטרים / נוף",
+                desc: "חלופה 1 מומלצת: עלייה ברכבל וגלישה במגלשת ההרים האלפינית בסינאיה.",
+                lat: 45.3520,
+                lng: 25.5390,
+                gmapsUrl: "https://www.google.com/maps/search/?api=1&query=Sinaia+Alpine+Coaster"
+            },
+            {
+                id: 13,
+                dayGroup: "d7",
+                dayTitle: "יום 7: עמק פראחובה ומעבר לבוקרשט",
+                color: "#ec4899",
+                pinNum: "7",
+                title: "מצודת רשנוב ו-Dino Parc Râșnov",
+                category: "משפחות / פארק",
+                desc: "חלופה 2: מצודת רשנוב ההיסטורית ופארק הדינוזאורים המשפחתי.",
+                lat: 45.5905,
+                lng: 25.4625,
+                gmapsUrl: "https://www.google.com/maps/search/?api=1&query=Dino+Parc+Rasnov"
+            },
+            {
+                id: 14,
+                dayGroup: "d7",
+                dayTitle: "יום 7: עמק פראחובה ומעבר לבוקרשט",
+                color: "#ec4899",
+                pinNum: "7",
+                title: "קניון AFI Cotroceni (בוקרשט)",
+                category: "קניות / ערב",
+                desc: "18:00 - צ'ק-אין בבוקרשט ושופינג/החלקה על הקרח בקניון AFI.",
+                lat: 44.4308,
+                lng: 26.0528,
+                gmapsUrl: "https://www.google.com/maps/search/?api=1&query=AFI+Cotroceni+Bucharest"
+            },
+            {
+                id: 15,
+                dayGroup: "d8-9",
+                dayTitle: "ימים 8-9: בוקרשט התוססת",
+                color: "#eab308",
+                pinNum: "8",
+                title: "פארק המים Therme București (Galaxy)",
+                category: "פארק מים / ספא",
+                desc: "09:30-14:30 - מתחם הגלקסי המשפחתי, מגלשות אקסטרים ובריכות. להזמין מראש!",
+                lat: 44.6052,
+                lng: 26.0870,
+                gmapsUrl: "https://www.google.com/maps/search/?api=1&query=Therme+Bucuresti"
+            },
+            {
+                id: 16,
+                dayGroup: "d8-9",
+                dayTitle: "ימים 8-9: בוקרשט התוססת",
+                color: "#eab308",
+                pinNum: "8",
+                title: "קניון Băneasa Shopping City",
+                category: "קניות",
+                desc: "קניון ענקי ומודרני הנמצא קרוב מאוד לפארק המים תרמה.",
+                lat: 44.5065,
+                lng: 26.0898,
+                gmapsUrl: "https://www.google.com/maps/search/?api=1&query=Baneasa+Shopping+City+Bucharest"
+            },
+            {
+                id: 17,
+                dayGroup: "d8-9",
+                dayTitle: "ימים 8-9: בוקרשט התוססת",
+                color: "#eab308",
+                pinNum: "9",
+                title: "ארמון הפרלמנט (Palace of Parliament)",
+                category: "אתר / תרבות",
+                desc: "תצפית וסיור באחד המבנים הממשלתיים הגדולים והמרשימים בעולם.",
+                lat: 44.4275,
+                lng: 26.0873,
+                gmapsUrl: "https://www.google.com/maps/search/?api=1&query=Palace+of+Parliament+Bucharest"
+            },
+            {
+                id: 18,
+                dayGroup: "d8-9",
+                dayTitle: "ימים 8-9: בוקרשט התוססת",
+                color: "#eab308",
+                pinNum: "9",
+                title: "מסעדת Caru' cu Bere (העיר העתיקה)",
+                category: "מסעדה / ערב",
+                desc: "ארוחת ערב חגיגית במסעדה ההיסטורית והמפורסמת ביותר בבוקרשט.",
+                lat: 44.4319,
+                lng: 26.0982,
+                gmapsUrl: "https://www.google.com/maps/search/?api=1&query=Caru+cu+Bere+Bucharest"
+            }
+        ];
+
+        // --- 2. Initialize Leaflet Map ---
+        const map = L.map('map').setView([45.2, 25.4], 8);
+
+        // OpenStreetMap Tile Layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Ensure map renders tiles properly on load
+        setTimeout(() => {
+            map.invalidateSize();
+        }, 300);
+
+        const markersMap = {};
+
+        // Helper function to create custom colored div icon
+        function createCustomPin(color, number) {
+            return L.divIcon({
+                className: 'custom-div-icon',
+                html: `<div class="pin-marker" style="background-color: ${color};">${number}</div>`,
+                iconSize: [32, 32],
+                iconAnchor: [16, 16]
+            });
+        }
+
+        // Render Map Markers
+        locationsData.forEach(loc => {
+            const marker = L.marker([loc.lat, loc.lng], {
+                icon: createCustomPin(loc.color, loc.pinNum)
+            }).addTo(map);
+
+            const popupContent = `
+                <div class="popup-card">
+                    <h3>${loc.title}</h3>
+                    <p>${loc.desc}</p>
+                    <a href="${loc.gmapsUrl}" target="_blank" class="btn-gmaps">
+                        <i class="fa-solid fa-location-arrow"></i> פתח ב-Google Maps
+                    </a>
+                </div>
+            `;
+
+            marker.bindPopup(popupContent);
+            markersMap[loc.id] = marker;
+        });
+
+        // --- 3. Render Sidebar Locations List ---
+        const locationsListContainer = document.getElementById('locationsList');
+
+        function renderSidebarList(filter = 'all', searchQuery = '') {
+            locationsListContainer.innerHTML = '';
+
+            // Group data by dayTitle
+            const grouped = {};
+            locationsData.forEach(loc => {
+                // Apply Filter
+                if (filter !== 'all' && loc.dayGroup !== filter) return;
+                
+                // Apply Search
+                if (searchQuery) {
+                    const q = searchQuery.toLowerCase();
+                    const matchTitle = loc.title.toLowerCase().includes(q);
+                    const matchDesc = loc.desc.toLowerCase().includes(q);
+                    const matchCat = loc.category.toLowerCase().includes(q);
+                    if (!matchTitle && !matchDesc && !matchCat) return;
+                }
+
+                if (!grouped[loc.dayTitle]) {
+                    grouped[loc.dayTitle] = [];
+                }
+                grouped[loc.dayTitle].push(loc);
+            });
+
+            if (Object.keys(grouped).length === 0) {
+                locationsListContainer.innerHTML = `<div style="text-align:center; padding: 20px; color: var(--text-muted);">לא נמצאו יעדים תואמים.</div>`;
+                return;
+            }
+
+            for (const [dayTitle, items] of Object.entries(grouped)) {
+                const groupHeader = document.createElement('div');
+                groupHeader.className = 'day-group-title';
+                groupHeader.innerHTML = `<span>${dayTitle}</span> <span style="font-size:11px; font-weight:normal;">(${items.length} יעדים)</span>`;
+                locationsListContainer.appendChild(groupHeader);
+
+                items.forEach(loc => {
+                    const card = document.createElement('div');
+                    card.className = 'location-card';
+                    card.style.borderRightColor = loc.color;
+                    card.dataset.id = loc.id;
+
+                    card.innerHTML = `
+                        <div class="card-header-row">
+                            <span class="card-title">${loc.title}</span>
+                            <span class="card-category">${loc.category}</span>
+                        </div>
+                        <div class="card-desc">${loc.desc}</div>
+                        <div class="card-actions">
+                            <a href="${loc.gmapsUrl}" target="_blank" class="btn-gmaps" onclick="event.stopPropagation();">
+                                <i class="fa-solid fa-location-arrow"></i> Google Maps
+                            </a>
+                        </div>
+                    `;
+
+                    // Click event to highlight & focus on map
+                    card.addEventListener('click', () => {
+                        document.querySelectorAll('.location-card').forEach(c => c.classList.remove('active'));
+                        card.classList.add('active');
+
+                        const marker = markersMap[loc.id];
+                        if (marker) {
+                            map.flyTo([loc.lat, loc.lng], 12, { duration: 1.2 });
+                            marker.openPopup();
+                        }
+
+                        // On mobile, switch to map view automatically on click
+                        if (window.innerWidth <= 768) {
+                            showMapView();
+                        }
+                    });
+
+                    locationsListContainer.appendChild(card);
+                });
+            }
+        }
+
+        // --- 4. Event Listeners ---
+
+        // Search Input Event
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const activeFilter = document.querySelector('.filter-pill.active').dataset.filter;
+            renderSidebarList(activeFilter, e.target.value);
+        });
+
+        // Filter Pills Event
+        document.getElementById('filterPills').addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-pill')) {
+                document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                const filter = e.target.dataset.filter;
+                const searchQuery = document.getElementById('searchInput').value;
+                renderSidebarList(filter, searchQuery);
+
+                // Auto zoom map to filtered bounds
+                if (filter !== 'all') {
+                    const filteredLocs = locationsData.filter(l => l.dayGroup === filter);
+                    if (filteredLocs.length > 0) {
+                        const bounds = L.latLngBounds(filteredLocs.map(l => [l.lat, l.lng]));
+                        map.fitBounds(bounds, { padding: [50, 50] });
+                    }
+                } else {
+                    map.setView([45.2, 25.4], 8);
+                }
+            }
+        });
+
+        // Mobile View Switcher Logic
+        const mainApp = document.getElementById('mainApp');
+        const tabListBtn = document.getElementById('tabListBtn');
+        const tabMapBtn = document.getElementById('tabMapBtn');
+
+        function showListView() {
+            mainApp.classList.remove('show-map');
+            tabListBtn.classList.add('active');
+            tabMapBtn.classList.remove('active');
+        }
+
+        function showMapView() {
+            mainApp.classList.add('show-map');
+            tabMapBtn.classList.add('active');
+            tabListBtn.classList.remove('active');
+            setTimeout(() => map.invalidateSize(), 200);
+        }
+
+        tabListBtn.addEventListener('click', showListView);
+        tabMapBtn.addEventListener('click', showMapView);
+
+        // Initial Render & Map Resize Trigger
+        window.addEventListener('resize', () => map.invalidateSize());
+        renderSidebarList();
+    </script>
+</body>
+</html>
+```
+
+כעת המפה זמינה ומוכנה לצפייה אינטראקטיבית מלאה! תוכל לחפש אטרקציות, לסנן לפי ימים וללחוץ על כל נקודה כדי לקבל ניווט ישיר ב-Google Maps.
