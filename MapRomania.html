@@ -3,488 +3,401 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מפה אינטראקטיבית - טיול משפחות 2026</title>
+    <title>מפות ומיקומים לפי ימים - רומניה 2026</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts (Rubik) -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Leaflet Map CSS & JS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Rubik', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --sidebar-width: 380px;
-            --primary: #1e3a8a;
-            --bg: #f8fafc;
-        }
-
-        * {
-            box-sizing: border-box;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            height: 100vh;
-            background-color: var(--bg);
-            direction: rtl;
-            overflow: hidden;
-        }
-
-        #sidebar {
-            width: var(--sidebar-width);
-            height: 100%;
-            background: #ffffff;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            z-index: 1000;
-        }
-
-        .sidebar-header {
-            padding: 20px;
-            background: linear-gradient(135deg, #1e3a8a 0%, #0284c7 100%);
-            color: white;
-        }
-
-        .sidebar-header h1 {
-            margin: 0 0 5px 0;
-            font-size: 1.4rem;
-        }
-
-        .sidebar-header p {
-            margin: 0;
-            font-size: 0.85rem;
-            opacity: 0.9;
-        }
-
-        .filter-container {
-            padding: 10px 15px;
-            background: #f1f5f9;
-            border-bottom: 1px solid #e2e8f0;
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-
-        .filter-btn {
-            padding: 6px 12px;
-            border: none;
-            background: #ffffff;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            transition: all 0.2s;
-        }
-
-        .filter-btn.active {
-            background: var(--primary);
-            color: white;
-        }
-
-        .places-list {
-            flex: 1;
-            overflow-y: auto;
-            padding: 15px;
-        }
-
-        .place-card {
-            background: #ffffff;
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 12px;
-            border: 1px solid #e2e8f0;
-            border-right: 5px solid #cbd5e1;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .place-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .place-title {
-            font-weight: bold;
-            font-size: 0.98rem;
-            color: #0f172a;
-            margin-bottom: 4px;
-        }
-
-        .place-day {
-            font-size: 0.75rem;
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 4px;
-            color: white;
-            font-weight: bold;
-            margin-bottom: 6px;
-        }
-
-        .place-drive {
-            font-size: 0.82rem;
-            color: #0284c7;
-            background: #f0f9ff;
-            padding: 4px 8px;
-            border-radius: 4px;
-            margin-top: 6px;
-        }
-
-        .gmaps-link {
-            display: inline-block;
-            margin-top: 8px;
-            font-size: 0.8rem;
-            color: #10b981;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .gmaps-link:hover {
-            text-decoration: underline;
-        }
-
-        #map {
-            flex: 1;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .custom-pin {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            color: white;
-            font-weight: bold;
+        body { font-family: 'Rubik', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        #main-map { height: 500px; width: 100%; border-radius: 1.25rem; z-index: 10; }
+        .day-badge-active { ring: 3px solid #000; transform: scale(1.03); }
+        .custom-div-icon {
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 50%;
+            color: white;
+            font-weight: bold;
+            font-size: 13px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             border: 2px solid white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-            font-size: 0.85rem;
-        }
-
-        @media (max-width: 768px) {
-            body { flex-direction: column; }
-            #sidebar { width: 100%; height: 45%; }
-            #map { height: 55%; }
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col antialiased">
 
-<div id="sidebar">
-    <div class="sidebar-header">
-        <h1>מפת מסלול טיול משפחות 2026</h1>
-        <p>10 ימים | מרחקים וזמני נסיעה מיעד קודם</p>
-    </div>
+    <header class="bg-slate-900 text-white shadow-xl py-6 px-4 sm:px-8 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="bg-sky-500/20 text-sky-300 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-sky-400/30">
+                        <i class="fa-solid fa-map-location-dot ml-1"></i> מפת מסלול אינטראקטיבית
+                    </span>
+                    <span class="bg-amber-500/20 text-amber-300 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-amber-400/30">
+                        צבע ייחודי לכל יום
+                    </span>
+                </div>
+                <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight">
+                    🗺️ מפת מיקומים ואטרקציות ברומניה לפי ימים
+                </h1>
+            </div>
+            <a href="https://maps.google.com" target="_blank" class="bg-sky-600 hover:bg-sky-500 text-white font-bold px-4 py-2 rounded-xl text-sm transition flex items-center gap-2">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> פתיחה ב-Google Maps
+            </a>
+        </div>
+    </header>
 
-    <div class="filter-container" id="filters">
-        <button class="filter-btn active" onclick="filterDay('all')">הכל</button>
-        <button class="filter-btn" onclick="filterDay(1)">יום 1</button>
-        <button class="filter-btn" onclick="filterDay(2)">יום 2</button>
-        <button class="filter-btn" onclick="filterDay(4)">יום 4</button>
-        <button class="filter-btn" onclick="filterDay(5)">יום 5</button>
-        <button class="filter-btn" onclick="filterDay(6)">יום 6</button>
-        <button class="filter-btn" onclick="filterDay(7)">יום 7</button>
-        <button class="filter-btn" onclick="filterDay(8)">יום 8</button>
-        <button class="filter-btn" onclick="filterDay(9)">יום 9</button>
-    </div>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full space-y-8">
 
-    <div class="places-list" id="placesList"></div>
-</div>
+        <section class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <h2 class="text-base font-bold text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-palette text-sky-600"></i> בחרו יום להצגת המיקומים והסימון במפה:
+                </h2>
+                <button onclick="filterDay('all')" class="text-xs text-sky-700 font-bold hover:underline">
+                    הצג את כל הימים במפה
+                </button>
+            </div>
 
-<div id="map"></div>
+            <!-- Day Buttons list with unique colors -->
+            <div id="day-buttons-container" class="flex flex-wrap gap-2 text-xs font-bold">
+                <!-- Javascript will inject colored day buttons here -->
+            </div>
+        </section>
 
-<script>
-    // צבעים לכל יום
-    const dayColors = {
-        1: '#ef4444', // אדום
-        2: '#f97316', // כתום
-        4: '#10b981', // ירוק
-        5: '#06b6d4', // טורקיז
-        6: '#3b82f6', // כחול
-        7: '#8b5cf6', // סגול
-        8: '#ec4899', // ורוד
-        9: '#eab308'  // זהב
-    };
+        <section class="bg-white rounded-3xl p-4 sm:p-6 border border-slate-200 shadow-md">
+            <div class="flex items-center justify-between mb-4">
+                <h3 id="selected-day-title" class="text-lg sm:text-xl font-extrabold text-slate-900 flex items-center gap-2">
+                    <span class="w-3.5 h-3.5 rounded-full bg-sky-500 inline-block" id="day-color-indicator"></span>
+                    <span id="day-title-text">מפת כל הימים והמיקומים</span>
+                </h3>
+                <span id="day-subtitle-text" class="text-xs text-slate-500 font-medium">11 ימים &bull; כל הנקודות המרכזיות</span>
+            </div>
 
-    // רשימת היעדים המלאה והמעודכנת
-    const locations = [
-        {
-            id: 1,
-            day: 1,
-            title: "נמל התעופה בוקרשט אוטופני (OTP)",
-            lat: 44.5711,
-            lng: 26.0850,
-            drive: "נקודת מוצא - איסוף רכב שכור",
-            gmaps: "https://maps.google.com/?q=Henri+Coand%C4%83+International+Airport"
-        },
-        {
-            id: 2,
-            day: 1,
-            title: "בראשוב - דירת לינה (Brașov)",
-            lat: 45.6579,
-            lng: 25.6012,
-            drive: "🚘 מנמל התעופה: ~150 ק\"מ | ⏱️ 2.5–3.5 שעות",
-            gmaps: "https://maps.google.com/?q=Brasov+Romania"
-        },
-        {
-            id: 3,
-            day: 1,
-            title: "כיכר המועצה והעיר העתיקה (Piața Sfatului)",
-            lat: 45.6427,
-            lng: 25.5887,
-            drive: "🚘 מהדירה בבראשוב: ~3 ק\"מ | ⏱️ 8–10 דקות",
-            gmaps: "https://maps.google.com/?q=Piata+Sfatului+Brasov"
-        },
-        {
-            id: 4,
-            day: 2,
-            title: "רכבל הר טמפה (Telecabina Tâmpa)",
-            lat: 45.6391,
-            lng: 25.5944,
-            drive: "🚘 מהדירה בבראשוב: ~4 ק\"מ | ⏱️ 10 דקות",
-            gmaps: "https://maps.google.com/?q=Telecabina+Tampa+Brasov"
-        },
-        {
-            id: 5,
-            day: 2,
-            title: "קארטינג מקורה Vmax Brașov",
-            lat: 45.6701,
-            lng: 25.6189,
-            drive: "🚘 מהר טמפה: ~5 ק\"מ | ⏱️ 12 דקות",
-            gmaps: "https://maps.google.com/?q=Vmax+Karting+Brasov"
-        },
-        {
-            id: 6,
-            day: 4,
-            title: "שמורת הדובים בזרנשט (Libearty Bear Sanctuary)",
-            lat: 45.5658,
-            lng: 25.3377,
-            drive: "🚘 מבראשוב: ~30 ק\"מ | ⏱️ 35–40 דקות",
-            gmaps: "https://maps.google.com/?q=Libearty+Bear+Sanctuary+Zarnesti"
-        },
-        {
-            id: 7,
-            day: 4,
-            title: "טירת בראן (Bran Castle)",
-            lat: 45.5149,
-            lng: 25.3672,
-            drive: "🚘 משמורת הדובים: ~15 ק\"מ | ⏱️ 20 דקות",
-            gmaps: "https://maps.google.com/?q=Bran+Castle"
-        },
-        {
-            id: 8,
-            day: 4,
-            title: "פארק החבלים Parc Aventura Brașov",
-            lat: 45.6171,
-            lng: 25.6375,
-            drive: "🚘 מטירת בראן: ~30 ק\"מ | ⏱️ 35 דקות",
-            gmaps: "https://maps.google.com/?q=Parc+Aventura+Brasov"
-        },
-        {
-            id: 9,
-            day: 5,
-            title: "קניון 7 הסולמות (Canionul 7 Scări)",
-            lat: 45.5672,
-            lng: 25.6428,
-            drive: "🚘 מבראשוב: ~12 ק\"מ | ⏱️ 15–20 דקות",
-            gmaps: "https://maps.google.com/?q=7+Ladders+Canyon"
-        },
-        {
-            id: 10,
-            day: 5,
-            title: "חוות פורלים לדייג (Păstrăvărie Râșnov)",
-            lat: 45.5788,
-            lng: 25.4412,
-            drive: "🚘 מקניון 7 הסולמות: ~25 ק\"מ | ⏱️ 25–30 דקות",
-            gmaps: "https://maps.google.com/?q=Pastravarie+Rasnov"
-        },
-        {
-            id: 11,
-            day: 5,
-            title: "אופציה: הכנסייה המבוצרת פרז'מר (Prejmer Fortified Church)",
-            lat: 45.7218,
-            lng: 25.7744,
-            drive: "🚘 מחוות הדייג / בראשוב: ~18 ק\"מ | ⏱️ 20 דקות",
-            gmaps: "https://maps.google.com/?q=Prejmer+Fortified+Church"
-        },
-        {
-            id: 12,
-            day: 5,
-            title: "קניון Coresi Shopping Resort בבראשוב",
-            lat: 45.6705,
-            lng: 25.6145,
-            drive: "🚘 מפרז'מר / מבראשוב: ~15 ק\"מ | ⏱️ 20 דקות",
-            gmaps: "https://maps.google.com/?q=Coresi+Shopping+Resort"
-        },
-        {
-            id: 13,
-            day: 6,
-            title: "רכבל אגם באליה (Bâlea Telecabina)",
-            lat: 45.6358,
-            lng: 24.6158,
-            drive: "🚘 מבראשוב: ~100 ק\"מ | ⏱️ 1.5 שעות",
-            gmaps: "https://maps.google.com/?q=Balea+Telecabina"
-        },
-        {
-            id: 14,
-            day: 6,
-            title: "פארק המים Paradisul Acvatic בבראשוב",
-            lat: 45.6721,
-            lng: 25.5988,
-            drive: "🚘 מרכבל באליה חזרה לבראשוב: ~100 ק\"מ | ⏱️ 1.5 שעות",
-            gmaps: "https://maps.google.com/?q=Paradisul+Acvatic+Brasov"
-        },
-        {
-            id: 15,
-            day: 7,
-            title: "רכבל ומגלשת הרים בסינאיה (Sinaia Alpine Coaster)",
-            lat: 45.3542,
-            lng: 25.5515,
-            drive: "🚘 מבראשוב: ~45 ק\"מ | ⏱️ 50 דקות",
-            gmaps: "https://maps.google.com/?q=Sinaia+Gondola"
-        },
-        {
-            id: 16,
-            day: 7,
-            title: "אופציה: ארמון פלש בסינאיה (Peleș Castle)",
-            lat: 45.3599,
-            lng: 25.5426,
-            drive: "🚘 מהרכבל בסינאיה: ~3 ק\"מ | ⏱️ 5–7 דקות",
-            gmaps: "https://maps.google.com/?q=Peles+Castle+Sinaia"
-        },
-        {
-            id: 17,
-            day: 7,
-            title: "קניון AFI Cotroceni בבוקרשט",
-            lat: 44.4308,
-            lng: 26.0531,
-            drive: "🚘 מסינאיה לבוקרשט: ~120 ק\"מ | ⏱️ 2–2.5 שעות",
-            gmaps: "https://maps.google.com/?q=AFI+Cotroceni+Bucharest"
-        },
-        {
-            id: 18,
-            day: 8,
-            title: "פארק המים Therme București",
-            lat: 44.6052,
-            lng: 26.0862,
-            drive: "🚘 ממרכז בוקרשט: ~20 ק\"מ | ⏱️ 25–30 דקות",
-            gmaps: "https://maps.google.com/?q=Therme+Bucuresti"
-        },
-        {
-            id: 19,
-            day: 8,
-            title: "קניון Băneasa Shopping City",
-            lat: 44.5068,
-            lng: 26.0898,
-            drive: "🚘 מ-Therme: ~10 ק\"מ | ⏱️ 12–15 דקות",
-            gmaps: "https://maps.google.com/?q=Baneasa+Shopping+City"
-        },
-        {
-            id: 20,
-            day: 9,
-            title: "ארמון הפרלמנט בבוקרשט (Palace of Parliament)",
-            lat: 44.4275,
-            lng: 26.0874,
-            drive: "🚘 ממרכז בוקרשט: ~3–5 ק\"מ | ⏱️ 10–12 דקות",
-            gmaps: "https://maps.google.com/?q=Palace+of+Parliament+Bucharest"
-        },
-        {
-            id: 21,
-            day: 9,
-            title: "מסעדת Caru' cu Bere (העיר העתיקה בוקרשט)",
-            lat: 44.4320,
-            lng: 26.0981,
-            drive: "🚘 מהקניון/פרלמנט: ~5 ק\"מ | ⏱️ 15 דקות",
-            gmaps: "https://maps.google.com/?q=Caru+cu+Bere+Bucharest"
-        }
-    ];
+            <!-- Map Container -->
+            <div id="main-map" class="shadow-inner border border-slate-200"></div>
+        </section>
 
-    // אתחול המפה
-    const map = L.map('map').setView([45.2, 25.5], 8);
+        <section class="space-y-4">
+            <div class="flex items-center justify-between">
+                <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-location-dot text-rose-500"></i> נקודות הציון והניווט ביום הנבחר
+                </h3>
+            </div>
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap'
-    }).addTo(map);
+            <!-- Locations list container -->
+            <div id="locations-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- JavaScript will populate location cards here -->
+            </div>
+        </section>
 
-    let markers = [];
+    </main>
 
-    // יצירת הסיכות והרשימה בסרגל
-    function initMap() {
-        const listContainer = document.getElementById('placesList');
-        listContainer.innerHTML = '';
+    <footer class="bg-slate-900 text-white py-6 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400">
+            <p>🇹🇩 מפת מיקומים אינטראקטיבית לרומניה 2026 | כל יום בצבע ייחודי עם קישורי ניווט ישירים</p>
+        </div>
+    </footer>
 
-        locations.forEach((loc) => {
-            const color = dayColors[loc.day] || '#3b82f6';
+    <script>
+        // Data structure containing each day with a distinct color, title, and coordinates
+        const itineraryDays = [
+            {
+                id: 1,
+                date: '19/09/2026 (שבת)',
+                title: 'יום 1: נחיתה, פלוישט ונסיעה לבראשוב',
+                color: '#ef4444', // Red
+                bgClass: 'bg-red-500',
+                textClass: 'text-red-700',
+                lightBg: 'bg-red-50',
+                borderClass: 'border-red-200',
+                locations: [
+                    { name: 'נמל התעופה בוקרשט אוטופני (OTP)', lat: 44.5708, lng: 26.0844, desc: 'איסוף הרכב והתארגנות ראשונית', mapQuery: 'Henri+Coandă+International+Airport' },
+                    { name: 'קניון Shopping City Ploiești', lat: 44.9701, lng: 25.9868, desc: 'עצירת הצטיידות: כספומט, SIM, סופרמרקט Carrefour', mapQuery: 'Shopping+City+Ploiesti' },
+                    { name: 'כיכר המועצה בראשוב (Piața Sfatului)', lat: 45.6423, lng: 25.5888, desc: 'סיור ערב וארוחה בעיר העתיקה', mapQuery: 'Piata+Sfatului+Brasov' }
+                ]
+            },
+            {
+                id: 2,
+                date: '20/09/2026 (ראשון - ערב כיפור)',
+                title: 'יום 2: פרז\'מר, הר טמפה והכנות לצום',
+                color: '#f59e0b', // Amber
+                bgClass: 'bg-amber-500',
+                textClass: 'text-amber-700',
+                lightBg: 'bg-amber-50',
+                borderClass: 'border-amber-200',
+                locations: [
+                    { name: 'כנסיית המבצר פרז\'מר (Prejmer)', lat: 45.7217, lng: 25.7747, desc: 'מבצר סקסוני אונסק"ו מהמאה ה-13', mapQuery: 'Prejmer+Fortified+Church' },
+                    { name: 'רכבל הר טמפה בראשוב (Telecabina Tâmpa)', lat: 45.6385, lng: 25.5947, desc: 'עלייה לתצפית פנורמית מרהיבה', mapQuery: 'Tampa+Cable+Car+Brasov' },
+                    { name: 'העיר העתיקה ורחוב החבל (Strada Sforii)', lat: 45.6388, lng: 25.5893, desc: 'סיור רגלי והתארגנות לסעודה מפסקת', mapQuery: 'Strada+Sforii+Brasov' }
+                ]
+            },
+            {
+                id: 3,
+                date: '21/09/2026 (שני - יום כיפור)',
+                title: 'יום 3: יום כיפור ומנוחה בדירה + קניון בערב',
+                color: '#6366f1', // Indigo
+                bgClass: 'bg-indigo-500',
+                textClass: 'text-indigo-700',
+                lightBg: 'bg-indigo-50',
+                borderClass: 'border-indigo-200',
+                locations: [
+                    { name: 'מנוחה בדירה בבראשוב', lat: 45.6579, lng: 25.6012, desc: 'צום ומנוחה מלאה בדירה', mapQuery: 'Brasov+Romania' },
+                    { name: 'קניון Coresi Shopping Resort', lat: 45.6702, lng: 25.6145, desc: 'קניות ואוורור במוצאי הצום (פתוח עד 22:00)', mapQuery: 'Coresi+Shopping+Resort' }
+                ]
+            },
+            {
+                id: 4,
+                date: '22/09/2026 (שלישי)',
+                title: 'יום 4: שמורת הדובים, בראן ומגלשת הרים',
+                color: '#f43f5e', // Rose
+                bgClass: 'bg-rose-500',
+                textClass: 'text-rose-700',
+                lightBg: 'bg-rose-50',
+                borderClass: 'border-rose-200',
+                locations: [
+                    { name: 'שמורת הדובים זרנשט (Libearty)', lat: 45.5801, lng: 25.3389, desc: 'שמורת הדובים החומים (חובה מראש, מגיל 5+)', mapQuery: 'Libearty+Bear+Sanctuary+Zarnesti' },
+                    { name: 'טירת בראן ("טירת דרקולה")', lat: 45.5149, lng: 25.3672, desc: 'סיור בטירה ובשוק המזכרות למרגלותיה', mapQuery: 'Bran+Castle' },
+                    { name: 'מגלשת הרים Alpine Coaster Fundata', lat: 45.4523, lng: 25.3001, desc: 'מגלשת הרים ארוכה ומסעירה (1.6 ק"מ)', mapQuery: 'Cheile+Gradistei+Fundata' }
+                ]
+            },
+            {
+                id: 5,
+                date: '23/09/2026 (רביעי)',
+                title: 'יום 5: קניון 7 הסולמות וחוות דייג',
+                color: '#10b981', // Emerald
+                bgClass: 'bg-emerald-500',
+                textClass: 'text-emerald-700',
+                lightBg: 'bg-emerald-50',
+                borderClass: 'border-emerald-200',
+                locations: [
+                    { name: 'חניון קניון 7 הסולמות (Dâmbul Morii)', lat: 45.6022, lng: 25.6420, desc: 'תחילת המסלול וטיפוס בסולמות', mapQuery: 'Canionul+Sapte+Scari' },
+                    { name: 'חוות הפורלים ברשנוב (Păstrăvărie Râșnov)', lat: 45.5885, lng: 25.4611, desc: 'דייג עצמאי וארוחת דגים טרייה', mapQuery: 'Pastravarie+Rasnov' }
+                ]
+            },
+            {
+                id: 6,
+                date: '24/09/2026 (חמישי)',
+                title: 'יום 6: סיגואשרה וויסקרי (חב\' א\') / סינאיה (חב\' ב\')',
+                color: '#14b8a6', // Teal
+                bgClass: 'bg-teal-500',
+                textClass: 'text-teal-700',
+                lightBg: 'bg-teal-50',
+                borderClass: 'border-teal-200',
+                locations: [
+                    { name: 'מצודת סיגואשרה (Sighișoara)', lat: 46.2197, lng: 24.7925, desc: 'מצודה מיושבת UNESCO ומגדל השעון', mapQuery: 'Sighisoara+Citadel' },
+                    { name: 'הכפר הסקסוני ויסקרי (Viscri)', lat: 46.0538, lng: 25.0883, desc: 'כפר אותנטי וכנסייה מבוצרת', mapQuery: 'Viscri+Fortified+Church' },
+                    { name: 'חלופה ב\': ארמון פלש בסינאיה (Peleș Castle)', lat: 45.3599, lng: 25.5426, desc: 'מעון הקיץ המלכותי המפואר', mapQuery: 'Peles+Castle+Sinaia' }
+                ]
+            },
+            {
+                id: 7,
+                date: '25/09/2026 (שישי)',
+                title: 'יום 7: טראנספגראשן, אגם באליה ופארק מים',
+                color: '#0284c7', // Sky Blue
+                bgClass: 'bg-sky-500',
+                textClass: 'text-sky-700',
+                lightBg: 'bg-sky-50',
+                borderClass: 'border-sky-200',
+                locations: [
+                    { name: 'רכבל Bâlea Telecabina (תחנה תחתונה)', lat: 45.6358, lng: 24.6162, desc: 'עלייה ברכבל אל פסגת הטראנספגראשן', mapQuery: 'Balea+Telecabina' },
+                    { name: 'אגם באליה (Bâlea Lake 2,034m)', lat: 45.6041, lng: 24.6169, desc: 'אגם אלפיני נופי ועצירת דובים בכביש', mapQuery: 'Balea+Lake' },
+                    { name: 'פארק המים Paradisul Acvatic בראשוב', lat: 45.6711, lng: 25.5901, desc: 'בריכות מקורות ומ מחוממות (אופציונלי)', mapQuery: 'Paradisul+Acvatic+Brasov' }
+                ]
+            },
+            {
+                id: 8,
+                date: '26/09/2026 (שבת)',
+                title: 'יום 8: פארק חבלים, מעבר רוקאר-בראן ובוקרשט',
+                color: '#4f46e5', // Indigo
+                bgClass: 'bg-indigo-600',
+                textClass: 'text-indigo-800',
+                lightBg: 'bg-indigo-50',
+                borderClass: 'border-indigo-200',
+                locations: [
+                    { name: 'פארק החבלים Parc Aventura Brașov', lat: 45.6178, lng: 25.6341, desc: 'מסלולי אקסטרים ואומגות ביער', mapQuery: 'Parc+Aventura+Brasov' },
+                    { name: 'מעבר ההרים רוקאר-בראן (Pasul Rucăr-Bran)', lat: 45.3852, lng: 25.2289, desc: 'כביש 73 הנופי וקניון דמבוביצ\'וארה', mapQuery: 'Pasul+Rucar+Bran' },
+                    { name: 'חלופה ב\': מכרה המלח סלניק פראחובה (Slănic)', lat: 45.2341, lng: 25.9412, desc: 'מכרה מלח תת-קרקעי ענק (עומק 208 מ\')', mapQuery: 'Salina+Slanic+Prahova' }
+                ]
+            },
+            {
+                id: 9,
+                date: '27/09/2026 (ראשון)',
+                title: 'יום 9: בוקרשט - פרלמנט, קניון AFI והעיר העתיקה',
+                color: '#06b6d4', // Cyan
+                bgClass: 'bg-cyan-500',
+                textClass: 'text-cyan-700',
+                lightBg: 'bg-cyan-50',
+                borderClass: 'border-cyan-200',
+                locations: [
+                    { name: 'ארמון הפרלמנט (Palace of Parliament)', lat: 44.4275, lng: 26.0874, desc: 'עצירת צילומים ותצפית בכיכר החוקה', mapQuery: 'Palace+of+Parliament+Bucharest' },
+                    { name: 'קניון AFI Cotroceni (מוזיאון החושים/החלקה)', lat: 44.4308, lng: 26.0531, desc: 'מוזיאון החושים, החלקה על הקרח ושופינג', mapQuery: 'AFI+Cotroceni' },
+                    { name: 'העיר העתיקה בבוקרשט (Lipscani)', lat: 44.4312, lng: 26.1005, desc: 'סיור רגלי בסמטאות המוארות וארוחת ערב', mapQuery: 'Old+Town+Bucharest' }
+                ]
+            },
+            {
+                id: 10,
+                date: '28/09/2026 (שני)',
+                title: 'יום 10: פארק Therme, קניון Băneasa וסיכום',
+                color: '#f97316', // Orange
+                bgClass: 'bg-orange-500',
+                textClass: 'text-orange-700',
+                lightBg: 'bg-orange-50',
+                borderClass: 'border-orange-200',
+                locations: [
+                    { name: 'פארק המים Therme București', lat: 44.6053, lng: 26.0881, desc: 'מתחם Galaxy (פנוי ושקט ביום שני בבוקר!)', mapQuery: 'Therme+Bucuresti' },
+                    { name: 'קניון Băneasa Shopping City', lat: 44.5074, lng: 26.0886, desc: 'קניות מתנות אחרונות בדרך לבוקרשט', mapQuery: 'Baneasa+Shopping+City' },
+                    { name: 'מסעדת Caru\' cu Bere בעיר העתיקה', lat: 44.4320, lng: 26.0981, desc: 'ארוחת סיום חגיגית מפורסמת מ-1879', mapQuery: 'Caru+cu+Bere+Bucharest' }
+                ]
+            },
+            {
+                id: 11,
+                date: '29/09/2026 (שלישי)',
+                title: 'יום 11: טיסה מוקדמת חזרה לישראל',
+                color: '#64748b', // Slate
+                bgClass: 'bg-slate-600',
+                textClass: 'text-slate-800',
+                lightBg: 'bg-slate-100',
+                borderClass: 'border-slate-300',
+                locations: [
+                    { name: 'נמל התעופה אוטופני (Henri Coandă - OTP)', lat: 44.5708, lng: 26.0844, desc: 'החזרת רכב ב-03:30, טיסה ב-06:00 (AnimaWings)', mapQuery: 'Henri+Coandă+International+Airport' }
+                ]
+            }
+        ];
 
-            // יצירת אייקון מותאם
-            const customIcon = L.divIcon({
-                className: 'custom-pin-wrapper',
-                html: `<div class="custom-pin" style="background-color: ${color}">${loc.day}</div>`,
-                iconSize: [30, 30],
-                iconAnchor: [15, 15]
-            });
+        let map;
+        let activeMarkers = [];
 
-            // מרקר במפה
-            const marker = L.marker([loc.lat, loc.lng], { icon: customIcon })
-                .addTo(map)
-                .bindPopup(`
-                    <div style="direction:rtl; text-align:right;">
-                        <strong style="color:${color}">יום ${loc.day} | ${loc.title}</strong><br>
-                        <small>${loc.drive}</small><br>
-                        <a href="${loc.gmaps}" target="_blank" style="color:#10b981; font-weight:bold;">📍 ניווט ב-Google Maps</a>
-                    </div>
-                `);
+        window.addEventListener('DOMContentLoaded', () => {
+            initDayButtons();
+            initMap();
+            filterDay('all');
+        });
 
-            markers.push({ day: loc.day, marker: marker });
-
-            // כרטיסייה בסרגל
-            const card = document.createElement('div');
-            card.className = 'place-card';
-            card.style.borderRightColor = color;
-            card.onclick = () => {
-                map.flyTo([loc.lat, loc.lng], 12);
-                marker.openPopup();
-            };
-
-            card.innerHTML = `
-                <span class="place-day" style="background-color: ${color}">יום ${loc.day}</span>
-                <div class="place-title">${loc.title}</div>
-                <div class="place-drive">${loc.drive}</div>
-                <a href="${loc.gmaps}" target="_blank" class="gmaps-link" onclick="event.stopPropagation()">📍 פתח ב-Google Maps</a>
+        function initDayButtons() {
+            const container = document.getElementById('day-buttons-container');
+            let html = `
+                <button onclick="filterDay('all')" id="btn-day-all" class="px-3 py-1.5 rounded-xl border bg-slate-800 text-white shadow-sm transition">
+                    כל הימים
+                </button>
             `;
 
-            listContainer.appendChild(card);
-        });
-    }
-
-    // סינון ימים
-    function filterDay(day) {
-        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-        event.target.classList.add('active');
-
-        markers.forEach(item => {
-            if (day === 'all' || item.day === day) {
-                map.addLayer(item.marker);
-            } else {
-                map.removeLayer(item.marker);
-            }
-        });
-
-        if (day !== 'all') {
-            const dayMarkers = markers.filter(m => m.day === day).map(m => m.marker.getLatLng());
-            if (dayMarkers.length > 0) {
-                const bounds = L.latLngBounds(dayMarkers);
-                map.fitBounds(bounds, { padding: [50, 50] });
-            }
-        } else {
-            map.setView([45.2, 25.5], 8);
+            itineraryDays.forEach(day => {
+                html += `
+                    <button onclick="filterDay(${day.id})" id="btn-day-${day.id}" 
+                        style="background-color: ${day.color};"
+                        class="px-3 py-1.5 rounded-xl text-white font-bold transition hover:opacity-90 shadow-sm">
+                        יום ${day.id}
+                    </button>
+                `;
+            });
+            container.innerHTML = html;
         }
-    }
 
-    initMap();
-</script>
+        function initMap() {
+            // Default center around Brașov & Southern Carpathians
+            map = L.map('main-map').setView([45.2, 25.4], 8);
 
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+        }
+
+        function filterDay(dayId) {
+            // Clear existing map markers
+            activeMarkers.forEach(marker => map.removeLayer(marker));
+            activeMarkers = [];
+
+            const locationsListEl = document.getElementById('locations-list');
+            const titleTextEl = document.getElementById('day-title-text');
+            const subtitleTextEl = document.getElementById('day-subtitle-text');
+            const colorIndicatorEl = document.getElementById('day-color-indicator');
+
+            let selectedDays = [];
+            if (dayId === 'all') {
+                selectedDays = itineraryDays;
+                titleTextEl.textContent = 'מפת כל הימים והמיקומים (11 ימים)';
+                subtitleTextEl.textContent = 'כל נקודות הציון מסומנות בצבע היום שלהן';
+                colorIndicatorEl.style.backgroundColor = '#0284c7';
+            } else {
+                const found = itineraryDays.find(d => d.id === dayId);
+                if (found) selectedDays = [found];
+                titleTextEl.textContent = found.title;
+                subtitleTextEl.textContent = found.date;
+                colorIndicatorEl.style.backgroundColor = found.color;
+            }
+
+            let locationsHTML = '';
+            let bounds = L.latLngBounds();
+
+            selectedDays.forEach(day => {
+                day.locations.forEach((loc, idx) => {
+                    // Create Leaflet map marker with day's custom color
+                    const customIcon = L.divIcon({
+                        className: 'custom-div-icon',
+                        html: `<div style="background-color: ${day.color}; width: 28px; height: 28px; line-height: 26px; border-radius: 50%; text-align: center; border: 2px solid white; box-shadow: 0 3px 6px rgba(0,0,0,0.3); font-weight: 800; font-size: 11px;">${day.id}</div>`,
+                        iconSize: [28, 28],
+                        iconAnchor: [14, 14]
+                    });
+
+                    const marker = L.marker([loc.lat, loc.lng], { icon: customIcon }).addTo(map);
+                    marker.bindPopup(`
+                        <div dir="rtl" class="text-right p-1 font-sans">
+                            <strong style="color: ${day.color};" class="block font-bold text-sm">${day.date}</strong>
+                            <strong class="text-base text-slate-900 block mt-0.5">${loc.name}</strong>
+                            <p class="text-xs text-slate-600 mt-1">${loc.desc}</p>
+                            <a href="https://maps.google.com/?q=${encodeURIComponent(loc.mapQuery)}" target="_blank" class="inline-block mt-2 text-xs font-bold text-sky-600 underline">
+                                ניווט ב-Google Maps &raquo;
+                            </a>
+                        </div>
+                    `);
+                    activeMarkers.push(marker);
+                    bounds.extend([loc.lat, loc.lng]);
+
+                    // Generate Location Card HTML
+                    locationsHTML += `
+                        <div class="bg-white p-4 rounded-2xl border ${day.borderClass} shadow-sm hover:shadow-md transition">
+                            <div class="flex items-center justify-between mb-2">
+                                <span style="background-color: ${day.color};" class="text-white text-xs font-bold px-2.5 py-1 rounded-full">
+                                    יום ${day.id}
+                                </span>
+                                <span class="text-xs font-semibold text-slate-500">${day.date.split(' ')[0]}</span>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-base mb-1">${loc.name}</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-3">${loc.desc}</p>
+                            <a href="https://maps.google.com/?q=${encodeURIComponent(loc.mapQuery)}" target="_blank" class="w-full text-center bg-slate-100 hover:bg-sky-50 text-sky-700 font-bold py-2 px-3 rounded-xl border border-slate-200 transition text-xs flex items-center justify-center gap-1.5">
+                                <i class="fa-solid fa-location-arrow text-rose-500"></i> ניווט ב-Google Maps
+                            </a>
+                        </div>
+                    `;
+                });
+            });
+
+            locationsListEl.innerHTML = locationsHTML;
+
+            if (activeMarkers.length > 0) {
+                map.fitBounds(bounds, { padding: [40, 40] });
+            }
+        }
+    </script>
 </body>
 </html>
