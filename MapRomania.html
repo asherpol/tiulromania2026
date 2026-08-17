@@ -28,7 +28,6 @@
     <style>
         body { font-family: 'Rubik', sans-serif; background-color: #f8fafc; color: #1e293b; }
         #main-map { height: 500px; width: 100%; border-radius: 1.25rem; z-index: 10; }
-        .day-badge-active { ring: 3px solid #000; transform: scale(1.03); }
         .custom-div-icon {
             display: flex;
             align-items: center;
@@ -125,10 +124,6 @@
                 date: '19/09/2026 (שבת)',
                 title: 'יום 1: נחיתה, פלוישט ונסיעה לבראשוב',
                 color: '#ef4444', // Red
-                bgClass: 'bg-red-500',
-                textClass: 'text-red-700',
-                lightBg: 'bg-red-50',
-                borderClass: 'border-red-200',
                 locations: [
                     { name: 'נמל התעופה בוקרשט אוטופני (OTP)', lat: 44.5708, lng: 26.0844, desc: 'איסוף הרכב והתארגנות ראשונית', mapQuery: 'Henri+Coandă+International+Airport' },
                     { name: 'קניון Shopping City Ploiești', lat: 44.9701, lng: 25.9868, desc: 'עצירת הצטיידות: כספומט, SIM, סופרמרקט Carrefour', mapQuery: 'Shopping+City+Ploiesti' },
@@ -138,27 +133,19 @@
             {
                 id: 2,
                 date: '20/09/2026 (ראשון - ערב כיפור)',
-                title: 'יום 2: פרז\'מר, הר טמפה והכנות לצום',
+                title: 'יום 2: פרז\'מר, הר טמפה וסעודה מפסקת',
                 color: '#f59e0b', // Amber
-                bgClass: 'bg-amber-500',
-                textClass: 'text-amber-700',
-                lightBg: 'bg-amber-50',
-                borderClass: 'border-amber-200',
                 locations: [
                     { name: 'כנסיית המבצר פרז\'מר (Prejmer)', lat: 45.7217, lng: 25.7747, desc: 'מבצר סקסוני אונסק"ו מהמאה ה-13', mapQuery: 'Prejmer+Fortified+Church' },
                     { name: 'רכבל הר טמפה בראשוב (Telecabina Tâmpa)', lat: 45.6385, lng: 25.5947, desc: 'עלייה לתצפית פנורמית מרהיבה', mapQuery: 'Tampa+Cable+Car+Brasov' },
-                    { name: 'העיר העתיקה ורחוב החבל (Strada Sforii)', lat: 45.6388, lng: 25.5893, desc: 'סיור רגלי והתארגנות לסעודה מפסקת', mapQuery: 'Strada+Sforii+Brasov' }
+                    { name: 'העיר העתיקה וסעודה מפסקת בבית חב"ד', lat: 45.6388, lng: 25.5893, desc: 'סיור רגלי והתארגנות לסעודה מפסקת', mapQuery: 'Strada+Sforii+Brasov' }
                 ]
             },
             {
                 id: 3,
                 date: '21/09/2026 (שני - יום כיפור)',
-                title: 'יום 3: יום כיפור ומנוחה בדירה + קניון בערב',
+                title: 'יום 3: יום כיפור ומנוחה בדירה + קניות בערב',
                 color: '#6366f1', // Indigo
-                bgClass: 'bg-indigo-500',
-                textClass: 'text-indigo-700',
-                lightBg: 'bg-indigo-50',
-                borderClass: 'border-indigo-200',
                 locations: [
                     { name: 'מנוחה בדירה בבראשוב', lat: 45.6579, lng: 25.6012, desc: 'צום ומנוחה מלאה בדירה', mapQuery: 'Brasov+Romania' },
                     { name: 'קניון Coresi Shopping Resort', lat: 45.6702, lng: 25.6145, desc: 'קניות ואוורור במוצאי הצום (פתוח עד 22:00)', mapQuery: 'Coresi+Shopping+Resort' }
@@ -167,27 +154,20 @@
             {
                 id: 4,
                 date: '22/09/2026 (שלישי)',
-                title: 'יום 4: שמורת הדובים, בראן ומגלשת הרים',
+                title: 'יום 4: שמורת הדובים, בראן, פשטרה ומגלשת הרים',
                 color: '#f43f5e', // Rose
-                bgClass: 'bg-rose-500',
-                textClass: 'text-rose-700',
-                lightBg: 'bg-rose-50',
-                borderClass: 'border-rose-200',
                 locations: [
                     { name: 'שמורת הדובים זרנשט (Libearty)', lat: 45.5801, lng: 25.3389, desc: 'שמורת הדובים החומים (חובה מראש, מגיל 5+)', mapQuery: 'Libearty+Bear+Sanctuary+Zarnesti' },
                     { name: 'טירת בראן ("טירת דרקולה")', lat: 45.5149, lng: 25.3672, desc: 'סיור בטירה ובשוק המזכרות למרגלותיה', mapQuery: 'Bran+Castle' },
+                    { name: 'הכפר הציורי פשטרה (Peștera) & אומגה', lat: 45.5102, lng: 25.2865, desc: 'נופים אלפיניים מרהיבים ואומגה פנורמית', mapQuery: 'Sat+Pestera+Brasov' },
                     { name: 'מגלשת הרים Alpine Coaster Fundata', lat: 45.4523, lng: 25.3001, desc: 'מגלשת הרים ארוכה ומסעירה (1.6 ק"מ)', mapQuery: 'Cheile+Gradistei+Fundata' }
                 ]
             },
             {
                 id: 5,
                 date: '23/09/2026 (רביעי)',
-                title: 'יום 5: קניון 7 הסולמות וחוות דייג',
+                title: 'יום 5: קניון 7 הסולמות, חוות דייג וערב חופשי',
                 color: '#10b981', // Emerald
-                bgClass: 'bg-emerald-500',
-                textClass: 'text-emerald-700',
-                lightBg: 'bg-emerald-50',
-                borderClass: 'border-emerald-200',
                 locations: [
                     { name: 'חניון קניון 7 הסולמות (Dâmbul Morii)', lat: 45.6022, lng: 25.6420, desc: 'תחילת המסלול וטיפוס בסולמות', mapQuery: 'Canionul+Sapte+Scari' },
                     { name: 'חוות הפורלים ברשנוב (Păstrăvărie Râșnov)', lat: 45.5885, lng: 25.4611, desc: 'דייג עצמאי וארוחת דגים טרייה', mapQuery: 'Pastravarie+Rasnov' }
@@ -196,31 +176,23 @@
             {
                 id: 6,
                 date: '24/09/2026 (חמישי)',
-                title: 'יום 6: סיגואשרה וויסקרי (חב\' א\') / סינאיה (חב\' ב\')',
+                title: 'יום 6: סיגואשרה וויסקרי (חב\' א\') / ארמון פלש (חב\' ב\')',
                 color: '#14b8a6', // Teal
-                bgClass: 'bg-teal-500',
-                textClass: 'text-teal-700',
-                lightBg: 'bg-teal-50',
-                borderClass: 'border-teal-200',
                 locations: [
                     { name: 'מצודת סיגואשרה (Sighișoara)', lat: 46.2197, lng: 24.7925, desc: 'מצודה מיושבת UNESCO ומגדל השעון', mapQuery: 'Sighisoara+Citadel' },
                     { name: 'הכפר הסקסוני ויסקרי (Viscri)', lat: 46.0538, lng: 25.0883, desc: 'כפר אותנטי וכנסייה מבוצרת', mapQuery: 'Viscri+Fortified+Church' },
-                    { name: 'חלופה ב\': ארמון פלש בסינאיה (Peleș Castle)', lat: 45.3599, lng: 25.5426, desc: 'מעון הקיץ המלכותי המפואר', mapQuery: 'Peles+Castle+Sinaia' }
+                    { name: 'חלופה ב\': ארמון פלש בסינאיה (Peleș Castle)', lat: 45.3599, lng: 25.5426, desc: 'מעון הקיץ המלכותי (להזמין מראש!)', mapQuery: 'Peles+Castle+Sinaia' }
                 ]
             },
             {
                 id: 7,
                 date: '25/09/2026 (שישי)',
-                title: 'יום 7: טראנספגראשן, אגם באליה ופארק מים',
+                title: 'יום 7: טראנספגראשן, אגם באליה ופארק מים/קניון',
                 color: '#0284c7', // Sky Blue
-                bgClass: 'bg-sky-500',
-                textClass: 'text-sky-700',
-                lightBg: 'bg-sky-50',
-                borderClass: 'border-sky-200',
                 locations: [
                     { name: 'רכבל Bâlea Telecabina (תחנה תחתונה)', lat: 45.6358, lng: 24.6162, desc: 'עלייה ברכבל אל פסגת הטראנספגראשן', mapQuery: 'Balea+Telecabina' },
                     { name: 'אגם באליה (Bâlea Lake 2,034m)', lat: 45.6041, lng: 24.6169, desc: 'אגם אלפיני נופי ועצירת דובים בכביש', mapQuery: 'Balea+Lake' },
-                    { name: 'פארק המים Paradisul Acvatic בראשוב', lat: 45.6711, lng: 25.5901, desc: 'בריכות מקורות ומ מחוממות (אופציונלי)', mapQuery: 'Paradisul+Acvatic+Brasov' }
+                    { name: 'פארק המים Paradisul Acvatic בראשוב', lat: 45.6711, lng: 25.5901, desc: 'בריכות מקורות ומחוממות (אופציונלי)', mapQuery: 'Paradisul+Acvatic+Brasov' }
                 ]
             },
             {
@@ -228,10 +200,6 @@
                 date: '26/09/2026 (שבת)',
                 title: 'יום 8: פארק חבלים, מעבר רוקאר-בראן ובוקרשט',
                 color: '#4f46e5', // Indigo
-                bgClass: 'bg-indigo-600',
-                textClass: 'text-indigo-800',
-                lightBg: 'bg-indigo-50',
-                borderClass: 'border-indigo-200',
                 locations: [
                     { name: 'פארק החבלים Parc Aventura Brașov', lat: 45.6178, lng: 25.6341, desc: 'מסלולי אקסטרים ואומגות ביער', mapQuery: 'Parc+Aventura+Brasov' },
                     { name: 'מעבר ההרים רוקאר-בראן (Pasul Rucăr-Bran)', lat: 45.3852, lng: 25.2289, desc: 'כביש 73 הנופי וקניון דמבוביצ\'וארה', mapQuery: 'Pasul+Rucar+Bran' },
@@ -241,15 +209,11 @@
             {
                 id: 9,
                 date: '27/09/2026 (ראשון)',
-                title: 'יום 9: בוקרשט - פרלמנט, קניון AFI והעיר העתיקה',
+                title: 'יום 9: בוקרשט - קניון AFI, פרלמנט מבחוץ והעיר העתיקה',
                 color: '#06b6d4', // Cyan
-                bgClass: 'bg-cyan-500',
-                textClass: 'text-cyan-700',
-                lightBg: 'bg-cyan-50',
-                borderClass: 'border-cyan-200',
                 locations: [
-                    { name: 'ארמון הפרלמנט (Palace of Parliament)', lat: 44.4275, lng: 26.0874, desc: 'עצירת צילומים ותצפית בכיכר החוקה', mapQuery: 'Palace+of+Parliament+Bucharest' },
-                    { name: 'קניון AFI Cotroceni (מוזיאון החושים/החלקה)', lat: 44.4308, lng: 26.0531, desc: 'מוזיאון החושים, החלקה על הקרח ושופינג', mapQuery: 'AFI+Cotroceni' },
+                    { name: 'קניון AFI Cotroceni (החלקה על הקרח/קארטינג)', lat: 44.4308, lng: 26.0531, desc: 'החלקה על הקרח, מוזיאון החושים ושופינג', mapQuery: 'AFI+Cotroceni' },
+                    { name: 'ארמון הפרלמנט (Palace of Parliament)', lat: 44.4275, lng: 26.0874, desc: 'תצפית וצילומים מבחוץ בכיכר החוקה', mapQuery: 'Palace+of+Parliament+Bucharest' },
                     { name: 'העיר העתיקה בבוקרשט (Lipscani)', lat: 44.4312, lng: 26.1005, desc: 'סיור רגלי בסמטאות המוארות וארוחת ערב', mapQuery: 'Old+Town+Bucharest' }
                 ]
             },
@@ -258,10 +222,6 @@
                 date: '28/09/2026 (שני)',
                 title: 'יום 10: פארק Therme, קניון Băneasa וסיכום',
                 color: '#f97316', // Orange
-                bgClass: 'bg-orange-500',
-                textClass: 'text-orange-700',
-                lightBg: 'bg-orange-50',
-                borderClass: 'border-orange-200',
                 locations: [
                     { name: 'פארק המים Therme București', lat: 44.6053, lng: 26.0881, desc: 'מתחם Galaxy (פנוי ושקט ביום שני בבוקר!)', mapQuery: 'Therme+Bucuresti' },
                     { name: 'קניון Băneasa Shopping City', lat: 44.5074, lng: 26.0886, desc: 'קניות מתנות אחרונות בדרך לבוקרשט', mapQuery: 'Baneasa+Shopping+City' },
@@ -273,10 +233,6 @@
                 date: '29/09/2026 (שלישי)',
                 title: 'יום 11: טיסה מוקדמת חזרה לישראל',
                 color: '#64748b', // Slate
-                bgClass: 'bg-slate-600',
-                textClass: 'text-slate-800',
-                lightBg: 'bg-slate-100',
-                borderClass: 'border-slate-300',
                 locations: [
                     { name: 'נמל התעופה אוטופני (Henri Coandă - OTP)', lat: 44.5708, lng: 26.0844, desc: 'החזרת רכב ב-03:30, טיסה ב-06:00 (AnimaWings)', mapQuery: 'Henri+Coandă+International+Airport' }
                 ]
@@ -375,7 +331,7 @@
 
                     // Generate Location Card HTML
                     locationsHTML += `
-                        <div class="bg-white p-4 rounded-2xl border ${day.borderClass} shadow-sm hover:shadow-md transition">
+                        <div class="bg-white p-4 rounded-2xl border shadow-sm hover:shadow-md transition">
                             <div class="flex items-center justify-between mb-2">
                                 <span style="background-color: ${day.color};" class="text-white text-xs font-bold px-2.5 py-1 rounded-full">
                                     יום ${day.id}
