@@ -3,544 +3,655 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>תוכנית טיול משפחות מפורטת - 2026</title>
+    <title>תוכנית טיול מפורטת לרומניה 2026</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts (Rubik) -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Rubik', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --primary: #1e3a8a;
-            --accent: #0284c7;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text: #0f172a;
-        }
-
-        * {
-            box-sizing: border-box;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0;
-            padding: 20px;
-            direction: rtl;
-            line-height: 1.5;
-        }
-
-        .container {
-            max-width: 1050px;
-            margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            padding: 30px 20px;
-            background: linear-gradient(135deg, #1e3a8a 0%, #0284c7 100%);
-            color: white;
-            border-radius: 16px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-
-        header h1 {
-            margin: 0 0 8px 0;
-            font-size: 2.1rem;
-        }
-
-        header p {
-            margin: 4px 0;
-            font-size: 1.05rem;
-            opacity: 0.95;
-        }
-
-        .summary-box {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 25px;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 12px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-        }
-
-        .summary-item {
-            text-align: center;
-        }
-
-        .summary-item strong {
-            display: block;
-            color: var(--primary);
-            font-size: 1rem;
-        }
-
-        /* כרטיסיית יום עם עימוד צידי */
-        .day-card {
-            background: var(--card-bg);
-            border-radius: 14px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06);
-            border-right: 6px solid var(--accent);
-            display: flex;
-            gap: 20px;
-            padding: 20px;
-            align-items: stretch;
-        }
-
-        .day-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .day-image-wrapper {
-            width: 220px;
-            min-width: 220px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            align-self: center;
-            height: 100%;
-            min-height: 180px;
-        }
-
-        .day-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .day-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .day-title {
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: var(--primary);
-        }
-
-        .day-date {
-            font-size: 0.88rem;
-            color: #475569;
-            background: #e2e8f0;
-            padding: 4px 10px;
-            border-radius: 16px;
-            font-weight: bold;
-        }
-
-        .schedule {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .schedule-item {
-            position: relative;
-            padding-right: 24px;
-            margin-bottom: 12px;
-            font-size: 0.95rem;
-        }
-
-        .schedule-item::before {
-            content: "•";
-            color: var(--accent);
-            font-size: 1.6rem;
-            position: absolute;
-            right: 4px;
-            top: -6px;
-        }
-
-        .time {
-            font-weight: bold;
-            color: #0369a1;
-            margin-left: 6px;
-        }
-
-        .drive-badge {
-            background-color: #f0f9ff;
-            border-right: 3px solid var(--accent);
-            padding: 6px 10px;
-            margin: 6px 0 10px 0;
-            border-radius: 4px;
-            font-size: 0.88rem;
-            color: #0369a1;
-        }
-
-        .options-list {
-            background: #fafafa;
-            border: 1px dashed #cbd5e1;
-            padding: 10px 12px;
-            border-radius: 8px;
-            margin: 8px 0;
-            font-size: 0.9rem;
-        }
-
-        .options-list h4 {
-            margin: 0 0 6px 0;
-            color: #334155;
-            font-size: 0.95rem;
-        }
-
-        .options-list ul {
-            margin: 0;
-            padding-right: 18px;
-        }
-
-        .alert-box {
-            background-color: #fef2f2;
-            border: 1px solid #fca5a5;
-            color: #991b1b;
-            padding: 10px 12px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            margin-top: 10px;
-        }
-
-        .alert-box strong {
-            display: block;
-            margin-bottom: 2px;
-        }
-
-        /* מובייל ותצוגה צרה */
-        @media (max-width: 720px) {
-            .day-card {
-                flex-direction: column-reverse;
-                padding: 15px;
-            }
-            .day-image-wrapper {
-                width: 100%;
-                min-width: 100%;
-                height: 160px;
-                min-height: 160px;
-            }
-            .day-title {
-                font-size: 1.1rem;
-            }
+        body { font-family: 'Rubik', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .gradient-banner { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0369a1 100%); }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.03); }
+        .day-card { transition: all 0.25s ease-in-out; }
+        .day-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px -5px rgba(0,0,0,0.08); }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; color: black; }
+            .day-card { break-inside: avoid; page-break-inside: avoid; shadow: none; border: 1px solid #ccc; }
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col antialiased">
 
-<div class="container">
-    <header>
-        <h1>מסלול טיול משפחות מפורט - 2026</h1>
-        <p>19/09/2026 – 28/09/2026 (10 ימים / 9 לילות)</p>
+    <header class="gradient-banner text-white shadow-xl relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div>
+                    <div class="flex flex-wrap items-center gap-2 mb-3">
+                        <span class="bg-sky-500/20 text-sky-200 border border-sky-400/30 text-xs font-semibold px-3 py-1 rounded-full backdrop-blur-md">
+                            <i class="fa-solid fa-calendar-days ml-1"></i> 19/09/2026 – 29/09/2026
+                        </span>
+                        <span class="bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 text-xs font-semibold px-3 py-1 rounded-full backdrop-blur-md">
+                            <i class="fa-solid fa-users ml-1"></i> הרכב משפחתי
+                        </span>
+                        <span class="bg-amber-500/20 text-amber-200 border border-amber-400/30 text-xs font-semibold px-3 py-1 rounded-full backdrop-blur-md">
+                            <i class="fa-solid fa-hotel ml-1"></i> 11 ימים / 10 לילות
+                        </span>
+                    </div>
+                    <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+                        🇹🇩 תוכנית טיול מפורטת לרומניה 2026
+                    </h1>
+                    <p class="text-sky-100 mt-2 text-base sm:text-lg font-medium">
+                        מסלול משפחתי מקיף | בראשוב, הקרפטים, עמק פראחובה ובוקרשט
+                    </p>
+                </div>
+
+                <div class="flex items-center gap-3 no-print shrink-0">
+                    <button onclick="window.print()" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-4 py-2.5 rounded-xl font-medium text-sm transition flex items-center gap-2 backdrop-blur-md">
+                        <i class="fa-solid fa-print"></i> הדפסת תוכנית
+                    </button>
+                    <a href="#booking-alerts" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-sm transition flex items-center gap-2 shadow-lg">
+                        <i class="fa-solid fa-bell"></i> דגשים להזמנה
+                    </a>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <div class="summary-box">
-        <div class="summary-item">
-            <strong>הרכב משתתפים</strong>
-            משפחתי
-        </div>
-        <div class="summary-item">
-            <strong>לינה חלק א' (לילות 1–6)</strong>
-            בראשוב (Brașov)
-        </div>
-        <div class="summary-item">
-            <strong>לינה חלק ב' (לילות 7–9)</strong>
-            בוקרשט (Bucharest)
-        </div>
-    </div>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full space-y-8">
 
-    <!-- יום 1 -->
-    <div class="day-card" style="border-right-color: #ef4444;">
-        <div class="day-content">
-            <div class="day-header">
-                <span class="day-title">יום 1 | נחיתה ונסיעה לרכס ההרים</span>
-                <span class="day-date">שבת, 19/09/2026</span>
-            </div>
-            <ul class="schedule">
-                <li class="schedule-item">
-                    <span class="time">14:00</span> נחיתה בנמל התעופה בבוקרשט אוטופני (OTP), איסוף הרכב השכור ויציאה לדרך.
-                    <div class="drive-badge">🚘 נסיעה מנמל התעופה לבראשוב: ~150 ק"מ | ⏱️ כ-2.5 עד 3.5 שעות (כביש DN1)</div>
-                </li>
-                <li class="schedule-item">
-                    <span class="time">18:30 – 20:00</span> הגעה לבראשוב, צ'ק-אין בדירה והתרעננות.
-                    <div class="drive-badge">🚘 נסיעה מהדירה לעיר העתיקה: ~3 ק"מ | ⏱️ כ-8–10 דקות</div>
-                </li>
-                <li class="schedule-item">
-                    <span class="time">ערב</span> סיור רגלי בכיכר המועצה (Piața Sfatului) וברחוב הרפובליקה (Strada Republicii), וארוחת ערב פתיחה בעיר העתיקה.
-                </li>
-            </ul>
-        </div>
-        <div class="day-image-wrapper">
-            <img class="day-image" src="https://images.unsplash.com/photo-1584646098378-0874589d76b1?auto=format&fit=crop&w=600&q=80" alt="בראשוב העיר העתיקה">
-        </div>
-    </div>
-
-    <!-- יום 2 -->
-    <div class="day-card" style="border-right-color: #f97316;">
-        <div class="day-content">
-            <div class="day-header">
-                <span class="day-title">יום 2 | בוקר אלפיני, קארטינג והיערכות לערב יום כיפור</span>
-                <span class="day-date">ראשון, 20/09/2026</span>
-            </div>
-            <ul class="schedule">
-                <li class="schedule-item">
-                    <span class="time">09:00 – 12:00</span> פעילות בוקר קלה בבראשוב וסביבתה (בחירה מתוך האפשרויות):
-                    <div class="options-list">
-                        <h4>אפשרויות לבחירה:</h4>
-                        <ul>
-                            <li><strong>חלופה א' (תצפית):</strong> עלייה ברכבל לתצפית מהר טמפה (Tâmpa) מעל העיר העתיקה (~10 דקות נסיעה).</li>
-                            <li><strong>חלופה ב' (אקסטרים מקורה):</strong> קארטינג מקורה ב-Vmax Karting Brașov (~12 דקות נסיעה).</li>
-                            <li><strong>חלופה ג' (טבע ואוויר הרים):</strong> נסיעה לעיירת הנופש פואיאנה בראשוב (Poiana Brașov) לסיור סביב האגם (~20 דקות נסיעה).</li>
-                            <li><strong>שילוב קל:</strong> סיור ברחוב השוט (Strada Sforii – הצר באירופה) ובמגדל השחור/הלבן.</li>
-                        </ul>
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 card-shadow">
+                <div class="flex items-center gap-3 text-sky-700 font-bold text-lg mb-2">
+                    <div class="w-10 h-10 rounded-xl bg-sky-100 flex items-center justify-center text-sky-600">
+                        <i class="fa-solid fa-house-chimney"></i>
                     </div>
-                </li>
-                <li class="schedule-item">
-                    <span class="time">12:30 – 15:00</span> הצטיידות בסופרמרקט גדול (Carrefour / Kaufland / Auchan) במזון, שתייה ומוצרים למוצאי הצום.
-                    <div class="drive-badge">🚘 נסיעה מהסופרמרקט חזרה לדירה: ~4 ק"מ | ⏱️ כ-10 דקות</div>
-                </li>
-                <li class="schedule-item">
-                    <span class="time">15:00</span> סיום נסיעות ופעילויות מוחלט, מנוחה בדירה והכנה לארוחה מפסקת.
-                </li>
-            </ul>
-        </div>
-        <div class="day-image-wrapper">
-            <img class="day-image" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80" alt="הר טמפה ותצפית">
-        </div>
-    </div>
+                     חלק א': בראשוב
+                </div>
+                <p class="text-xs font-semibold text-slate-500">7 לילות (19/09 – 26/09)</p>
+                <p class="text-xs text-slate-600 mt-2 leading-relaxed">בסיס יציאה לטיולי כוכב בהרי הקרפטים, שמורת הדובים, טירת בראן, קניון 7 הסולמות, טראנספגראשן ופארקי מים וחבלים.</p>
+            </div>
 
-    <!-- יום 3 -->
-    <div class="day-card" style="border-right-color: #64748b;">
-        <div class="day-content">
-            <div class="day-header">
-                <span class="day-title">יום 3 | יום כיפור (יום מנוחה וצום)</span>
-                <span class="day-date">שני, 21/09/2026</span>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 card-shadow">
+                <div class="flex items-center gap-3 text-indigo-700 font-bold text-lg mb-2">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600">
+                        <i class="fa-solid fa-city"></i>
+                    </div>
+                    חלק ב': בוקרשט
+                </div>
+                <p class="text-xs font-semibold text-slate-500">2 לילות (26/09 – 28/09)</p>
+                <p class="text-xs text-slate-600 mt-2 leading-relaxed">אירוח במרכז העיר: פארק המים Therme, קניונים מובילים (AFI, Băneasa), העיר העתיקה (Lipscani) וארוחות שף.</p>
             </div>
-            <div class="drive-badge" style="background:#f1f5f9; border-color:#94a3b8; color:#475569;">
-                🚘 מרחק וזמן נסיעה: 0 ק"מ (ללא נסיעות)
-            </div>
-            <ul class="schedule">
-                <li class="schedule-item">
-                    <span class="time">מהלך היום</span> יום מנוחה מלא בדירה המאובזרת בבראשוב.
-                </li>
-                <li class="schedule-item">
-                    <span class="time">אפשרות (רשות)</span> טיול רגלי קל ורגוע בסביבה הקרובה של הדירה או בסמטאות העיר העתיקה.
-                </li>
-                <li class="schedule-item">
-                    <span class="time">ערב (מוצאי הצום)</span> ארוחה קלה בדירה מהמזון שהוכן מראש.
-                </li>
-            </ul>
-        </div>
-        <div class="day-image-wrapper">
-            <img class="day-image" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="יום מנוחה">
-        </div>
-    </div>
 
-    <!-- יום 4 -->
-    <div class="day-card" style="border-right-color: #10b981;">
-        <div class="day-content">
-            <div class="day-header">
-                <span class="day-title">יום 4 | שמורת הדובים, טירת בראן ואקסטרים</span>
-                <span class="day-date">שלישי, 22/09/2026</span>
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 card-shadow">
+                <div class="flex items-center gap-3 text-emerald-700 font-bold text-lg mb-2">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600">
+                        <i class="fa-solid fa-plane-departure"></i>
+                    </div>
+                    לילה אחרון & טיסה
+                </div>
+                <p class="text-xs font-semibold text-slate-500">1 לילה (28/09 – 29/09)</p>
+                <p class="text-xs text-slate-600 mt-2 leading-relaxed">לינה קרובה לנמל התעופה OTP / החזרת רכב מוקדמת. טיסה חזרה לתל אביב בשעה 06:00 בבוקר.</p>
             </div>
-            <ul class="schedule">
-                <li class="schedule-item">
-                    <span class="time">08:45 – 12:00</span> סיור מודרך בשמורת הדובים בזרנשט (Libearty Bear Sanctuary).
-                    <div class="drive-badge">🚘 נסיעה מבראשוב לזרנשט: ~30 ק"מ | ⏱️ כ-35–40 דקות</div>
-                </li>
-                <li class="schedule-item">
-                    <span class="time">12:30 – 14:30</span> ביקור בטירת בראן ("טירת דרקולה") ובשוק המקומי למרגלותיה.
-                    <div class="drive-badge">🚘 נסיעה מזרנשט לבראן: ~15 ק"מ | ⏱️ כ-20 דקות</div>
-                </li>
-                <li class="schedule-item">
-                    <span class="time">15:30 – 18:00</span> אקסטרים משפחתי: פארק החבלים Parc Aventura Brașov או קארטינג (Prejmer / Vmax).
-                    <div class="drive-badge">🚘 נסיעה מבראן לפארק האקסטרים: ~30 ק"מ | ⏱️ כ-35 דקות</div>
-                </li>
-            </ul>
-            <div class="alert-box">
-                <strong>⚠️ דגשים קריטיים:</strong>
-                1. בשמורת הדובים חובה להזמין כרטיסים מראש באינטרנט.
-                2. הכניסה לילדים מתחת לגיל 5 אסורה בהחלט מטעמי בטיחות (יש להציג דרכונים בכניסה).
-            </div>
-        </div>
-        <div class="day-image-wrapper">
-            <img class="day-image" src="https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=600&q=80" alt="טירת בראן">
-        </div>
-    </div>
+        </section>
 
-    <!-- יום 5 -->
-    <div class="day-card" style="border-right-color: #06b6d4;">
-        <div class="day-content">
-            <div class="day-header">
-                <span class="day-title">יום 5 | קניון 7 הסולמות, חוות דייג ושופינג (+ אופציה: פרז'מר)</span>
-                <span class="day-date">רביעי, 23/09/2026</span>
-            </div>
-            <ul class="schedule">
-                <li class="schedule-item">
-                    <span class="time">09:30 – 13:30</span> מסלול הליכה ביער וטיפוס בסולמות מתכת בקניון 7 הסולמות (Canionul 7 Scări).
-                    <div class="drive-badge">🚘 נסיעה מבראשוב לחניית הקניון בדולנשט: ~12 ק"מ | ⏱️ כ-15–20 דקות</div>
-                </li>
-                <li class="schedule-item">
-                    <span class="time">14:30 – 17:00</span> דייג עצמאי ולאחריו ארוחת צהריים/ערב של הדגים שתדוגו בחוות הפורלים (Păstrăvărie Râșnov).
-                    <div class="drive-badge">🚘 נסיעה מהקניון לחוות הדייג: ~25 ק"מ | ⏱️ כ-25–30 דקות</div>
-                </li>
-                <li class="schedule-item">
-                    <span class="time">אופציונלי / תוספת מומלצת</span> הביקור ב<strong>כנסייה המבוצרת של פרז'מר (Prejmer Fortified Church)</strong> – אתר אונסק"ו מרהיב עם מבוך חדרים בתוך החומות (~20 דקות נסיעה מבראשוב). מהווה פתרון גיבוי מצוין במקרה של גשם!
-                </li>
-                <li class="schedule-item">
-                    <span class="time">18:00 – 20:00</span> קניות וזמן חופשי במרכז המסחרי Coresi Shopping Resort בבראשוב.
-                    <div class="drive-badge">🚘 נסיעה מחוות הדייג / פרז'מר לקניון Coresi: ~15–20 ק"מ | ⏱️ כ-20–25 דקות</div>
-                </li>
-            </ul>
-        </div>
-        <div class="day-image-wrapper">
-            <img class="day-image" src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=600&q=80" alt="קניון 7 הסולמות">
-        </div>
-    </div>
+        <section id="booking-alerts" class="bg-amber-50 border-2 border-amber-300 rounded-3xl p-6 card-shadow">
+            <h2 class="text-xl font-bold text-amber-950 flex items-center gap-2 mb-4">
+                <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> רשימת הזמנות ודגשים קריטיים מראש
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm text-slate-800">
+                <div class="bg-white/80 p-4 rounded-xl border border-amber-200 flex items-start gap-3">
+                    <i class="fa-solid fa-synagogue text-amber-600 text-lg mt-0.5"></i>
+                    <div>
+                        <strong class="text-amber-950 block mb-1">ארוחה מפסקת בערב יום כיפור (יום 2 - 20/09):</strong>
+                        תיאום והזמנת מקומות מראש מול בית חב"ד בראשוב (Chabad Brașov) עבור הסעודה המפסקת והצום.
+                    </div>
+                </div>
 
-    <!-- יום 6 -->
-    <div class="day-card" style="border-right-color: #3b82f6;">
-        <div class="day-content">
-            <div class="day-header">
-                <span class="day-title">יום 6 | טראנספגראשן ברכבל + פארק מים בבראשוב</span>
-                <span class="day-date">חמישי, 24/09/2026</span>
-            </div>
-            <ul class="schedule">
-                <li class="schedule-item">
-                    <span class="time">08:30 – 12:30</span> נסיעה בכביש ההררי ועלייה ברכבל (Bâlea Telecabina) הישר לאגם באליה בגובה 2,034 מטרים.
-                    <div class="drive-badge">🚘 נסיעה מבראשוב לתחנת הרכבל: ~100 ק"מ | ⏱️ כ-1.5 שעות לכל כיוון</div>
-                </li>
-                <li class="schedule-item">
-                    <span class="time">14:30 – 18:30</span> בילוי וכיף בפארק המים Paradisul Acvatic בבראשוב (בריכות מחוממות, מגלשות וג'קוזי).
-                    <div class="drive-badge">🚘 נסיעה חזרה מבאליה לפארק המים בבראשוב: ~100 ק"מ | ⏱️ כ-1.5 שעות</div>
-                </li>
-            </ul>
-        </div>
-        <div class="day-image-wrapper">
-            <img class="day-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="אגם באליה">
-        </div>
-    </div>
+                <div class="bg-white/80 p-4 rounded-xl border border-rose-200 flex items-start gap-3">
+                    <i class="fa-solid fa-paw text-rose-600 text-lg mt-0.5"></i>
+                    <div>
+                        <strong class="text-rose-950 block mb-1">שמורת הדובים בזרנשט (יום 4 - 22/09):</strong>
+                        חובה להזמין כרטיסים אונליין מראש בלבד! כניסה מותרת מגיל 5 ומעלה בלבד (חובה דרכונים פיזיים בכניסה).
+                    </div>
+                </div>
 
-    <!-- יום 7 -->
-    <div class="day-card" style="border-right-color: #8b5cf6;">
-        <div class="day-content">
-            <div class="day-header">
-                <span class="day-title">יום 7 | עמק פראחובה, ארמון פלש ומעבר לבוקרשט</span>
-                <span class="day-date">שישי, 25/09/2026</span>
-            </div>
-            <ul class="schedule">
-                <li class="schedule-item">
-                    <span class="time">09:30 – 13:00</span> עלייה ברכבל בסינאיה (גובה 1400/2000 מטר) וגלישה במגלשת ההרים האלפינית (Alpine Coaster Sinaia).
-                    <div class="drive-badge">🚘 נסיעה מבראשוב לסינאיה: ~45 ק"מ | ⏱️ כ-50 דקות</div>
-                </li>
-                <li class="schedule-item">
-                    <span class="time">אופציונלי</span> ביקור בארמון פלש (Peleș Castle) בסינאיה – טיול בגינות ובחצר המלכותית (חינם) או סיור פנימי. 
-                    <br>⚠️ <strong>חובה:</strong> לסיור פנימי בתוך חדרי הארמון יש להזמין כרטיסים מראש באתר הרשמי!
-                </li>
-                <li class="schedule-item">
-                    <span class="time">15:00 – 17:30</span> נסיעה לבוקרשט וצ'ק-אין במלון/דירה.
-                    <div class="drive-badge">🚘 נסיעה מסינאיה לבוקרשט: ~120 ק"מ | ⏱️ כ-2 עד 2.5 שעות (נגד כיוון הפקקים)</div>
-                </li>
-                <li class="schedule-item">
-                    <span class="time">18:00 ומעלה</span> בילוי ערב, שופינג והחלקה על הקרח בקניון AFI Cotroceni בבוקרשט.
-                </li>
-            </ul>
-        </div>
-        <div class="day-image-wrapper">
-            <img class="day-image" src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=600&q=80" alt="סינאיה">
-        </div>
-    </div>
+                <div class="bg-white/80 p-4 rounded-xl border border-amber-200 flex items-start gap-3">
+                    <i class="fa-solid fa-water-ladder text-cyan-600 text-lg mt-0.5"></i>
+                    <div>
+                        <strong class="text-cyan-950 block mb-1">פארק המים Therme בבוקרשט (יום 10 - 28/09):</strong>
+                        להזמין כרטיסים אונליין מראש לשעת הפתיחה ב-10:00 (מתחם Galaxy) ביום שני ליהנות ממתחם ללא תורים!
+                    </div>
+                </div>
 
-    <!-- יום 8 -->
-    <div class="day-card" style="border-right-color: #ec4899;">
-        <div class="day-content">
-            <div class="day-header">
-                <span class="day-title">יום 8 | פארק מים Therme ושופינג בבוקרשט</span>
-                <span class="day-date">שבת, 26/09/2026</span>
+                <div class="bg-white/80 p-4 rounded-xl border border-amber-200 flex items-start gap-3">
+                    <i class="fa-solid fa-utensils text-amber-700 text-lg mt-0.5"></i>
+                    <div>
+                        <strong class="text-amber-950 block mb-1">מסעדת Caru' cu Bere בבוקרשט (יום 10 - 28/09):</strong>
+                        להזמין שולחן מראש באתר המסעדה לארוחת הסיום החגיגית בעיר העתיקה.
+                    </div>
+                </div>
             </div>
-            <ul class="schedule">
-                <li class="schedule-item">
-                    <span class="time">09:30 – 14:30</span> בילוי משפחתי במתחם ה-Galaxy בפארק המים Therme București.
-                    <div class="drive-badge">🚘 נסיעה ממרכז בוקרשט ל-Therme: ~20 ק"מ | ⏱️ כ-25–30 דקות</div>
-                </li>
-                <li class="schedule-item">
-                    <span class="time">15:00 – 19:30</span> שופינג ובילוי בקניון Băneasa Shopping City.
-                    <div class="drive-badge">🚘 נסיעה מ-Therme לקניון Băneasa: ~10 ק"מ | ⏱️ כ-12–15 דקות</div>
-                </li>
-                <li class="schedule-item">
-                    <span class="time">20:00</span> ארוחת ערב וסיור רגלי בסמטאות העיר העתיקה (Lipscani).
-                </li>
-            </ul>
-            <div class="alert-box">
-                <strong>⚠️ חובת הזמנה מראש:</strong> יום שבת עמוס מאוד ב-Therme! חובה להזמין כרטיסים באינטרנט מראש לשעה 09:30 כדי למנוע עמידה בתורים.
-            </div>
-        </div>
-        <div class="day-image-wrapper">
-            <img class="day-image" src="https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?auto=format&fit=crop&w=600&q=80" alt="Therme בוקרשט">
-        </div>
-    </div>
+        </section>
 
-    <!-- יום 9 -->
-    <div class="day-card" style="border-right-color: #eab308;">
-        <div class="day-content">
-            <div class="day-header">
-                <span class="day-title">יום 9 | בוקרשט – אטרקציות, קניות וארוחת סיום</span>
-                <span class="day-date">ראשון, 27/09/2026</span>
-            </div>
-            <ul class="schedule">
-                <li class="schedule-item">
-                    <span class="time">09:30 – 13:30</span> סיור בארמון הפרלמנט (Palace of Parliament) / מוזיאון החושים בקניון AFI / טיול בפארק הרסטראו.
-                    <div class="drive-badge">🚘 נסיעות עירוניות: ~3–5 ק"מ | ⏱️ כ-10–15 דקות</div>
-                </li>
-                <li class="schedule-item">
-                    <span class="time">13:30 – 19:30</span> קניות אחרונות, מתנות וזמן חופשי בקניון AFI Cotroceni / ParkLake.
-                </li>
-                <li class="schedule-item">
-                    <span class="time">20:00</span> ארוחת ערב חגיגית במסעדת Caru' cu Bere המפורסמת בעיר העתיקה.
-                </li>
-            </ul>
-            <div class="alert-box">
-                <strong>⚠️ דגשים קריטיים:</strong>
-                1. לסיור בפרלמנט חובה להביא דרכונים מקוריים פיזיים לכל בני המשפחה.
-                2. למסעדת Caru' cu Bere מומלץ להזמין שולחן מראש באתר שלהם.
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 card-shadow flex flex-wrap items-center justify-between gap-3 no-print">
+            <span class="text-xs font-bold text-slate-600 flex items-center gap-1.5">
+                <i class="fa-solid fa-filter text-sky-600"></i> מעבר מהיר ליום:
+            </span>
+            <div class="flex flex-wrap gap-1.5 text-xs font-semibold">
+                <a href="#day1" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-sky-100 hover:text-sky-700 transition">יום 1 (19/9)</a>
+                <a href="#day2" class="px-2.5 py-1.5 rounded-lg bg-amber-100 text-amber-900 font-bold">יום 2 (20/9 ערב כיפור)</a>
+                <a href="#day3" class="px-2.5 py-1.5 rounded-lg bg-indigo-100 text-indigo-900 font-bold">יום 3 (21/9 כיפור)</a>
+                <a href="#day4" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-sky-100 hover:text-sky-700 transition">יום 4 (22/9)</a>
+                <a href="#day5" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-sky-100 hover:text-sky-700 transition">יום 5 (23/9)</a>
+                <a href="#day6" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-sky-100 hover:text-sky-700 transition">יום 6 (24/9)</a>
+                <a href="#day7" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-sky-100 hover:text-sky-700 transition">יום 7 (25/9)</a>
+                <a href="#day8" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-sky-100 hover:text-sky-700 transition">יום 8 (26/9)</a>
+                <a href="#day9" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-sky-100 hover:text-sky-700 transition">יום 9 (27/9)</a>
+                <a href="#day10" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-sky-100 hover:text-sky-700 transition">יום 10 (28/9)</a>
+                <a href="#day11" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-sky-100 hover:text-sky-700 transition">יום 11 (29/9)</a>
             </div>
         </div>
-        <div class="day-image-wrapper">
-            <img class="day-image" src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=600&q=80" alt="ארמון הפרלמנט בוקרשט">
-        </div>
-    </div>
 
-    <!-- יום 10 -->
-    <div class="day-card" style="border-right-color: #10b981;">
-        <div class="day-content">
-            <div class="day-header">
-                <span class="day-title">יום 10 | טיסה חזרה לישראל</span>
-                <span class="day-date">שני, 28/09/2026</span>
+        <article id="day1" class="day-card bg-white rounded-3xl border border-slate-200 overflow-hidden card-shadow">
+            <div class="bg-slate-900 text-white p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="bg-sky-500 text-white font-extrabold px-3 py-1.5 rounded-xl text-sm">יום 1</span>
+                    <h2 class="text-xl sm:text-2xl font-bold">שבת, 19/09/2026 | נחיתה, התארגנות ונסיעה לבראשוב</h2>
+                </div>
+                <span class="bg-slate-800 text-sky-300 text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full border border-slate-700">
+                    <i class="fa-solid fa-route ml-1"></i> כ-155 ק"מ | כ-3 שעות נהיגה
+                </span>
             </div>
-            <ul class="schedule">
-                <li class="schedule-item">
-                    <span class="time">03:30</span> צ'ק-אאוט מהמלון בבוקרשט ויציאה לשדה התעופה.
-                    <div class="drive-badge">🚘 נסיעה לנמל התעופה אוטופני (OTP): ~18 ק"מ | ⏱️ כ-20–25 דקות (כביש פנוי)</div>
-                </li>
-                <li class="schedule-item">
-                    <span class="time">04:00</span> הגעה לשדה OTP, החזרת הרכב השכור, צ'ק-אין וביטחון.
-                </li>
-                <li class="schedule-item">
-                    <span class="time">07:00</span> טיסה חזרה לישראל (חברת AnimaWings).
-                </li>
-            </ul>
-        </div>
-        <div class="day-image-wrapper">
-            <img class="day-image" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80" alt="טיסה חזרה">
-        </div>
-    </div>
 
-</div>
+            <div class="p-6 sm:p-8 space-y-4">
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-sky-50/60 border border-sky-100">
+                    <div class="bg-sky-600 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">12:30–14:00</div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-lg">נחיתה והשכרת רכב</h3>
+                        <p class="text-sm text-slate-600 mt-1">נחיתה בנמל התעופה הבינלאומי בוקרשט אוטופני (Henri Coandă - OTP), איסוף כבודה וקבלת הרכב השכור בדלפקים.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-amber-50/80 border border-amber-200">
+                    <div class="bg-amber-600 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">15:45–17:00</div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-cart-shopping text-amber-600"></i> עצירת התארגנות: קניון Shopping City Ploiești
+                        </h3>
+                        <p class="text-xs text-amber-900 font-semibold mt-1"><i class="fa-solid fa-car ml-1"></i> כ-45 דקות משדה התעופה (~45 ק"מ)</p>
+                        <p class="text-sm text-slate-700 mt-2 leading-relaxed">
+                            קניון מודרני מרווח השוכן בדרך צפונה. עצירה מומלצת למשיכת מזומן (ליי / RON) מכספומט בנקאי, כרטיס SIM, ארוחה קלה והצטיידות במים ונשנושים בסופרמרקט הענק Carrefour (מומלץ לקנות כבר כאן מצרכים בסיסיים עבור ערב יום כיפור והצום).
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="bg-slate-800 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">17:00–19:30</div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-lg">המשך נסיעה לבראשוב והגעה</h3>
+                        <p class="text-sm text-slate-600 mt-1">כ-110 ק"מ | כ-2 עד 2.5 שעות. צ'ק-אין בדירה/מלון בבראשוב, מנוחה והתרעננות.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="bg-sky-700 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">19:30–21:00</div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-lg">סיור ערב בכיכר המועצה</h3>
+                        <p class="text-sm text-slate-600 mt-1">סיור רגלי קל ורגוע בכיכר המועצה (Piața Sfatului) המוארת וארוחת ערב פתיחה בעיר העתיקה.</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article id="day2" class="day-card bg-white rounded-3xl border border-slate-200 overflow-hidden card-shadow border-r-4 border-r-amber-500">
+            <div class="bg-amber-950 text-white p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="bg-amber-600 text-white font-extrabold px-3 py-1.5 rounded-xl text-sm">יום 2</span>
+                    <h2 class="text-xl sm:text-2xl font-bold">ראשון, 20/09/2026 | ערב יום כיפור – סיור בבראשוב וסעודה מפסקת (סיום ב-17:00)</h2>
+                </div>
+                <span class="bg-amber-900 text-amber-200 text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full border border-amber-800">
+                    <i class="fa-solid fa-clock ml-1"></i> סיום מוחלט ב-17:00
+                </span>
+            </div>
+
+            <div class="p-6 sm:p-8 space-y-4">
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="bg-slate-800 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">09:00–11:30</div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-lg">כנסיית המבצר בפרז'מר (Prejmer Fortified Church)</h3>
+                        <p class="text-xs text-slate-500 font-medium mt-1"><i class="fa-solid fa-car ml-1"></i> כ-20–25 דקות מבראשוב (~18 ק"מ)</p>
+                        <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                            אתר מורשת עולמית של אונסק"ו. מבצר סקסוני מרהיב מהמאה ה-13 עם חומות בעובי 5 מטרים ומתחם פנימי בן 4 קומות הכולל כ-270 תאי מגורים היסטוריים.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="bg-slate-800 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">12:00–13:45</div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-lg">רכבל להר טמפה (Tâmpa Cable Car) ותצפית</h3>
+                        <p class="text-xs text-slate-500 font-medium mt-1"><i class="fa-solid fa-car ml-1"></i> כ-20 דקות חזרה למרכז בראשוב</p>
+                        <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                            עלייה קצרה של כ-3 דקות ברכבל אל פסגת הר טמפה בגובה 960 מטר, ליד שלט "BRASOV". שביל הליכה קל של 5 דקות מוליך למרפסת תצפית פנורמית.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="bg-slate-800 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">14:00–16:30</div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-lg">סיור בעיר העתיקה של בראשוב</h3>
+                        <p class="text-sm text-slate-600 mt-1">
+                            שוטטות במדרחוב הרפובליקה (Strada Republicii), מעבר ברחוב החבל הצר (Strada Sforii - ברוחב 1.11 מ'), ומבט מבחוץ על הכנסייה השחורה (Biserica Neagră).
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-amber-50 border border-amber-300">
+                    <div class="bg-amber-700 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">17:00</div>
+                    <div>
+                        <h3 class="font-bold text-amber-900 text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-utensils text-amber-700"></i> סיום הטיול, חזרה לדירה וסעודה מפסקת
+                        </h3>
+                        <p class="text-sm text-amber-800 mt-1">
+                            מנוחה והתארגנות בנחת בבית/בדירה לקראת הסעודה המפסקת וביצוע תיאום מראש מול <strong>בית חב"ד בראשוב (Chabad Brașov)</strong> עבור הארוחה והצום.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article id="day3" class="day-card bg-white rounded-3xl border border-indigo-200 overflow-hidden card-shadow border-r-4 border-r-indigo-600">
+            <div class="bg-indigo-950 text-white p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="bg-indigo-600 text-white font-extrabold px-3 py-1.5 rounded-xl text-sm">יום 3</span>
+                    <h2 class="text-xl sm:text-2xl font-bold">שני, 21/09/2026 | יום כיפור (צום ומנוחה) + קניות במוצאי הצום</h2>
+                </div>
+                <span class="bg-indigo-900 text-indigo-200 text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full border border-indigo-800">
+                    <i class="fa-solid fa-person-walking ml-1"></i> 0 ק"מ נהיגה ביום
+                </span>
+            </div>
+
+            <div class="p-6 sm:p-8 space-y-4">
+                <div class="p-5 rounded-2xl bg-indigo-50/60 border border-indigo-100">
+                    <h3 class="font-bold text-indigo-950 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-moon text-indigo-700"></i> מהלך היום: צום ומנוחה מלאה
+                    </h3>
+                    <p class="text-sm text-slate-700 mt-2 leading-relaxed">
+                        יום מנוחה מלא בדירה המאובזרת בבראשוב. אפשרות לטיול רגלי קל ורגוע בסביבת הדירה או בסמטאות העיר העתיקה.
+                    </p>
+                </div>
+
+                <div class="p-5 rounded-2xl bg-sky-50 border border-sky-200">
+                    <h3 class="font-bold text-sky-900 text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping text-sky-700"></i> 20:00–22:00 | מוצאי הצום: קניות בקניון Coresi Shopping Resort
+                    </h3>
+                    <p class="text-xs text-sky-800 font-semibold mt-1">הצום בבראשוב מסתיים ב-19:48 | נסיעה של 10 דקות (~6 ק"מ)</p>
+                    <p class="text-sm text-slate-700 mt-2 leading-relaxed">
+                        לאחר שבירת הצום וארוחה קלה בדירה, יציאה להתאווררות וקניות בקניון Coresi החדיש והמרווח הפתוח עד 22:00.
+                    </p>
+                </div>
+            </div>
+        </article>
+
+        <article id="day4" class="day-card bg-white rounded-3xl border border-slate-200 overflow-hidden card-shadow">
+            <div class="bg-slate-900 text-white p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="bg-sky-500 text-white font-extrabold px-3 py-1.5 rounded-xl text-sm">יום 4</span>
+                    <h2 class="text-xl sm:text-2xl font-bold">שלישי, 22/09/2026 | שמורת הדובים, טירת בראן ומגלשת הרים</h2>
+                </div>
+                <span class="bg-slate-800 text-sky-300 text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full border border-slate-700">
+                    <i class="fa-solid fa-car ml-1"></i> כ-80 ק"מ נהיגה מצטברת
+                </span>
+            </div>
+
+            <div class="p-6 sm:p-8 space-y-4">
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-rose-50 border border-rose-200">
+                    <div class="bg-rose-700 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">09:30–12:00</div>
+                    <div>
+                        <h3 class="font-bold text-rose-950 text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-paw text-rose-600"></i> שמורת הדובים בזרנשט (Libearty Bear Sanctuary)
+                        </h3>
+                        <p class="text-xs text-rose-800 font-semibold mt-1">נסיעה מבראשוב: כ-35 דקות (~30 ק"מ)</p>
+                        <p class="text-sm text-slate-700 mt-2 leading-relaxed">
+                            שמורת הדובים החומים הגדולה בעולם (690 דונם יער). מעל 100 דובים שנפדו מתנאים קשים. סיור מודרך מרגש.
+                        </p>
+                        <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                            <span class="bg-rose-200 text-rose-900 font-bold px-2.5 py-1 rounded-md"><i class="fa-solid fa-triangle-exclamation"></i> כניסה מותרת מגיל 5 ומעלה בלבד!</span>
+                            <span class="bg-amber-100 text-amber-900 font-bold px-2.5 py-1 rounded-md"><i class="fa-solid fa-ticket"></i> חובה כרטיסים אונליין מראש</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="bg-slate-800 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">12:30–14:30</div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-lg">טירת בראן ("טירת דרקולה") והשוק המקומי</h3>
+                        <p class="text-xs text-slate-500 font-medium mt-1">משמורת הדובים לבראן: 20 דקות (~15 ק"מ)</p>
+                        <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                            טירה דרמטית מן המאה ה-14 על צוק סלע תלול. שוק מזכרות ועבודות יד עשיר למרגלות הטירה.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-sky-50 border border-sky-200">
+                    <div class="bg-sky-600 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">14:45–16:30</div>
+                    <div>
+                        <h3 class="font-bold text-sky-950 text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-person-snowboarding text-sky-600"></i> מגלשת ההרים Alpine Coaster Cheile Grădiștei (Fundata)
+                        </h3>
+                        <p class="text-xs text-sky-800 font-semibold mt-1">מבראן לפונדטה: 20 דקות (~15 ק"מ)</p>
+                        <p class="text-sm text-slate-700 mt-2 leading-relaxed">
+                            מגלשת הרים חדישה, ארוכה (1.6 ק"מ) ומסעירה לכל המשפחה עם שליטה מלאה בבלם היד ונוף אלפיני מהמם.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article id="day5" class="day-card bg-white rounded-3xl border border-slate-200 overflow-hidden card-shadow">
+            <div class="bg-slate-900 text-white p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="bg-sky-500 text-white font-extrabold px-3 py-1.5 rounded-xl text-sm">יום 5</span>
+                    <h2 class="text-xl sm:text-2xl font-bold">רביעי, 23/09/2026 | קניון 7 הסולמות, חוות דייג וערב חופשי</h2>
+                </div>
+                <span class="bg-slate-800 text-sky-300 text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full border border-slate-700">
+                    <i class="fa-solid fa-car ml-1"></i> כ-60 ק"מ נהיגה
+                </span>
+            </div>
+
+            <div class="p-6 sm:p-8 space-y-4">
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-emerald-50 border border-emerald-200">
+                    <div class="bg-emerald-700 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">09:30–13:30</div>
+                    <div>
+                        <h3 class="font-bold text-emerald-950 text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-person-hiking text-emerald-600"></i> קניון 7 הסולמות (Canionul 7 Scări)
+                        </h3>
+                        <p class="text-xs text-emerald-800 font-semibold mt-1">נסיעה מבראשוב: כ-20 דקות (~12 ק"מ)</p>
+                        <p class="text-sm text-slate-700 mt-2 leading-relaxed">
+                            מסלול הליכה ביער לצד פלג מים וטיפוס ב-7 סולמות מתכת אנכיים בתוך נקיק סלע מרהיב לצד מפלים.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="bg-slate-800 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">14:30–17:00</div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-fish text-sky-600"></i> חוות הפורלים ברשנוב (Păstrăvărie Râșnov)
+                        </h3>
+                        <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                            דייג עצמאי מהנה לילדים ולמשפחה מבריכות החווה ולאחריו ארוחה טעימה של הדגים שדגתם.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="bg-slate-800 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">17:30+</div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-lg">חזרה לבראשוב וערב חופשי</h3>
+                        <p class="text-sm text-slate-600 mt-1">ערב נינוח, מנוחה וסיור חופשי בכיכר העיר בבראשוב.</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article id="day6" class="day-card bg-white rounded-3xl border border-slate-200 overflow-hidden card-shadow">
+            <div class="bg-slate-900 text-white p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="bg-sky-500 text-white font-extrabold px-3 py-1.5 rounded-xl text-sm">יום 6</span>
+                    <h2 class="text-xl sm:text-2xl font-bold">חמישי, 24/09/2026 | יום בחירה: סיגואשרה וויסקרי (מומלץ) או עמק פראחובה</h2>
+                </div>
+                <span class="bg-slate-800 text-sky-300 text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full border border-slate-700">
+                    <i class="fa-solid fa-code-branch ml-1"></i> 2 חלופות לבחירה
+                </span>
+            </div>
+
+            <div class="p-6 sm:p-8 space-y-6">
+                <!-- Option A -->
+                <div class="p-5 rounded-2xl bg-sky-50/80 border-2 border-sky-300">
+                    <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+                        <span class="bg-sky-600 text-white font-bold text-xs px-3 py-1 rounded-full">חלופה א' (מומלצת ועדיפה)</span>
+                        <span class="text-xs text-sky-800 font-bold">הלב של טרנסילבניה (~240 ק"מ)</span>
+                    </div>
+                    <h3 class="font-bold text-sky-950 text-xl">מצודת סיגואשרה (Sighișoara) והכפר ויסקרי (Viscri)</h3>
+                    <p class="text-sm text-slate-700 mt-2 leading-relaxed">
+                        מצודה מיושבת מהמאה ה-12 (UNESCO), עיר הולדתו של ולאד המשפד ומגדל השעון. בהמשך: הכפר הסקסוני האותנטי ויסקרי והכנסייה המבוצרת שלו.
+                    </p>
+                </div>
+
+                <!-- Option B -->
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+                        <span class="bg-slate-700 text-white font-bold text-xs px-3 py-1 rounded-full">חלופה ב'</span>
+                        <span class="text-xs text-slate-600 font-bold">עמק פראחובה וסינאיה (~90 ק"מ)</span>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-xl">ארמון פלש, מנזר סינאיה ורכבל Cota 2000</h3>
+                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+                        ארמון פלש המלכותי, מנזר סינאיה מהמאה ה-17, ארוחת צהריים בשדרה המרכזית, ועלייה בגונדולה אל פסגת רכס הרי בוצ'ג'י.
+                    </p>
+                </div>
+            </div>
+        </article>
+
+        <article id="day7" class="day-card bg-white rounded-3xl border border-slate-200 overflow-hidden card-shadow">
+            <div class="bg-slate-900 text-white p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="bg-sky-500 text-white font-extrabold px-3 py-1.5 rounded-xl text-sm">יום 7</span>
+                    <h2 class="text-xl sm:text-2xl font-bold">שישי, 25/09/2026 | טראנספגראשן ברכבל + פארק מים (אופציונלי)</h2>
+                </div>
+                <span class="bg-slate-800 text-sky-300 text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full border border-slate-700">
+                    <i class="fa-solid fa-car ml-1"></i> כ-200 ק"מ (כ-3 שעות נהיגה)
+                </span>
+            </div>
+
+            <div class="p-6 sm:p-8 space-y-4">
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-sky-50 border border-sky-200">
+                    <div class="bg-sky-700 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">10:00–12:30</div>
+                    <div>
+                        <h3 class="font-bold text-sky-950 text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-cable-car text-sky-600"></i> טראנספגראשן ברכבל (Bâlea Telecabina) ואגם באליה
+                        </h3>
+                        <p class="text-xs text-sky-800 font-semibold mt-1">נסיעה מבראשוב: כ-1.5 שעות (~100 ק"מ)</p>
+                        <p class="text-sm text-slate-700 mt-2 leading-relaxed">
+                            עלייה ברכבל מעל מפלי באליה אל אגם באליה בגובה 2,034 מטרים.
+                        </p>
+                        <div class="mt-2 text-xs bg-amber-100 text-amber-900 p-2 rounded-lg font-semibold">
+                            <i class="fa-solid fa-bear-head text-amber-700"></i> שימו לב: שכיחות גבוהה לצפייה בדובים בשולי הכביש! (הישארו ברכב הסגור).
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="bg-slate-800 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">15:00–18:00</div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-lg">אופציה/רשות: פארק המים Paradisul Acvatic בבראשוב</h3>
+                        <p class="text-sm text-slate-600 mt-1">קומפלקס בריכות מקורות ומחוממות, בריכת גלים ומגלשות למי שמעוניין להתרענן.</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article id="day8" class="day-card bg-white rounded-3xl border border-slate-200 overflow-hidden card-shadow">
+            <div class="bg-slate-900 text-white p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="bg-sky-500 text-white font-extrabold px-3 py-1.5 rounded-xl text-sm">יום 8</span>
+                    <h2 class="text-xl sm:text-2xl font-bold">שבת, 26/09/2026 | אקסטרים בפארק חבלים + מעבר לבוקרשט (2 חלופות)</h2>
+                </div>
+                <span class="bg-slate-800 text-sky-300 text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full border border-slate-700">
+                    <i class="fa-solid fa-car ml-1"></i> מעבר לבוקרשט
+                </span>
+            </div>
+
+            <div class="p-6 sm:p-8 space-y-6">
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-sky-50 border border-sky-200">
+                    <div class="bg-sky-700 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">09:30–12:30</div>
+                    <div>
+                        <h3 class="font-bold text-sky-950 text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-tree text-emerald-600"></i> פארק החבלים Parc Aventura Brașov
+                        </h3>
+                        <p class="text-sm text-slate-700 mt-1">צ'ק-אאוט מבראשוב ובילוי אקסטרים משפחתי בפארק חבלים ענק בלב היער לפני הנסיעה דרומה.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-5 rounded-2xl bg-emerald-50 border border-emerald-300">
+                        <span class="bg-emerald-700 text-white font-bold text-xs px-2.5 py-1 rounded-md mb-2 inline-block">חלופה א' (מומלצת ועדיפה)</span>
+                        <h4 class="font-bold text-slate-900 text-lg">מעבר ההרים רוקאר-בראן וקניון דמבוביצ'וארה</h4>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                            מעבר הרים נופי מרהיב בכביש 73. עוקף לחלוטין את הפקקים של כביש DN1 בשבת.
+                        </p>
+                    </div>
+
+                    <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200">
+                        <span class="bg-slate-700 text-white font-bold text-xs px-2.5 py-1 rounded-md mb-2 inline-block">חלופה ב' (אם הדרך פנויה)</span>
+                        <h4 class="font-bold text-slate-900 text-lg">מכרות המלח בסלניק פראחובה (Salina Slănic)</h4>
+                        <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+                            מכרה מלח ענק ותת-קרקעי (עומק 208 מטר). חובה להביא עליוניות חמות (12°C).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article id="day9" class="day-card bg-white rounded-3xl border border-slate-200 overflow-hidden card-shadow">
+            <div class="bg-slate-900 text-white p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="bg-sky-500 text-white font-extrabold px-3 py-1.5 rounded-xl text-sm">יום 9</span>
+                    <h2 class="text-xl sm:text-2xl font-bold">ראשון, 27/09/2026 | בוקרשט – אטרקציות, אקסטרים, שופינג והעיר העתיקה</h2>
+                </div>
+                <span class="bg-slate-800 text-sky-300 text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full border border-slate-700">
+                    <i class="fa-solid fa-city ml-1"></i> בוקרשט
+                </span>
+            </div>
+
+            <div class="p-6 sm:p-8 space-y-4">
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="bg-slate-800 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">09:30–11:00</div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-lg">ארמון הפרלמנט (Palace of Parliament) - מבחוץ</h3>
+                        <p class="text-sm text-slate-600 mt-1">עצירה ברחבה הקדמית (Piața Constituției) לתצפית, צילומים והתרשמות מהמבנה הציבורי השני בגודלו בעולם.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-sky-50 border border-sky-200">
+                    <div class="bg-sky-600 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">11:30–18:30</div>
+                    <div>
+                        <h3 class="font-bold text-sky-950 text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles text-sky-600"></i> קניון AFI Cotroceni (מוזיאון החושים / החלקה על הקרח / קארטינג)
+                        </h3>
+                        <p class="text-sm text-slate-700 mt-2 leading-relaxed">
+                            בילוי משפחתי מושלם: מוזיאון החושים האינטראקטיבי, משטח ההחלקה על הקרח Cotroceni On Ice, מסלול קארטינג חשמלי Vmax ושופינג.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-amber-50 border border-amber-200">
+                    <div class="bg-amber-700 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">19:30+</div>
+                    <div>
+                        <h3 class="font-bold text-amber-950 text-lg">העיר העתיקה בבוקרשט (Lipscani)</h3>
+                        <p class="text-sm text-slate-700 mt-1">סיור רגלי תוסס בסמטאות העיר העתיקה המוארת וארוחת ערב.</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article id="day10" class="day-card bg-white rounded-3xl border border-slate-200 overflow-hidden card-shadow">
+            <div class="bg-slate-900 text-white p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="bg-sky-500 text-white font-extrabold px-3 py-1.5 rounded-xl text-sm">יום 10</span>
+                    <h2 class="text-xl sm:text-2xl font-bold">שני, 28/09/2026 | פארק המים Therme, שופינג, ארוחת סיום והתארגנות לטיסה</h2>
+                </div>
+                <span class="bg-slate-800 text-sky-300 text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full border border-slate-700">
+                    <i class="fa-solid fa-water-ladder ml-1"></i> יום סיום חגיגי
+                </span>
+            </div>
+
+            <div class="p-6 sm:p-8 space-y-4">
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-cyan-50 border border-cyan-200">
+                    <div class="bg-cyan-600 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">10:00–15:00</div>
+                    <div>
+                        <h3 class="font-bold text-cyan-950 text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-water text-cyan-600"></i> פארק המים Therme București (מתחם Galaxy)
+                        </h3>
+                        <p class="text-xs text-cyan-800 font-bold mt-1"><i class="fa-solid fa-thumbs-up"></i> יום שני - המתחם פנוי, רגוע וללא תורים!</p>
+                        <p class="text-sm text-slate-700 mt-2 leading-relaxed">
+                            פארק המים והספא המקורה הגדול באירופה. 16 מגלשות מים מתקדמות, בריכת גלים ענקית ובריכות מחוממות.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="bg-slate-800 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">15:30–18:30</div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-lg">קניון Băneasa Shopping City</h3>
+                        <p class="text-sm text-slate-600 mt-1">שופינג יוקרתי וקניות אחרונות בדרך מ-Therme בחזרה לבוקרשט.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-amber-50 border border-amber-300">
+                    <div class="bg-amber-700 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">19:30</div>
+                    <div>
+                        <h3 class="font-bold text-amber-950 text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-utensils text-amber-700"></i> ארוחת סיום חגיגית במסעדת Caru' cu Bere
+                        </h3>
+                        <p class="text-sm text-slate-700 mt-1">המסעדה ההיסטורית המפורסמת ביותר בעיר העתיקה מ-1879. מופעי פולקלור ואוכל מסורתי. <span class="text-amber-900 font-bold underline">(להזמין מקום מראש!)</span></p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article id="day11" class="day-card bg-white rounded-3xl border border-sky-300 overflow-hidden card-shadow border-r-4 border-r-sky-600">
+            <div class="bg-sky-950 text-white p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <span class="bg-sky-600 text-white font-extrabold px-3 py-1.5 rounded-xl text-sm">יום 11</span>
+                    <h2 class="text-xl sm:text-2xl font-bold">שלישי, 29/09/2026 | טיסה מוקדמת חזרה לישראל</h2>
+                </div>
+                <span class="bg-sky-900 text-sky-200 text-xs sm:text-sm font-semibold px-3.5 py-1.5 rounded-full border border-sky-800">
+                    <i class="fa-solid fa-plane-departure ml-1"></i> טיסה ב-06:00
+                </span>
+            </div>
+
+            <div class="p-6 sm:p-8 space-y-4 text-slate-700">
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-sky-50 border border-sky-200">
+                    <div class="bg-sky-800 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">03:00–03:30</div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-lg">הגעה לשדה התעופה OTP והחזרת הרכב</h3>
+                        <p class="text-sm text-slate-600 mt-1">נסיעה קצרה לנמל התעופה אוטופני (הכבישים ריקים לחלוטין בשעות אלו) והחזרת הרכב השכור במגרש.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                    <div class="bg-slate-800 text-white font-bold px-3 py-1 rounded-xl text-sm shrink-0">06:00</div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-lg">המראה חזרה לתל אביב</h3>
+                        <p class="text-sm text-slate-600 mt-1">המראה בטיסה חזרה לישראל (חברת AnimaWings). נחיתה בשלום בבן גוריון!</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+    <footer class="bg-slate-900 text-white py-8 border-t border-slate-800 mt-auto no-print">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs sm:text-sm text-slate-400">
+            <p>🇹🇩 תוכנית טיול משפחתית מפורטת לרומניה 2026 | מותאם אישית לעריכה ולשימוש</p>
+        </div>
+    </footer>
 
 </body>
 </html>
