@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>מפת ניווט אינטראקטיבית לפי ימים - רומניה 2026</title>
-    <!-- Tailwind CSS CDN -->
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <!-- Google Fonts (Rubik) -->
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- Leaflet Map CSS & JS -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
@@ -18,9 +15,7 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Rubik', 'sans-serif'],
-                    }
+                    fontFamily: { sans: ['Rubik', 'sans-serif'] }
                 }
             }
         }
@@ -29,7 +24,7 @@
         body { 
             font-family: 'Rubik', sans-serif; 
             background-color: #e0f2fe; 
-            color: #0284c7; 
+            color: #0f172a; 
         }
         #main-map { 
             height: 560px; 
@@ -44,8 +39,8 @@
             border-radius: 50%;
             color: white;
             font-weight: 900;
-            font-size: 13px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+            font-size: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             border: 2px solid white;
         }
         .leaflet-popup-content-wrapper {
@@ -58,12 +53,10 @@
             font-size: 14px !important;
             padding: 4px !important;
         }
-        .leaflet-popup-tip {
-            background-color: #0f172a !important;
-        }
+        .leaflet-popup-tip { background-color: #0f172a !important; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased selection:bg-sky-500 selection:text-white text-slate-900 text-base">
+<body class="min-h-screen flex flex-col antialiased selection:bg-sky-500 selection:text-white text-base">
 
     <header class="bg-sky-950 border-b-2 border-sky-800 shadow-xl py-6 px-4 sm:px-8 text-white">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
@@ -73,7 +66,7 @@
                         <i class="fa-solid fa-map-location-dot ml-1"></i> מפת ניווט אינטראקטיבית
                     </span>
                     <span class="bg-amber-400/30 text-amber-100 text-sm font-bold px-3 py-1 rounded-full border border-amber-300/40">
-                        סימון מספרי וצבע ייחודי לכל יום
+                        סימון ממוספר וצבע ייחודי לכל יום
                     </span>
                 </div>
                 <h1 class="text-2xl sm:text-4xl font-black tracking-tight text-white">
@@ -88,7 +81,6 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full space-y-8">
 
-        <!-- Day Filter Buttons Section -->
         <section class="bg-white p-6 rounded-3xl border-2 border-sky-300 shadow-lg space-y-4">
             <div class="flex items-center justify-between flex-wrap gap-2">
                 <h2 class="text-lg font-black text-slate-950 flex items-center gap-2">
@@ -99,13 +91,10 @@
                 </button>
             </div>
 
-            <!-- Day Buttons list -->
-            <div id="day-buttons-container" class="flex flex-wrap gap-2.5 text-sm font-extrabold">
-                <!-- JS will generate colored buttons -->
-            </div>
+            <!-- Dynamic Day Buttons -->
+            <div id="day-buttons-container" class="flex flex-wrap gap-2.5 text-sm font-extrabold"></div>
         </section>
 
-        <!-- Map Display Section -->
         <section class="bg-white rounded-3xl p-5 sm:p-7 border-2 border-sky-300 shadow-xl">
             <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
                 <h3 id="selected-day-title" class="text-xl sm:text-2xl font-black text-slate-950 flex items-center gap-2.5">
@@ -119,7 +108,6 @@
             <div id="main-map" class="shadow-inner border-2 border-slate-300"></div>
         </section>
 
-        <!-- Dynamic Location Cards List -->
         <section class="space-y-4">
             <div class="flex items-center justify-between">
                 <h3 class="text-xl font-black text-slate-950 flex items-center gap-2">
@@ -127,10 +115,7 @@
                 </h3>
             </div>
 
-            <!-- Dynamic Locations Grid -->
-            <div id="locations-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                <!-- JS will populate location cards -->
-            </div>
+            <div id="locations-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
         </section>
 
     </main>
@@ -145,18 +130,18 @@
                 id: 1,
                 date: '19/09/2026 (שבת)',
                 title: 'יום 1: נחיתה, פלויישטי ונסיעה לרשנוב',
-                color: '#ef4444', // Red
+                color: '#ef4444',
                 locations: [
                     { name: 'נמל התעופה בוקרשט אוטופני (OTP)', lat: 44.5708, lng: 26.0844, desc: 'איסוף הרכב השכור והתארגנות ראשונית', mapQuery: 'Henri+Coandă+International+Airport' },
                     { name: 'קניון Shopping City Ploiești', lat: 44.9701, lng: 25.9868, desc: 'עצירת הצטיידות: כספומט, SIM, סופרמרקט Carrefour', mapQuery: 'Shopping+City+Ploiesti' },
-                    { name: 'הוילה ברשנוב (Râșnov)', lat: 45.5901, lng: 25.4622, desc: 'בסיס הלינה הראשי ל-7 לילות', mapQuery: 'Rasnov+Romania' }
+                    { name: 'וילה ברשנוב (Râșnov)', lat: 45.5901, lng: 25.4622, desc: 'בסיס הלינה הראשי ל-7 לילות', mapQuery: 'Rasnov+Romania' }
                 ]
             },
             {
                 id: 2,
                 date: '20/09/2026 (ראשון - ערב כיפור)',
                 title: 'יום 2: פרז\'מר/פויאנה בראשוב וסעודה מפסקת',
-                color: '#f59e0b', // Amber
+                color: '#f59e0b',
                 locations: [
                     { name: 'כנסיית המבצר פרז\'מר (Prejmer)', lat: 45.7217, lng: 25.7747, desc: 'מבצר סקסוני אונסק"ו מהמאה ה-13 (חלופה א\')', mapQuery: 'Prejmer+Fortified+Church' },
                     { name: 'רכבל להר טמפה בראשוב', lat: 45.6385, lng: 25.5947, desc: 'עלייה לתצפית מעל בראשוב (חלופה א\')', mapQuery: 'Tampa+Cable+Car+Brasov' },
@@ -168,7 +153,7 @@
                 id: 3,
                 date: '21/09/2026 (שני - יום כיפור)',
                 title: 'יום 3: יום כיפור ומנוחה בוילה ברשנוב',
-                color: '#a855f7', // Purple
+                color: '#a855f7',
                 locations: [
                     { name: 'וילה ברשנוב (מנוחה)', lat: 45.5901, lng: 25.4622, desc: 'צום ומנוחה מלאה בוילה (0 ק"מ נהיגה)', mapQuery: 'Rasnov+Romania' },
                     { name: 'קניון Coresi Shopping Resort', lat: 45.6702, lng: 25.6145, desc: 'קניות ואוורור במוצאי הצום (אופציונלי)', mapQuery: 'Coresi+Shopping+Resort' }
@@ -178,7 +163,7 @@
                 id: 4,
                 date: '22/09/2026 (שלישי)',
                 title: 'יום 4: שמורת הדובים, בראן, פשטרה/פונדטה',
-                color: '#f43f5e', // Rose
+                color: '#f43f5e',
                 locations: [
                     { name: 'שמורת הדובים זרנשט (Libearty)', lat: 45.5801, lng: 25.3389, desc: 'שמורת הדובים החומים (חובה מראש, מגיל 5+)', mapQuery: 'Libearty+Bear+Sanctuary+Zarnesti' },
                     { name: 'טירת בראן ("טירת דרקולה")', lat: 45.5149, lng: 25.3672, desc: 'סיור בטירה ובשוק המזכרות', mapQuery: 'Bran+Castle' },
@@ -190,7 +175,7 @@
                 id: 5,
                 date: '23/09/2026 (רביעי)',
                 title: 'יום 5: קניון 7 הסולמות, חוות פורלים ובראשוב',
-                color: '#38bdf8', // Sky
+                color: '#0284c7',
                 locations: [
                     { name: 'קניון 7 הסולמות (Canionul 7 Scări)', lat: 45.6022, lng: 25.6420, desc: 'מסלול 7 סולמות מתכת ומפלים', mapQuery: 'Canionul+Sapte+Scari' },
                     { name: 'חוות הפורלים ברשנוב', lat: 45.5885, lng: 25.4611, desc: 'דייג עצמאי וארוחת דגים טרייה', mapQuery: 'Pastravarie+Rasnov' }
@@ -200,7 +185,7 @@
                 id: 6,
                 date: '24/09/2026 (חמישי)',
                 title: 'יום 6: סיגישוארה, רופאה, ויסקרי / פלש, מפל השואגת',
-                color: '#10b981', // Emerald
+                color: '#10b981',
                 locations: [
                     { name: 'מצודת סיגישוארה (Sighișoara)', lat: 46.2197, lng: 24.7925, desc: 'מצודה מיושבת UNESCO ומגדל השעון (חלופה א\' ⭐)', mapQuery: 'Sighisoara+Citadel' },
                     { name: 'מבצר רופאה (Cetatea Rupea)', lat: 46.0378, lng: 25.2215, desc: 'מבצר בזלת סקסוני ותצפית 360 מעלות (חלופה א\')', mapQuery: 'Cetatea+Rupea' },
@@ -213,7 +198,7 @@
                 id: 7,
                 date: '25/09/2026 (שישי)',
                 title: 'יום 7: טראנספגראשן ואגם בליה / קניון זרנשט',
-                color: '#06b6d4', // Cyan
+                color: '#06b6d4',
                 locations: [
                     { name: 'רכבל Bâlea Telecabina', lat: 45.6358, lng: 24.6162, desc: 'תחנה תחתונה לעלייה לאגם (חלופה א\')', mapQuery: 'Balea+Telecabina' },
                     { name: 'אגם באליה (Bâlea Lake 2,034m)', lat: 45.6041, lng: 24.6169, desc: 'אגם אלפיני ופסגת הטרנספגראשן (חלופה א\')', mapQuery: 'Balea+Lake' },
@@ -225,7 +210,7 @@
                 id: 8,
                 date: '26/09/2026 (שבת)',
                 title: 'יום 8: פארק חבלים, קניון דמבוביצ\'וארה ובוקרשט',
-                color: '#e11d48', // Crimson
+                color: '#e11d48',
                 locations: [
                     { name: 'פארק החבלים Parc Aventura Brașov', lat: 45.6178, lng: 25.6341, desc: 'מסלולי אקסטרים ואומגות ביער', mapQuery: 'Parc+Aventura+Brasov' },
                     { name: 'קניון דמבוביצ\'וארה & מערה', lat: 45.4412, lng: 25.2211, desc: 'עצירת טבע ומערת נטיפים במעבר רוקאר-בראן', mapQuery: 'Pestera+Dambovicioara' },
@@ -236,7 +221,7 @@
                 id: 9,
                 date: '27/09/2026 (ראשון)',
                 title: 'יום 9: בוקרשט - עיר עתיקה, מסעדות וקניון אפי',
-                color: '#d97706', // Amber-Dark
+                color: '#d97706',
                 locations: [
                     { name: 'העיר העתיקה בבוקרשט (Lipscani)', lat: 44.4312, lng: 26.1005, desc: 'סיור בחצר הנסיכים, ספריית קרוסל ו-Calea Victoriei', mapQuery: 'Old+Town+Bucharest' },
                     { name: 'מסעדת Caru\' cu Bere', lat: 44.4320, lng: 26.0981, desc: 'מסעדה היסטורית מפורסמת מ-1879', mapQuery: 'Caru+cu+Bere+Bucharest' },
@@ -247,7 +232,7 @@
                 id: 10,
                 date: '28/09/2026 (שני)',
                 title: 'יום 10: ספא Therme, קניון בניאסה והחזרת רכב',
-                color: '#0284c7', // Sky-Dark
+                color: '#6366f1',
                 locations: [
                     { name: 'פארק המים Therme București', lat: 44.6053, lng: 26.0881, desc: 'מתחמים The Palm, Galaxy, Elysium', mapQuery: 'Therme+Bucuresti' },
                     { name: 'קניון Băneasa Shopping City', lat: 44.5074, lng: 26.0886, desc: 'שופינג מתנות אחרונות בצפון בוקרשט', mapQuery: 'Baneasa+Shopping+City' },
@@ -258,7 +243,7 @@
                 id: 11,
                 date: '29/09/2026 (שלישי)',
                 title: 'יום 11: טיסת Wizz Air מוקדמת ב-05:45',
-                color: '#475569', // Slate
+                color: '#475569',
                 locations: [
                     { name: 'טרמינל OTP בוקרשט', lat: 44.5708, lng: 26.0844, desc: 'הליכה 3 דק\' מהמלון לטרמינל, טיסה ב-05:45', mapQuery: 'Henri+Coandă+International+Airport' }
                 ]
@@ -295,7 +280,6 @@
         }
 
         function initMap() {
-            // Center default around Brașov & Southern Carpathians
             map = L.map('main-map').setView([45.2, 25.4], 8);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -305,7 +289,6 @@
         }
 
         function filterDay(dayId) {
-            // Remove existing markers
             activeMarkers.forEach(marker => map.removeLayer(marker));
             activeMarkers = [];
 
@@ -319,7 +302,7 @@
                 selectedDays = itineraryDays;
                 titleTextEl.textContent = 'מפת כל הימים והמיקומים (11 ימים)';
                 subtitleTextEl.textContent = 'כל הנקודות מסומנות בצבע היום המיועד להן';
-                colorIndicatorEl.style.backgroundColor = '#38bdf8';
+                colorIndicatorEl.style.backgroundColor = '#0284c7';
             } else {
                 const found = itineraryDays.find(d => d.id === dayId);
                 if (found) selectedDays = [found];
@@ -333,7 +316,6 @@
 
             selectedDays.forEach(day => {
                 day.locations.forEach((loc) => {
-                    // Create Leaflet divIcon with day's custom color and number
                     const customIcon = L.divIcon({
                         className: 'custom-div-icon',
                         html: `<div style="background-color: ${day.color}; width: 28px; height: 28px; line-height: 26px; border-radius: 50%; text-align: center; border: 2px solid white; font-weight: 800; font-size: 11px;">${day.id}</div>`,
@@ -355,7 +337,6 @@
                     activeMarkers.push(marker);
                     bounds.extend([loc.lat, loc.lng]);
 
-                    // Generate Location Card HTML with enlarged fonts and strong contrast
                     locationsHTML += `
                         <div class="bg-white p-5 rounded-2xl border-2 border-sky-300 shadow-md hover:border-sky-500 transition space-y-2">
                             <div class="flex items-center justify-between mb-1">
@@ -383,22 +364,3 @@
     </script>
 </body>
 </html>
-```eative_map.html
-
-קובץ המפה האינטראקטיבית `romania_trip_2026_interactive_map.html` נבנה מחדש במלואו!
-
-### מה שולב בקובץ המפה המעודכן:
-1. **כל 11 הימים מיוצגים:** לכל יום יש צבע ייחודי משלו, כפתור מסודר בחלק העליון וסמלים ממוספרים על המפה (1 עד 11).
-2. **כל הנקודות והאטרקציות הכלולות במסלול:**
-   * נמל תעופה אוטופני, קניון פלויישטי, וילה ברשנוב (יום 1)
-   * כנסיית פרז'מר, רכבל הר טמפה, פויאנה בראשוב, בית חב"ד בראשוב (יום 2)
-   * וילה ברשנוב, קניון Coresi (יום 3)
-   * שמורת הדובים זרנשט, טירת בראן, כפרי פשטרה ומגורה, מגלשת הרים פונדטה (יום 4)
-   * קניון 7 הסולמות, חוות הפורלים ברשנוב (יום 5)
-   * מצודת סיגישוארה, מבצר רופאה, הכפר ויסקרי, ארמון פלש בסינאיה, מפל השואגת בבושטני (יום 6)
-   * רכבל הטרנספגראשן, אגם באליה, קניון זרנשט, פארק המים Paradisul Acvatic (יום 7)
-   * פארק החבלים בבראשוב, קניון דמבוביצ'וארה ומערה, מרכז בוקרשט (יום 8)
-   * העיר העתיקה בבוקרשט, מסעדת Caru' cu Bere, קניון AFI Cotroceni (יום 9)
-   * ספא Therme, קניון בניאסה, הילטון שדה התעופה OTP (יום 10)
-   * הליכה קצרה לטרמינל OTP ב-03:15 בבוקר לטיסת Wizz Air (יום 11)
-3. **נוחות ויזואלית ושימושיות:** גופנים כהים ומוגדלים, ניגודיות גבוהה מול רקע התכלת הבהיר, חלונות קופצים (Popups) במפה עם קישור ישיר לניווט ב-Google Maps וכרטיסיות מידע מתחת למפה.
