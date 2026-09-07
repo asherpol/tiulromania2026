@@ -8,23 +8,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Assistant', sans-serif; background-color: #f0f9ff; }
+    .badge-parking { background-color: #1e3a8a; color: white; padding: 2px 8px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; }
+    .badge-drive { background-color: #0369a1; color: white; padding: 2px 8px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; }
   </style>
 </head>
 <body class="text-slate-900 min-h-screen p-3 md:p-8 leading-relaxed">
-  <div class="max-w-5xl mx-auto space-y-6">
+  <div class="max-w-5xl mx-auto space-y-8">
 
     <!-- כותרת ראשית -->
     <header class="bg-white border-2 border-sky-300 rounded-3xl p-6 md:p-8 shadow-lg text-center">
-      <h1 class="text-3xl md:text-5xl font-extrabold text-sky-950 mb-3">🇷🇴 תוכנית טיול מקיפה ומלאה לרומניה</h1>
-      <p class="text-lg md:text-xl text-slate-700 font-bold mb-2">19 בספטמבר 2026 – 29 בספטמבר 2026 (11 ימים / 10 לילות)</p>
-      <div class="flex flex-wrap justify-center gap-3 text-sm md:text-base font-semibold text-sky-900 mt-3">
-        <span class="bg-sky-100 px-3 py-1.5 rounded-xl border border-sky-200">🏡 7 לילות בוילה ברשנוב (Râșnov)</span>
-        <span class="bg-sky-100 px-3 py-1.5 rounded-xl border border-sky-200">🏙️ 2 לילות במרכז בוקרשט</span>
-        <span class="bg-sky-100 px-3 py-1.5 rounded-xl border border-sky-200">✈️ לילה 1 במלון Hilton Garden Inn OTP</span>
+      <h1 class="text-3xl md:text-5xl font-extrabold text-sky-950 mb-3">🇷🇴 תוכנית מסע מקיפה ומלאה – רומניה 2026</h1>
+      <p class="text-lg md:text-xl text-slate-700 font-bold mb-3">19 בספטמבר 2026 – 29 בספטמבר 2026 | 11 ימים / 10 לילות</p>
+      <div class="flex flex-wrap justify-center gap-3 text-sm md:text-base font-semibold text-sky-900">
+        <span class="bg-sky-100 px-3.5 py-1.5 rounded-xl border border-sky-200">🏡 לילות 1–7: וילה ברשנוב (Râșnov)</span>
+        <span class="bg-sky-100 px-3.5 py-1.5 rounded-xl border border-sky-200">🏙️ לילות 8–9: מרכז בוקרשט העתיקה</span>
+        <span class="bg-sky-100 px-3.5 py-1.5 rounded-xl border border-sky-200">✈️ לילה 10: מלון Hilton Garden Inn OTP</span>
       </div>
     </header>
 
-    <!-- טבלת הזמנות קריטיות -->
+    <!-- טבלת הזמנות מראש -->
     <section class="bg-white border-2 border-sky-300 rounded-3xl p-5 md:p-8 shadow-md">
       <h2 class="text-2xl md:text-3xl font-bold text-sky-950 mb-4 flex items-center gap-2">
         <span>📌</span> ריכוז הזמנות קריטיות מראש
@@ -34,35 +36,35 @@
           <thead>
             <tr class="bg-sky-100 text-sky-950 border-b-2 border-sky-300">
               <th class="p-3.5 font-bold">יום ותאריך</th>
-              <th class="p-3.5 font-bold">האתר / הפעילות</th>
-              <th class="p-3.5 font-bold">דגשי הזמנה, שעות וקישורים ישירים</th>
+              <th class="p-3.5 font-bold">אתר / פעילות</th>
+              <th class="p-3.5 font-bold">דגשי הזמנה, חלונות זמן וקישורים ישירים</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-sky-200">
             <tr class="hover:bg-sky-50 transition">
               <td class="p-3.5 font-semibold text-sky-900">יום 2 (20/09)</td>
               <td class="p-3.5 font-bold">סעודה מפסקת בבית חב"ד בראשוב</td>
-              <td class="p-3.5">תיאום מראש ישירות מול בית חב"ד בראשוב לשריון מקומות למשפחה לסעודה המפסקת לפני כניסת צום יום כיפור.</td>
+              <td class="p-3.5">תיאום מקומות מראש ישירות מול בית חב"ד לשריון מקומות למשפחה לפני הצום.</td>
             </tr>
             <tr class="hover:bg-sky-50 transition">
               <td class="p-3.5 font-semibold text-sky-900">יום 4 (22/09)</td>
-              <td class="p-3.5 font-bold">שמורת הדובים ליברטי (Libearty)</td>
-              <td class="p-3.5">רכישת כרטיסים אונליין לסיור בוקר מודרך (09:30–10:30). <strong>שימו לב:</strong> חל איסור כניסה מתחת לגיל 5. חובה להציג דרכונים מקוריים פיזיים.<br><a href="https://millionsoffriends.org/en/libearty/visit-sanctuary/" target="_blank" class="text-blue-600 underline font-bold inline-block mt-1">להזמנה באתר הרשמי &larr;</a></td>
+              <td class="p-3.5 font-bold">שמורת הדובים ליברטי בזרנשט (Libearty)</td>
+              <td class="p-3.5">חובה להזמין אונליין סיור בוקר מודרך (09:30–10:30). אסורה כניסה מתחת לגיל 5. חובה להציג דרכונים מקוריים פיזיים.<br><a href="https://millionsoffriends.org/en/libearty/visit-sanctuary/" target="_blank" class="text-blue-600 underline font-bold inline-block mt-1">להזמנה באתר הרשמי &larr;</a></td>
             </tr>
             <tr class="hover:bg-sky-50 transition">
               <td class="p-3.5 font-semibold text-sky-900">יום 4 (22/09)</td>
               <td class="p-3.5 font-bold">טירת בראן (Castelul Bran)</td>
-              <td class="p-3.5">הזמנת כרטיסים אונליין מראש לדילוג על תורי הקופות העמוסים.<br><a href="https://bran-castle.com/" target="_blank" class="text-blue-600 underline font-bold inline-block mt-1">להזמנה באתר הרשמי &larr;</a></td>
+              <td class="p-3.5">מומלץ להזמין כרטיסים אונליין לדילוג על תורי הקופות.<br><a href="https://bran-castle.com/" target="_blank" class="text-blue-600 underline font-bold inline-block mt-1">להזמנה באתר הרשמי &larr;</a></td>
             </tr>
             <tr class="hover:bg-sky-50 transition">
               <td class="p-3.5 font-semibold text-sky-900">יום 6 (24/09)</td>
               <td class="p-3.5 font-bold">ארמון פלש ופלשור (Castelul Peleș)</td>
-              <td class="p-3.5">במידה ובוחרים בחלופה ב' – חובה להזמין סיור בפנים הארמון לפי חלון זמן מדויק (Time Slot) למניעת שעות המתנה.<br><a href="https://peles.ro/" target="_blank" class="text-blue-600 underline font-bold inline-block mt-1">להזמנה באתר הרשמי &larr;</a></td>
+              <td class="p-3.5">במידה ובוחרים בחלופה ב' – חובה להזמין סיור בפנים הארמון לפי חלון זמן (Time Slot) למניעת עמידה של שעות בתור.<br><a href="https://peles.ro/" target="_blank" class="text-blue-600 underline font-bold inline-block mt-1">להזמנה באתר הרשמי &larr;</a></td>
             </tr>
             <tr class="hover:bg-sky-50 transition">
               <td class="p-3.5 font-semibold text-sky-900">יום 9 (27/09)</td>
               <td class="p-3.5 font-bold">מסעדת Caru' cu Bere / Hanul lui Manuc</td>
-              <td class="p-3.5">שריון שולחן מראש לארוחת צהריים/ערב ביום ראשון בעיר העתיקה של בוקרשט.<br><a href="https://www.carucubere.ro/en/" target="_blank" class="text-blue-600 underline font-bold">Caru' cu Bere</a> | <a href="https://hanumanuc.ro/" target="_blank" class="text-blue-600 underline font-bold">Hanul lui Manuc</a></td>
+              <td class="p-3.5">שריון שולחן מראש לארוחת צהריים/ערב ביום ראשון בעיר העתיקה בבוקרשט.<br><a href="https://www.carucubere.ro/en/" target="_blank" class="text-blue-600 underline font-bold">Caru' cu Bere</a> | <a href="https://hanumanuc.ro/" target="_blank" class="text-blue-600 underline font-bold">Hanul lui Manuc</a></td>
             </tr>
             <tr class="hover:bg-sky-50 transition">
               <td class="p-3.5 font-semibold text-sky-900">יום 10 (28/09)</td>
@@ -81,36 +83,44 @@
       <article class="bg-white border-2 border-sky-300 rounded-3xl p-6 md:p-8 shadow-md">
         <div class="flex flex-wrap items-center justify-between gap-3 border-b-2 border-sky-200 pb-4 mb-4">
           <div>
-            <span class="text-sky-700 font-bold text-sm tracking-wider uppercase">יום הנחיתה וההתמקמות</span>
-            <h3 class="text-2xl md:text-3xl font-extrabold text-sky-950">יום 1 | שבת, 19/09: נחיתה, הצטיידות בפלויישטי ונסיעה לרשנוב</h3>
+            <span class="text-sky-700 font-bold text-sm tracking-wider uppercase">נחיתה, התארגנות ונסיעה להרים</span>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-sky-950">יום 1 | שבת, 19/09: בוקרשט &larr; פלויישטי &larr; וילה ברשנוב</h3>
           </div>
-          <span class="bg-sky-100 text-sky-900 px-4 py-1.5 rounded-full text-base font-bold border border-sky-200">מרחק: כ-160 ק"מ</span>
+          <span class="bg-sky-100 text-sky-900 px-4 py-1.5 rounded-full text-base font-bold border border-sky-200">נסיעה מצטברת: כ-160 ק"מ</span>
         </div>
 
         <div class="space-y-4 text-base md:text-lg text-slate-800">
-          <div class="space-y-2">
-            <h4 class="font-bold text-sky-900 text-xl">לוח זמנים ומסלול מפורט:</h4>
-            <ul class="list-disc list-inside space-y-2 mr-2">
-              <li><strong>12:30–14:00:</strong> נחיתה בנמל התעופה הבינלאומי הנרי קואנדה (OTP) בבוקרשט, איסוף כבודה, ביקורת דרכונים ואיסוף הרכב השכור במגרש החברות.</li>
-              <li><strong>15:00:</strong> יציאה בנסיעה צפונה על כביש DN1 לכיוון מחוז פראחובה וטרנסילבניה.</li>
-              <li><strong>15:45–17:00 | עצירת התארגנות ב-Shopping City Ploiești:</strong> קניון מרווח כ-45 ק"מ מהשדה (שעות פתיחה: 10:00–22:00, סופרמרקט פתוח מ-07:00).
-                <div class="mt-1 text-slate-700">
-                  <em>מה עושים:</em> רכישת כרטיסי SIM/eSIM מקומיים, משיכת כסף מקומי (לאי רומני - RON) בכספומט בנקאי, והצטיידות במצרכים לצום יום כיפור ולתחילת השהות בסופרמרקט Carrefour הענקי.
-                </div>
-                <div class="mt-2 flex gap-2">
-                  <a href="https://maps.google.com/?q=Shopping+City+Ploiesti" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold hover:bg-emerald-700">Google Maps</a>
-                  <a href="https://waze.com/ul?q=Shopping+City+Ploiesti" target="_blank" class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-bold hover:bg-blue-600">Waze</a>
-                </div>
-              </li>
-              <li><strong>17:00–19:30:</strong> המשך נסיעה לרשנוב (כ-115 ק"מ, כ-2–2.5 שעות) דרך עמק פראחובה, חציית פראדיאל ופנייה לכביש הנופי DN73A היורד ישירות לעיירה רשנוב.</li>
-              <li><strong>19:30–21:00:</strong> צ'ק-אין והתמקמות בוילה ברשנוב, ארוחת ערב קלה ומנוחה.</li>
-            </ul>
-          </div>
+          <ul class="space-y-4">
+            <li class="bg-sky-50 p-4 rounded-2xl border border-sky-200">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <strong class="text-xl text-sky-950">12:30–14:30 | נחיתה ואיסוף רכב בנמל תעופה OTP</strong>
+                <span class="badge-parking">חניית מגרש חברות ההשכרה</span>
+              </div>
+              <p>נחיתה בנמל התעופה הבינלאומי הנרי קואנדה בבוקרשט. איסוף כבודה, ביקורת דרכונים ואיסוף הרכב במגרש ההשכרה. מומלץ לצלם את הרכב היטב מכל צדדיו לפני היציאה.</p>
+            </li>
 
-          <div class="bg-sky-50 border border-sky-200 rounded-2xl p-4 mt-3">
-            <h5 class="font-bold text-sky-950 mb-1">🏛️ רקע, היסטוריה וחשיבות:</h5>
-            <p class="text-slate-700">העיר פלויישטי (Ploiești) היא בירת הנפט ההיסטורית של רומניה; כבר במאה ה-19 הוקם בה בית הזיקוק הראשון בעולם. המעבר דרך עמק פראחובה חושף את המפגש הגיאוגרפי הדרמטי בין המישורים החקלאיים של ולאכיה לבין מצוקי הגיר העצומים של הרי הקרפטים הדרומיים.</p>
-          </div>
+            <li class="bg-sky-50 p-4 rounded-2xl border border-sky-200">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <strong class="text-xl text-sky-950">15:15–17:00 | הצטיידות והתארגנות ב-Shopping City Ploiești</strong>
+                <span class="badge-drive">זמן נסיעה מ-OTP: כ-45 דקות (45 ק"מ)</span>
+              </div>
+              <p class="mb-2"><strong>חניה מומלצת:</strong> חניון הקרקע הפתוח והענק בחזית קניון פלויישטי (חינם, שפע חניה לרכבים עמוסי מזוודות).</p>
+              <p class="mb-2"><strong>מה עושים במקום:</strong> רכישת כרטיסי SIM/eSIM בחנויות התקשורת בקניון, משיכת כסף מקומי (RON) מכספומט בנקאי, והצטיידות ענקית בסופרמרקט Carrefour במצרכים לצום יום כיפור ולכל ימי השהות בוילה ברשנוב.</p>
+              <p class="text-slate-600 text-sm"><strong>רקע והיסטוריה:</strong> פלויישטי היא בירת הנפט ההיסטורית של רומניה; כבר בשנת 1857 הוקם בה בית הזיקוק הראשון בעולם. הנסיעה צפונה חושפת את המעבר ממישורי ולאכיה לרכס הקרפטים הדרמטי.</p>
+              <div class="mt-3 flex gap-2">
+                <a href="https://maps.google.com/?q=Shopping+City+Ploiesti" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1.5 rounded-lg font-bold">Google Maps</a>
+                <a href="https://waze.com/ul?q=Shopping+City+Ploiesti" target="_blank" class="bg-blue-500 text-white text-sm px-3 py-1.5 rounded-lg font-bold">Waze</a>
+              </div>
+            </li>
+
+            <li class="bg-sky-50 p-4 rounded-2xl border border-sky-200">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <strong class="text-xl text-sky-950">17:00–19:30 | נסיעה אל הוילה ברשנוב</strong>
+                <span class="badge-drive">זמן נסיעה מפלויישטי: כ-2–2.5 שעות (115 ק"מ)</span>
+              </div>
+              <p>נסיעה דרך עמק פראחובה הציורי (Sinaia, Bușteni, Predeal) ופנייה לכביש הנופי DN73A המוביל ישירות לרשנוב. צ'ק-אין, התמקמות בוילה וארוחת ערב קלה.</p>
+            </li>
+          </ul>
         </div>
       </article>
 
@@ -119,44 +129,50 @@
         <div class="flex flex-wrap items-center justify-between gap-3 border-b-2 border-sky-200 pb-4 mb-4">
           <div>
             <span class="text-amber-700 font-bold text-sm tracking-wider uppercase">ערב יום כיפור</span>
-            <h3 class="text-2xl md:text-3xl font-extrabold text-sky-950">יום 2 | ראשון, 20/09: פעילות בוקר קצרה, הכנה וסעודה מפסקת</h3>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-sky-950">יום 2 | ראשון, 20/09: בוקר בטבע רשנוב, פויאנה בראשוב וסעודה מפסקת</h3>
           </div>
           <span class="bg-amber-100 text-amber-900 px-4 py-1.5 rounded-full text-base font-bold border border-amber-200">סיום פעילות מוקדם</span>
         </div>
 
         <div class="space-y-4 text-base md:text-lg text-slate-800">
-          <p class="font-semibold text-slate-900 bg-sky-50 p-3 rounded-xl border border-sky-200">
-            💡 <strong>הנחיית בחירה:</strong> בחרו בחלופה ב' (המומלצת ביותר) כדי להימנע מפקקים, עומסים ונסיעות מתישות ביום של ערב צום. בחרו בחלופה א' רק אם קריטי לכם לבקר במבצר אונסק"ו ובמרכז בראשוב ביום זה.
-          </p>
+          <div class="p-5 bg-emerald-50 border-2 border-emerald-300 rounded-2xl space-y-3">
+            <h4 class="text-xl md:text-2xl font-bold text-emerald-950">⭐ חלופה ב' (מומלצת ועדיפה ביותר לפני הצום): רשנוב ופויאנה בראשוב</h4>
+            
+            <div class="border-b border-emerald-200 pb-3">
+              <div class="flex justify-between items-center mb-1">
+                <strong class="text-lg text-emerald-900">09:30–11:30 | מבצר רשנוב ועמק גלז'ריה</strong>
+                <span class="badge-drive">זמן נסיעה מהוילה: 5–8 דקות</span>
+              </div>
+              <p class="mb-1"><strong>חניה מומלצת:</strong> חניון הרכבת התיירותית/המעלית למבצר רשנוב (Parcare Cetatea Râșnov בתחתית הגבעה).</p>
+              <p class="text-slate-700"><strong>מה רואים והיסטוריה:</strong> מבצר איכרים מהמאה ה-13 שנבנה על גבעת גיר נישאת בגובה 150 מ' מעל העמק כמקום מקלט לקהילה בעת פשיטות טטאריות ועות'מאניות. במרכז המבצר באר מים בעומק 146 מ' שנחצבה במשך 17 שנה בידי שבויים. המשך בטיול רגוע בעמק גלז'ריה (Glăjăriei) המוצל – מרכז ניפוח הזכוכית ההיסטורי של טרנסילבניה.</p>
+            </div>
 
-          <!-- חלופה ב' -->
-          <div class="p-5 bg-emerald-50 border-2 border-emerald-300 rounded-2xl">
-            <h4 class="text-xl md:text-2xl font-bold text-emerald-950 mb-2">⭐ חלופה ב' (מומלצת ועדיפה ביותר): טבע כפרי ברשנוב ופסגת פויאנה בראשוב</h4>
-            <ul class="list-disc list-inside space-y-2 text-slate-800">
-              <li><strong>09:30–11:30 | מבצר רשנוב ועמק גלז'ריה (Glăjăriei):</strong> סיור באזור מבצר האיכרים של רשנוב שנבנה במאה ה-13 על גבעת גיר נישאת עם באר מים היסטורית בעומק 146 מטר שנחצבה בידי שבויים במשך 17 שנה. המשך בטיול רגוע בעמק גלז'ריה המוצל לאורך פלג המים, שבו פרחה בעבר תעשיית ניפוח הזכוכית הטרנסילבנית.</li>
-              <li><strong>11:30–14:00 | פויאנה בראשוב (Poiana Brașov) והר פוסטווארול:</strong> נסיעה קצרה של 15 דקות (כביש 1E) לעיירת הסקי המרכזית של רומניה. עלייה בגונדולה (Telegondola Postăvarul - שעות: 09:00–17:00) לפסגת הר פוסטווארול (Postăvarul, גובה 1,799 מטר) לתצפית פנורמית של 360 מעלות על הרי בוצ'ג'י, רכס פיאטרה קראיולוי ועמק בירסה. ארוחה קלה במסעדה מקומית.
-                <div class="mt-2 flex gap-2">
-                  <a href="https://maps.google.com/?q=Telegondola+Postavarul" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps</a>
-                  <a href="https://waze.com/ul?q=Telegondola+Postavarul" target="_blank" class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-bold">Waze</a>
-                </div>
-              </li>
-              <li><strong>14:30–17:30 | מנוחה רגועה בוילה ברשנוב:</strong> זמן מנוחה מלא, שתייה מרובה של מים והתארגנות שקטה ללא נסיעות וללא לחץ.</li>
-            </ul>
+            <div>
+              <div class="flex justify-between items-center mb-1">
+                <strong class="text-lg text-emerald-900">11:30–14:00 | רכבל פוסטווארול בפויאנה בראשוב</strong>
+                <span class="badge-drive">זמן נסיעה מרשנוב: כ-15 דקות (כביש 1E)</span>
+              </div>
+              <p class="mb-1"><strong>חניה מומלצת:</strong> החניון המרכזי למרגלות הגונדולה (Parcare Telegondola Postăvarul).</p>
+              <p class="text-slate-700"><strong>פעילות ונוף:</strong> עלייה ברכבל הגונדולה לפסגת הר פוסטווארול (גובה 1,799 מטר). תצפית פנורמית מרהיבה של 360 מעלות על עמק בראשוב ורכסי בוצ'ג'י. ארוחה קלה לפני חזרה לוילה.</p>
+              <div class="mt-2 flex gap-2">
+                <a href="https://maps.google.com/?q=Telegondola+Postavarul" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps</a>
+                <a href="https://waze.com/ul?q=Telegondola+Postavarul" target="_blank" class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-bold">Waze</a>
+              </div>
+            </div>
+
+            <p class="text-emerald-950 font-bold mt-2">14:30–17:30: מנוחה מלאה בוילה ברשנוב, שתייה מרובה והכנה שקטה לצום.</p>
           </div>
 
-          <!-- חלופה א' -->
           <div class="p-5 bg-slate-50 border border-slate-300 rounded-2xl">
-            <h4 class="text-xl font-bold text-slate-900 mb-2">חלופה א': כנסיית המבצר בפרז'מר, הר טמפה והעיר העתיקה בראשוב</h4>
-            <ul class="list-disc list-inside space-y-2 text-slate-700">
-              <li><strong>09:00–11:30 | כנסיית המבצר בפרז'מר (Prejmer):</strong> אתר מורשת עולמית של אונסק"ו שהוקם ב-1211 ע"י האבירים הטבטונים. מבצר שהותקף 50 פעמים ונכבש פעם אחת בלבד. שימו לב ל-270 תאי המגורים הפנימיים מעץ ב-4 קומות לאורך החומה ול"עוגב המוות".</li>
-              <li><strong>12:00–13:45 | רכבל להר טמפה (Tâmpa):</strong> עלייה ברכבל לתצפית מגובה 955 מטר על העיר העתיקה והליכה קצרה אל מאחורי אותיות השלט "BRASOV".</li>
-              <li><strong>14:00–17:00 | העיר העתיקה בראשוב:</strong> כיכר המועצה (Piața Sfatului), הכנסייה השחורה הגותית (Biserica Neagră מ-1689), רחוב החבל הצר (Strada Sforii) וארוחת צהריים.</li>
-            </ul>
+            <h4 class="text-lg font-bold text-slate-900 mb-1">חלופה א' (אופציה היסטורית): כנסיית פרז'מר, הר טמפה והעיר העתיקה</h4>
+            <p class="text-slate-700 text-sm md:text-base">09:00–11:30 ביקור בכנסיית המבצר פרז'מר (אונסק"ו - 270 תאי מגורים בחומה), 12:00–13:45 עלייה ברכבל להר טמפה לתצפית שלט BRASOV, וסיור רגלי קצר בכיכר המועצה והכנסייה השחורה. (חניה מומלצת בבראשוב: חניון תת-קרקעי Parcare Subterana Regina Maria).</p>
           </div>
 
-          <p class="font-bold text-sky-950 text-lg">
-            🕯️ <strong>18:00:</strong> נסיעה לסעודה מפסקת בבית חב"ד בראשוב (כניסת צום יום כיפור: ~18:50).
-          </p>
+          <div class="p-4 bg-sky-100 rounded-2xl border border-sky-300">
+            <strong class="text-sky-950 text-lg">🕯️ 18:00 | סעודה מפסקת בבית חב"ד בראשוב</strong>
+            <p class="text-slate-700 mt-1">נסיעה של כ-20 דקות מרשנוב לבית חב"ד בראשוב לסעודה המפסקת. כניסת צום יום כיפור בסביבות 18:50.</p>
+            <p class="text-sm mt-1"><strong>חניה מומלצת:</strong> חניות מוסדרות בכחול-לבן לאורך הרחובות הסמוכים למרכז היהודי או בחניון Livada Poștei.</p>
+          </div>
         </div>
       </article>
 
@@ -169,15 +185,13 @@
           </div>
           <span class="bg-sky-100 text-sky-900 px-4 py-1.5 rounded-full text-base font-bold border border-sky-200">0 ק"מ נסיעות ברכב</span>
         </div>
-
         <div class="space-y-3 text-base md:text-lg text-slate-800">
-          <p>יום מנוחה מלא בוילה ברשנוב. הליכות רגליות נעימות ושקטות באוויר ההרים הצלול בשבילי היער הסמוכים לוילה ללא צורך בנסיעות ברכב.</p>
-          <p class="bg-amber-50 border border-amber-200 p-3.5 rounded-xl font-bold text-amber-950">
-            ✨ <strong>19:48:</strong> צאת הצום ושבירת הצום בוילה בארוחה ביתית עשירה ומפנקת.
-          </p>
-          <p class="text-slate-600 text-base">
-            <em>אופציונלי (20:30–22:00):</em> קפיצה קלה להתאווררות בקניון Coresi Shopping Resort בבראשוב (נסיעה של כ-20 דקות, פתוח עד 22:00).
-          </p>
+          <p>יום מנוחה שקט, הליכות רגליות בשבילי היער הסמוכים לוילה באוויר הרים צלול.</p>
+          <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200">
+            <strong class="text-amber-950 text-xl">✨ 19:48 | צאת הצום ושבירת הצום בוילה</strong>
+            <p class="text-slate-700 mt-1">שבירת הצום בארוחה משפחתית עשירה במטבח הוילה.</p>
+          </div>
+          <p class="text-slate-600 text-sm md:text-base"><em>אופציונלי (20:30–22:00):</em> קפיצה להתאווררות בקניון Coresi Shopping Resort בבראשוב (פתוח עד 22:00, חניה חופשית ענקית).</p>
         </div>
       </article>
 
@@ -185,49 +199,54 @@
       <article class="bg-white border-2 border-sky-300 rounded-3xl p-6 md:p-8 shadow-md">
         <div class="flex flex-wrap items-center justify-between gap-3 border-b-2 border-sky-200 pb-4 mb-4">
           <div>
-            <span class="text-sky-700 font-bold text-sm tracking-wider uppercase">דובים, טירות וכפרים אלפיניים</span>
-            <h3 class="text-2xl md:text-3xl font-extrabold text-sky-950">יום 4 | שלישי, 22/09: שמורת הדובים ליברטי, טירת בראן ובחירת אחר-הצהריים</h3>
+            <span class="text-sky-700 font-bold text-sm tracking-wider uppercase">דובים, טירות ואקשן אלפיני</span>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-sky-950">יום 4 | שלישי, 22/09: שמורת ליברטי, טירת בראן ובחירת אחה"צ</h3>
           </div>
-          <span class="bg-sky-100 text-sky-900 px-4 py-1.5 rounded-full text-base font-bold border border-sky-200">מרחק: כ-65 ק"מ</span>
+          <span class="bg-sky-100 text-sky-900 px-4 py-1.5 rounded-full text-base font-bold border border-sky-200">נסיעה מצטברת: כ-65 ק"מ</span>
         </div>
 
         <div class="space-y-4 text-base md:text-lg text-slate-800">
-          <ul class="list-disc list-inside space-y-4 mr-2">
-            <li>
-              <strong>09:30–12:00 | שמורת הדובים ליברטי בזרנשט (Libearty Bear Sanctuary):</strong>
-              <p class="mr-4 mt-1 text-slate-700"><em>מרחק:</em> כ-12 ק"מ מרשנוב (15–20 דקות נסיעה). שעות סיורים: 09:00–11:00.</p>
-              <p class="mr-4 mt-1 text-slate-700"><em>רקע וחשיבות:</em> מקלט הדובים החומים הגדול בעולם (690 דונם של יער אלונים טבעי) שהוקם ב-2005 להצלת דובים שנוצלו והוחזקו בתנאי שבי קשים. במהלך סיור הבוקר המודרך מתבצעת האכלת הדובים, ולכן צופים בעשרות דובים ממרחק בטוח וקרוב מאוד כשהם משתכשכים בבריכות מים, מטפסים על עצים ומסתובבים ביער.</p>
-              <p class="mr-4 mt-1 text-amber-900 font-semibold">⚠️ דגשים: חובה להציג דרכונים מקוריים פיזיים בכניסה; כניסה אסורה לילדים מתחת לגיל 5.</p>
-              <div class="mr-4 mt-2 flex gap-2">
+          <ul class="space-y-4">
+            <li class="bg-sky-50 p-4 rounded-2xl border border-sky-200">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                <strong class="text-xl text-sky-950">09:30–12:00 | שמורת הדובים ליברטי בזרנשט (Libearty)</strong>
+                <span class="badge-drive">נסיעה מהוילה: כ-18 דקות (12 ק"מ)</span>
+              </div>
+              <p class="mb-1"><strong>חניה מומלצת:</strong> מגרש החניה בכניסה לשמורה (חניון עפר מוסדר וחינמי Parcare Sanctuarul Libearty).</p>
+              <p class="mb-2"><strong>רקע וחשיבות:</strong> מקלט הדובים החומים הגדול בעולם (690 דונם של יער אלונים טבעי) שהוקם ב-2005 להצלת דובים שנוצלו בתנאי שבי קשים. במהלך סיור הבוקר מתבצעת האכלת הדובים, ולכן צופים בעשרות דובים משתכשכים בבריכות ומסתובבים ביער.</p>
+              <p class="text-amber-900 font-bold">⚠️ שימו לב: חובה להציג דרכונים פיזיים מקוריים! כניסה אסורה מתחת לגיל 5.</p>
+              <div class="mt-2 flex gap-2">
                 <a href="https://maps.google.com/?q=Libearty+Bear+Sanctuary+Zarnesti" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps</a>
                 <a href="https://waze.com/ul?q=Libearty+Bear+Sanctuary+Zarnesti" target="_blank" class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-bold">Waze</a>
                 <a href="https://millionsoffriends.org/en/libearty/visit-sanctuary/" target="_blank" class="bg-sky-700 text-white text-sm px-3 py-1 rounded-lg font-bold">אתר רשמי והזמנות</a>
               </div>
             </li>
 
-            <li>
-              <strong>12:30–15:00 | טירת בראן (Castelul Bran), השוק וארוחת צהריים:</strong>
-              <p class="mr-4 mt-1 text-slate-700"><em>מרחק:</em> כ-15 ק"מ (20 דקות) מזרנשט לבראן. שעות פתיחה: 09:00–18:00.</p>
-              <p class="mr-4 mt-1 text-slate-700"><em>רקע והיסטוריה:</em> נבנתה בשנת 1377 על ידי סקסונים מבראשוב כמבצר צבאי על צוק סלע נישא לחסימת מעבר הפלישות העות'מאניות. בשנות ה-20 של המאה ה-20 שימשה כמעון קיץ מלכותי אהוב על המלכה מריה מרומניה. הטירה זכתה לתהילת עולם כ"טירת דרקולה" בהשראת ספרו של ברם סטוקר.</p>
-              <p class="mr-4 mt-1 text-slate-700"><em>דגשים בסיור:</em> החצר הפנימית המוקפת מרפסות עץ, באר המשאלות העמוקה, גרם המדרגות הסודי החצוב בתוך הקיר, שוק הגבינות והמזכרות העשיר למרגלות הטירה, וארוחת צהריים מסורתית.</p>
-              <div class="mr-4 mt-2 flex gap-2">
+            <li class="bg-sky-50 p-4 rounded-2xl border border-sky-200">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                <strong class="text-xl text-sky-950">12:30–15:00 | טירת בראן (Castelul Bran) והשוק הכפרי</strong>
+                <span class="badge-drive">נסיעה מזרנשט לבראן: כ-20 דקות (15 ק"מ)</span>
+              </div>
+              <p class="mb-1"><strong>חניה מומלצת:</strong> מגרש החניה המרכזי בתשלום למרגלות הטירה (Parcare Castelul Bran ברחוב Strada Sextil Pușcariu).</p>
+              <p class="mb-2"><strong>היסטוריה ודגשים:</strong> נבנתה בשנת 1377 על גבי מצוק סלע ענק להגנה על מעבר ההרים מפני העות'מאנים. שימשה מעון קיץ אהוב על המלכה מריה בשנות ה-20 של המאה ה-20. שימו לב לחצר הפנימית המוקפת מרפסות עץ, לבאר המשאלות העמוקה, ולמעבר המדרגות הסודי החצוב בתוך הקיר. למרגלות הטירה – שוק אותנטי עשיר במזכרות וגבינות מעושנות.</p>
+              <div class="mt-2 flex gap-2">
                 <a href="https://maps.google.com/?q=Bran+Castle" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps</a>
                 <a href="https://waze.com/ul?q=Bran+Castle" target="_blank" class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-bold">Waze</a>
-                <a href="https://bran-castle.com/" target="_blank" class="bg-sky-700 text-white text-sm px-3 py-1 rounded-lg font-bold">אתר רשמי והזמנות</a>
+                <a href="https://bran-castle.com/" target="_blank" class="bg-sky-700 text-white text-sm px-3 py-1 rounded-lg font-bold">אתר רשמי</a>
               </div>
             </li>
           </ul>
 
-          <div class="bg-sky-50 border border-sky-200 rounded-2xl p-4 mt-3">
-            <h5 class="font-bold text-sky-950 mb-2">בחירת המשך אחר-הצהריים (15:00–18:00) – שתי האפשרויות ללא הזמנה מראש:</h5>
+          <div class="bg-sky-100 p-4 rounded-2xl border border-sky-300">
+            <h5 class="font-bold text-sky-950 mb-2">בחירת המשך אחה"צ (15:00–18:00) – שתיהן ללא צורך בהזמנה מראש:</h5>
             <div class="space-y-3">
-              <div>
-                <p class="font-bold text-emerald-950">🔹 אפשרות א' (טבע, נוף ופסטורליה): הכפרים האלפיניים פשטרה ומגורה (Peștera & Măgura)</p>
-                <p class="text-slate-700 text-sm md:text-base">כפרים מסורתיים היושבים על קו הרכס בגובה מעל 1,000 מטר בתוך הפארק הלאומי פיאטרה קראיולוי. נופים עוצרי נשימה של בקתות עץ, שטחי מרעה ירוקים וגדרות עץ על רקע מצוקי הגיר. עצירה לתצפית פנורמית וקפה במתחם Amfiteatrul Transilvania, ואופציה לאומגה כפרית מעל העמק ב-Casa Tăbăcaru. חזרה לרשנוב בנסיעה של כ-20 דקות.</p>
+              <div class="bg-white p-3 rounded-xl border border-sky-200">
+                <p class="font-bold text-emerald-950">🔹 אפשרות א' (טבע ושקט כפרי): הכפרים האלפיניים פשטרה ומגורה (Peștera & Măgura)</p>
+                <p class="text-sm md:text-base text-slate-700">בקתות עץ, עדרי צאן וגדרות עץ מול מצוקי פיאטרה קראיולוי בגובה 1,000 מ'. תצפית וקפה במתחם Amfiteatrul Transilvania (חניה במתחם). נסיעה חזרה לוילה: כ-20 דקות.</p>
               </div>
-              <div>
-                <p class="font-bold text-blue-950">🔹 אפשרות ב' (אקשן וכיף למשפחה): מגלשת ההרים האלפינית Cheile Grădiștei בפונדטה</p>
-                <p class="text-slate-700 text-sm md:text-base">נסיעה של כ-20 דקות מבראן ישירות לפונדטה (Fundata - היישוב הגבוה ברומניה בגובה 1,300 מטר). גלישה במגלשת הרים חדישה ומהירה לאורך 1.6 ק"מ עם שליטה עצמית במהירות מול נוף הרי בוצ'ג'י ופיאטרה קראיולוי. חזרה ישירה לרשנוב על כביש DN73 (כ-25 דקות נסיעה).</p>
+              <div class="bg-white p-3 rounded-xl border border-sky-200">
+                <p class="font-bold text-blue-950">🔹 אפשרות ב' (אקשן וכיף למשפחה): מגלשת ההרים האלפינית בפונדטה (Cheile Grădiștei)</p>
+                <p class="text-sm md:text-base text-slate-700">נסיעה של 20 דקות מבראן לפונדטה (גובה 1,300 מ'). גלישה במגלשת הרים חדישה לאורך 1.6 ק"מ עם שליטה עצמית במהירות. חניה מוסדרת במתחם הנופש Cheile Grădiștei. נסיעה חזרה לוילה: כ-25 דקות.</p>
               </div>
             </div>
           </div>
@@ -239,38 +258,44 @@
         <div class="flex flex-wrap items-center justify-between gap-3 border-b-2 border-sky-200 pb-4 mb-4">
           <div>
             <span class="text-sky-700 font-bold text-sm tracking-wider uppercase">טבע אתגרי וקולינריה כפרית</span>
-            <h3 class="text-2xl md:text-3xl font-extrabold text-sky-950">יום 5 | רביעי, 23/09: קניון 7 הסולמות, חוות הפורלים וערב במסעדת Coliba Haiducilor</h3>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-sky-950">יום 5 | רביעי, 23/09: קניון 7 הסולמות, חוות הפורלים וערב ב-Coliba Haiducilor</h3>
           </div>
-          <span class="bg-sky-100 text-sky-900 px-4 py-1.5 rounded-full text-base font-bold border border-sky-200">מרחק: כ-45 ק"מ</span>
+          <span class="bg-sky-100 text-sky-900 px-4 py-1.5 rounded-full text-base font-bold border border-sky-200">נסיעה מצטברת: כ-45 ק"מ</span>
         </div>
 
         <div class="space-y-4 text-base md:text-lg text-slate-800">
-          <ul class="list-disc list-inside space-y-4 mr-2">
-            <li>
-              <strong>09:30–13:30 | קניון 7 הסולמות (Canionul 7 Scări):</strong>
-              <p class="mr-4 mt-1 text-slate-700"><em>נסיעה:</em> כ-22 ק"מ מרשנוב (אזור Timișu de Jos / Dâmbu Morii). שעות פתיחה: 10:00–17:30 (כניסה עד 16:30).</p>
-              <p class="mr-4 mt-1 text-slate-700"><em>רקע וגיאולוגיה:</em> נקיק קרסטי צר ועמוק שנחצב בסלעי גיר מתקופת היורה ברכס פיאטרה מארה (Piatra Mare). לאורך הנקיק זורמים מפלי מים שוצפים בגובה עשרות מטרים.</p>
-              <p class="mr-4 mt-1 text-slate-700"><em>חוויה ואתגר:</em> טיפוס על גבי 7 סולמות מתכת אנכיים (הארוך מביניהם בגובה 15 מטר) המותקנים ישירות בצמוד לזרמי המים השוצפים. ביציאה מהקניון ניתן לחזור רגלית בשביל יער מוצל או לגלוש מטה ברשת אומגות מפותלת בין צמרות העצים (חובה להגיע עם נעלי הליכה סגורות בעלות אחיזה טובה).</p>
-              <div class="mr-4 mt-2 flex gap-2">
-                <a href="https://maps.google.com/?q=Canionul+7+Scari" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps חניה ומסלול</a>
+          <ul class="space-y-4">
+            <li class="bg-sky-50 p-4 rounded-2xl border border-sky-200">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                <strong class="text-xl text-sky-950">09:30–13:30 | קניון 7 הסולמות (Canionul 7 Scări)</strong>
+                <span class="badge-drive">נסיעה מהוילה: כ-25 דקות (22 ק"מ)</span>
+              </div>
+              <p class="mb-1"><strong>חניה מומלצת:</strong> חניון שפך המסלול ב-Dâmbu Morii (חניון מוסדר בתשלום קל Parcare Canionul 7 Scari).</p>
+              <p class="mb-2"><strong>המסלול והחוויה:</strong> הליכה מישורית של כ-40 דקות ביער מחטני מוצל לאורך הנחל, והגעה אל נקיק הגיר הצר שנחצב ברכס פיאטרה מארה. טיפוס מאתגר על גבי 7 סולמות מתכת אנכיים (הארוך מביניהם בגובה 15 מטר) הצמודים למפלי מים שוצפים. חזרה רגלית בשביל עוקף או גלישה ברשת האומגות הארוכה. (נעלי הליכה סגורות – חובה!).</p>
+              <div class="mt-2 flex gap-2">
+                <a href="https://maps.google.com/?q=Canionul+7+Scari" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps חניה</a>
                 <a href="https://waze.com/ul?q=Canionul+7+Scari" target="_blank" class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-bold">Waze</a>
               </div>
             </li>
 
-            <li>
-              <strong>14:30–17:00 | חוות הפורלים ברשנוב (Păstrăvărie Râșnov):</strong>
-              <p class="mr-4 mt-1 text-slate-700"><em>נסיעה:</em> כ-20 ק"מ מהקניון חזרה לעמק רשנוב. שעות פתיחה: 10:00–20:00.</p>
-              <p class="mr-4 mt-1 text-slate-700"><em>חוויה קולינרית ומקומית:</em> גידול דגי פורל (שמך) במים זכים וקרים מהפשרת שלגי הקרפטים. דייג עצמאי בחכות מבריכות הגידול וארוחה אותנטית של דגי פורל טריים צלויים לצד ממליגה חמה ורוטב שום מוז'דיי (Mujdei).</p>
+            <li class="bg-sky-50 p-4 rounded-2xl border border-sky-200">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                <strong class="text-xl text-sky-950">14:30–17:00 | חוות הפורלים ברשנוב (Păstrăvărie Râșnov)</strong>
+                <span class="badge-drive">נסיעה מהקניון: כ-25 דקות (20 ק"מ)</span>
+              </div>
+              <p class="mb-1"><strong>חניה מומלצת:</strong> חניון החווה הצמוד למסעדה (חינם לאורחים).</p>
+              <p>דייג עצמאי בחכות מבריכות מי הפשרת השלגים, וארוחת דגי פורל טריים שנצלים במקום ומוגשים עם ממליגה חמה ורוטב שום מוז'דיי אותנטי.</p>
             </li>
 
-            <li>
-              <strong>17:30–21:30 | נסיעה, טיול ערב וארוחת ערב במסעדת Coliba Haiducilor בפויאנה בראשוב:</strong>
-              <p class="mr-4 mt-1 text-slate-700"><em>נסיעה:</em> כ-15 דקות נסיעה נופית ויפהפייה בעלייה בכביש 1E מרשנוב לפויאנה בראשוב.</p>
-              <p class="mr-4 mt-1 text-slate-700"><em>17:45–19:00 | שיטוט ערב:</em> הליכה נעימה באוויר הפסגות הצלול סביב אגם Lacul Miorița ובשבילי היער הירוקים.</p>
-              <p class="mr-4 mt-1 text-slate-700"><em>19:00–21:00 | ארוחת ערב חגיגית במסעדת Coliba Haiducilor:</em> מסעדת קונספט יער אותנטית שנבנתה כבקתת אבן ועץ ענקית ("בקתת פורעי החוק האגדיים"), המעוטרת בעורות דובים, קרניים וכלים עתיקים. המסעדה מציעה אווירת פולקלור ייחודית עם נגני כינור ואקורדיון בלבוש מסורתי, מנות בשרים מעושנים וקדירות בממליגה (Tochitură), וקינוח פפנאש טרי וחם עם ריבת אוכמניות יער ושמנת.</p>
-              <p class="mr-4 mt-1 text-slate-700"><em>חזרה:</em> נסיעה קצרה של כ-12–15 דקות בירידה חזרה לוילה ברשנוב.</p>
-              <div class="mr-4 mt-2 flex gap-2">
-                <a href="https://maps.google.com/?q=Coliba+Haiducilor+Poiana+Brasov" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps מסעדה</a>
+            <li class="bg-sky-50 p-4 rounded-2xl border border-sky-200">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                <strong class="text-xl text-sky-950">17:30–21:30 | טיול ערב וארוחה ב-Coliba Haiducilor בפויאנה בראשוב</strong>
+                <span class="badge-drive">נסיעה מרשנוב: כ-15 דקות</span>
+              </div>
+              <p class="mb-1"><strong>חניה מומלצת:</strong> חניון המסעדה המרווח או חניון מרכז פויאנה בראשוב (Parcare Poiana Brașov).</p>
+              <p class="mb-2"><strong>מה עושים:</strong> 17:45–19:00 שיטוט רגוע באוויר הפסגות סביב אגם Miorița הציורי. 19:00–21:00 ארוחת ערב חגיגית ב"בקתת פורעי החוק האגדיים" (Coliba Haiducilor) – בקתת קורות עץ מרשימה המעוטרת בעורות דובים וקרניים, עם נגנים עממיים ואוכל רומני כפרי (קדירות בממליגה, בשרים מעושנים ופפנאש חם). חזרה בירידה לוילה: כ-12 דקות.</p>
+              <div class="mt-2 flex gap-2">
+                <a href="https://maps.google.com/?q=Coliba+Haiducilor+Poiana+Brasov" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps</a>
                 <a href="https://waze.com/ul?q=Coliba+Haiducilor+Poiana+Brasov" target="_blank" class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-bold">Waze</a>
               </div>
             </li>
@@ -285,68 +310,72 @@
             <span class="text-purple-700 font-bold text-sm tracking-wider uppercase">יום בחירה מרכזי</span>
             <h3 class="text-2xl md:text-3xl font-extrabold text-sky-950">יום 6 | חמישי, 24/09: טרנסילבניה הסקסונית או ארמונות פראחובה ובוצ'ג'י</h3>
           </div>
-          <span class="bg-purple-100 text-purple-900 px-4 py-1.5 rounded-full text-base font-bold border border-purple-200">יום עשיר באפשרויות</span>
+          <span class="bg-purple-100 text-purple-900 px-4 py-1.5 rounded-full text-base font-bold border border-purple-200">יום עשיר בחוויות</span>
         </div>
 
-        <div class="space-y-5 text-base md:text-lg text-slate-800">
-          <p class="font-semibold text-slate-900 bg-sky-50 p-3 rounded-xl border border-sky-200">
-            💡 <strong>הנחיית בחירה:</strong> בחרו בחלופה א' (מומלצת ועדיפה ⭐) לטובת חוויה היסטורית ואדריכלית עמוקה בלב טרנסילבניה (מצודת סיגישוארה, מבצר רופאה והכפר ויסקרי – כ-3.5 שעות נהיגה מצטברות). בחרו בחלופה ב' אם מעדיפים נסיעות קצרות יותר (~50 דק' לכל כיוון), פאר מלכותי בארמון פלש ורכסי הרים בפארק הטבע בוצ'ג'י.
-          </p>
-
+        <div class="space-y-4 text-base md:text-lg text-slate-800">
           <!-- חלופה א' -->
           <div class="p-5 bg-emerald-50 border-2 border-emerald-300 rounded-2xl space-y-3">
-            <h4 class="text-xl md:text-2xl font-bold text-emerald-950">⭐ חלופה א' (מומלצת ועדיפה ביותר): מצודת סיגישוארה, מבצר רופאה והכפר ויסקרי</h4>
-            <ul class="list-disc list-inside space-y-2 text-slate-800">
-              <li><strong>09:00–13:30 | מצודת סיגישוארה (Sighișoara Citadel):</strong> נסיעה של כ-120 ק"מ (שעה ו-45 דקות) מרשנוב על כביש DN13. אתר מורשת עולמית של אונסק"ו ואחת מערי המבצר הימי-ביניימיות השמורות והמיושבות ברציפות הטובות באירופה. נבנתה במאה ה-12 על ידי סקסונים גרמנים. כאן נולד בשנת 1431 הנסיך ולאד המשפד (ולאד צפש). סיור במגדל השעון (Turnul cu Ceas - שעות: 09:00–17:30) עם מנגנון הבובות הייחודי, גרם המדרגות המקורה של התלמידים (Scara Școlarilor מ-1642), וסמטאות האבן הציוריות.
-                <div class="mt-2 flex gap-2">
-                  <a href="https://maps.google.com/?q=Sighisoara+Citadel" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps</a>
-                  <a href="https://waze.com/ul?q=Sighisoara+Citadel" target="_blank" class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-bold">Waze</a>
-                </div>
-              </li>
-              <li><strong>14:15–15:15 | עצירת ביניים במבצר רופאה (Cetatea Rupea):</strong> נסיעה של 40 דקות מסיגישוארה דרומה (יושב ישירות על כביש DN13, שעות: 09:00–18:00). מבצר סקסוני מרשים מהמאה ה-14 הבנוי בצורת ספירלה על סלע בזלת ענק ומספק תצפית פנורמית מרהיבה של 360 מעלות על המרחב הכפרי.
-                <div class="mt-2 flex gap-2">
-                  <a href="https://maps.google.com/?q=Cetatea+Rupea" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps</a>
-                  <a href="https://waze.com/ul?q=Cetatea+Rupea" target="_blank" class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-bold">Waze</a>
-                </div>
-              </li>
-              <li><strong>15:30–17:30 | הכפר המסורתי ויסקרי (Viscri):</strong> נסיעה קצרה של 15 דקות מרופאה (שעות: 10:00–18:00). אתר אונסק"ו המשמר כפר סקסוני אותנטי מהמאה ה-18 שזכה לפרסום עולמי בזכות פטרונותו של המלך צ'ארלס השלישי מבריטניה. ביקור בכנסייה המבוצרת הלבנה מהמאה ה-13, טיפוס למגדל הפעמונים וחוויה של חיים כפריים ללא אספלט. חזרה לרשנוב בנסיעה של כ-85 ק"מ (שעה ורבע).
-                <div class="mt-2 flex gap-2">
-                  <a href="https://maps.google.com/?q=Viscri+Fortified+Church" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps</a>
-                  <a href="https://waze.com/ul?q=Viscri+Fortified+Church" target="_blank" class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-bold">Waze</a>
-                </div>
-              </li>
-            </ul>
+            <h4 class="text-xl md:text-2xl font-bold text-emerald-950">⭐ חלופה א' (המומלצת ביותר): סיגישוארה, מבצר רופאה והכפר ויסקרי</h4>
+            
+            <div class="border-b border-emerald-200 pb-3">
+              <div class="flex justify-between items-center mb-1">
+                <strong class="text-lg text-emerald-900">09:00–13:30 | מצודת סיגישוארה (Sighișoara Citadel)</strong>
+                <span class="badge-drive">נסיעה מהוילה: שעה ו-45 דק' (120 ק"מ)</span>
+              </div>
+              <p class="mb-1"><strong>חניה מומלצת:</strong> חניון בתחתית המצודה Parcare Strada Anton Pann (גישה רגלית נוחה לעיר העתיקה).</p>
+              <p class="text-slate-700"><strong>היסטוריה ודגשים:</strong> אתר מורשת עולמית של אונסק"ו, מהמבצרים השמורים באירופה שנבנה ע"י סקסונים במאה ה-12. כאן נולד בשנת 1431 הנסיך ולאד המשפד ("דרקולה"). סיור במגדל השעון (Turnul cu Ceas) עם מנגנון הבובות, גרם מדרגות התלמידים המקורה (Scara Școlarilor מ-1642), וסמטאות האבן הצבעוניות.</p>
+            </div>
+
+            <div class="border-b border-emerald-200 pb-3">
+              <div class="flex justify-between items-center mb-1">
+                <strong class="text-lg text-emerald-900">14:15–15:15 | מבצר רופאה (Cetatea Rupea)</strong>
+                <span class="badge-drive">נסיעה מסיגישוארה: כ-40 דקות (50 ק"מ)</span>
+              </div>
+              <p class="mb-1"><strong>חניה מומלצת:</strong> חניון שער המבצר (Parcare Cetatea Rupea, מוסדר וחינמי).</p>
+              <p class="text-slate-700">מבצר סקסוני מהמאה ה-14 שנבנה בצורת ספירלה על סלע בזלת ענק ומספק תצפית פנורמית מרהיבה של 360 מעלות על המרחב הכפרי.</p>
+            </div>
+
+            <div>
+              <div class="flex justify-between items-center mb-1">
+                <strong class="text-lg text-emerald-900">15:30–17:30 | הכפר המסורתי ויסקרי (Viscri)</strong>
+                <span class="badge-drive">נסיעה מרופאה: כ-15 דקות</span>
+              </div>
+              <p class="mb-1"><strong>חניה מומלצת:</strong> חניון הכניסה לכפר (חניה מסודרת Parcare Viscri, הכניסה ברכב לרחובות הכפר מוגבלת לשימור האופי המסורתי).</p>
+              <p class="text-slate-700">אתר אונסק"ו המשמר כפר סקסוני מהמאה ה-18 שזכה לפטרונות המלך צ'ארלס השלישי. כנסייה מבוצרת לבנה מהמאה ה-13, טיפוס למגדל הפעמונים ורחובות ללא אספלט. חזרה לרשנוב: כשעה ורבע.</p>
+            </div>
           </div>
 
           <!-- חלופה ב' -->
           <div class="p-5 bg-slate-50 border border-slate-300 rounded-2xl space-y-3">
-            <h4 class="text-xl md:text-2xl font-bold text-slate-900">חלופה ב': עמק פראחובה – ארמון פלש, סינאיה ובחירת אחה"צ</h4>
-            <ul class="list-disc list-inside space-y-2 text-slate-700">
-              <li><strong>09:00–12:30 | ארמון פלש ופלשור (Castelul Peleș & Pelișor):</strong> נסיעה של כ-48 ק"מ (50 דקות) מרשנוב לסינאיה (שעות: 09:15–17:00). מעון הקיץ של המלך קרול הראשון (נבנה 1873–1914). פאר אדריכלי ניאו-רנסנסי גרמני עם 160 חדרים עתירי גילופי עץ נדירים, אולם נשקייה עם 4,000 פריטים היסטוריים, ויטראז'ים שוויצריים וטרסות גן מפוארות (חובה להזמין כרטיסים מראש אונליין לפי חלון זמן).
-                <div class="mt-2 flex gap-2">
-                  <a href="https://maps.google.com/?q=Peles+Castle" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps</a>
-                  <a href="https://waze.com/ul?q=Peles+Castle" target="_blank" class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-bold">Waze</a>
-                  <a href="https://peles.ro/" target="_blank" class="bg-sky-700 text-white text-sm px-3 py-1 rounded-lg font-bold">אתר רשמי והזמנות</a>
-                </div>
-              </li>
-              <li><strong>12:45–13:45 | מנזר סינאיה (Mănăstirea Sinaia):</strong> הוקם ב-1695 על ידי הנסיך מיכאיל קנטקוזינו לאחר שובו מהר סיני (מקור שמה של העיירה).</li>
-              <li><strong>14:00–15:15 | ארוחת צהריים:</strong> במדרחוב Carol I במרכז סינאיה.</li>
-            </ul>
+            <h4 class="text-xl md:text-2xl font-bold text-slate-900">חלופה ב': ארמון פלש בסינאיה ובחירת אחה"צ וערב</h4>
+            <div class="border-b border-slate-200 pb-3">
+              <div class="flex justify-between items-center mb-1">
+                <strong class="text-lg text-slate-900">09:00–13:45 | ארמון פלש, פלשור ומנזר סינאיה</strong>
+                <span class="badge-drive">נסיעה מהוילה: כ-50 דקות (48 ק"מ)</span>
+              </div>
+              <p class="mb-1"><strong>חניה מומלצת:</strong> חניון הרחוב התחתון של הארמון Parcare Castelul Peleș (ברחוב Strada Furnica).</p>
+              <p class="text-slate-700">מעון הקיץ המלכותי של המלך קרול הראשון (נבנה 1873–1914) – מופת ניאו-רנסנסי גרמני עם 160 חדרים עתירי גילופי עץ נדירים, אולם נשקייה עם 4,000 פריטים, ויטראז'ים שוויצריים וגני שיש. המשך לביקור במנזר סינאיה מ-1695 וארוחת צהריים במדרחוב Carol I.</p>
+            </div>
 
-            <div class="bg-white p-4 rounded-xl border border-slate-200 mt-2">
-              <h5 class="font-bold text-sky-950 mb-2">אפשרויות להמשך אחר-הצהריים (15:30–18:30) – מדורגות ממומלץ למעניין:</h5>
-              <ol class="list-decimal list-inside space-y-2 text-slate-800">
+            <div class="bg-white p-4 rounded-xl border border-slate-200">
+              <strong class="text-sky-950 block mb-2 font-bold">דירוג אפשרויות להמשך אחה"צ וערב (מ-15:30 ואילך):</strong>
+              <ol class="list-decimal list-inside space-y-2 text-sm md:text-base text-slate-800">
                 <li>
-                  <strong>דירוג 1 (המומלצת ביותר ⭐⭐⭐): לב פארק הטבע בוצ'ג'י – אגם בולבוצ'י ומערת יאלומיצה</strong>
-                  <p class="mr-4 text-sm md:text-base text-slate-700">יוצאים מסינאיה ועולים בכביש הנופי Transbucegi (DJ713) ומשם ב-DJ714 לעמק יאלומיצה (כ-30 ק"מ, כ-40 דקות נסיעה באספלט סלול). ביקור במערת יאלומיצה (שעות: 09:00–18:00, כניסה עד 17:00) – מנזר עץ עתיק מהמאה ה-16 הבנוי בפתח המערה וגשרי עץ מוארים באורך 450 מטר בבטן ההר. עצירה באגם בולבוצ'י ("הים של בוצ'ג'י") בגובה 1,438 מטר. חזרה לרשנוב בכשעה ורבע.</p>
+                  <strong class="text-emerald-950">דירוג 1 (המרשימה ביותר בטבע ⭐⭐⭐): אגם בולבוצ'י ומערת יאלומיצה בפארק בוצ'ג'י</strong>
+                  <p class="mr-4 text-slate-700">נסיעה בכביש Transbucegi הנופי (40 דק'). מנזר בפתח המערה וגשרי עץ בבטן ההר. חניה: Parcare Peștera Ialomiței. חזרה לרשנוב: שעה ורבע.</p>
                 </li>
                 <li>
-                  <strong>דירוג 2 (תצפית פנורמית אלפינית ⭐⭐): רכבל הגונדולה בסינאיה (Gondola Sinaia)</strong>
-                  <p class="mr-4 text-sm md:text-base text-slate-700">עלייה ישירה מסינאיה לגובה Cota 1400 ו-Cota 2000 (שעות: 09:00–17:00) לתצפית של 360 מעלות על עמק פראחובה ורכס בוצ'ג'י. חזרה לרשנוב בכ-50 דקות.</p>
+                  <strong class="text-blue-950">דירוג 2 (פינוק וספא משפחתי לערב מ-17:00 ⭐⭐⭐): פארק המים והספא Paradisul Acvatic בבראשוב</strong>
+                  <p class="mr-4 text-slate-700">מתחם מקורה מחומם עם בריכות זרמים, ג'קוזי, מגלשות וסאונות (פתוח עד 21:00). חניה: חניון הפארק המרווח Parcare Paradisul Acvatic. חזרה לרשנוב: כ-18 דקות.</p>
                 </li>
                 <li>
-                  <strong>דירוג 3 (הליכת יער קלילה ⭐): מפל השואגת בבושטני (Cascada Urlătoarea)</strong>
-                  <p class="mr-4 text-sm md:text-base text-slate-700">נסיעה של 10 דקות צפונה לבושטני והליכה מוצלת ביער של 2 ק"מ לכל כיוון (כ-45 דקות לכל כיוון) אל מפל מים הנופל מגובה 15 מטר ומשמיע שאון עוצמתי. חזרה לרשנוב בכ-35 דקות.</p>
+                  <strong class="text-purple-950">דירוג 3 (תצפית פסגות ⭐⭐): גונדולה סינאיה לגובה Cota 2000</strong>
+                  <p class="mr-4 text-slate-700">עלייה ישירה מסינאיה לתצפית של 360 מעלות על עמק פראחובה. חניה: Parcare Telegondola Sinaia. חזרה לרשנוב: 50 דק'.</p>
+                </li>
+                <li>
+                  <strong class="text-slate-800">דירוג 4 (הליכת יער קלה ⭐): מפל השואגת בבושטני</strong>
+                  <p class="mr-4 text-slate-700">הליכה מוצלת ביער של כ-45 דקות לכל כיוון אל המפל השוצף. חניה: ליד Telecabina Bușteni. חזרה לרשנוב: 35 דק'.</p>
                 </li>
               </ol>
             </div>
@@ -359,36 +388,28 @@
         <div class="flex flex-wrap items-center justify-between gap-3 border-b-2 border-sky-200 pb-4 mb-4">
           <div>
             <span class="text-sky-700 font-bold text-sm tracking-wider uppercase">אלפיניזם מול שלווה מקומית</span>
-            <h3 class="text-2xl md:text-3xl font-extrabold text-sky-950">יום 7 | שישי, 25/09: יום בחירה – מעבר הטרנספגראשן או קניון זרנשט ברוגע</h3>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-sky-950">יום 7 | שישי, 25/09: מעבר הטרנספגראשן או קניון זרנשט ברוגע</h3>
           </div>
           <span class="bg-sky-100 text-sky-900 px-4 py-1.5 rounded-full text-base font-bold border border-sky-200">תלוי מזג אוויר</span>
         </div>
 
         <div class="space-y-4 text-base md:text-lg text-slate-800">
-          <p class="font-semibold text-slate-900 bg-sky-50 p-3 rounded-xl border border-sky-200">
-            💡 <strong>הנחיית בחירה:</strong> בחרו בחלופה א' (טראנספגראשן ואגם בליה) רק אם מזג האוויר בהיר לחלוטין וללא ערפל בפסגות (דורש כ-3 שעות נסיעה מצטברות). בחרו בחלופה ב' (קניון זרנשט) אם יש ערפל בהרים או אם מעדיפים יום טבע קליל וקרוב לבית (15 דק' נסיעה) בשילוב קניות ופארק מים.
-          </p>
-
-          <!-- חלופה א' -->
           <div class="p-5 bg-sky-50 border border-sky-300 rounded-2xl space-y-2">
-            <h4 class="text-xl font-bold text-sky-950">חלופה א' (במזג אוויר בהיר): מעבר הטרנספגראשן (Transfăgărășan) ברכבל ואגם בליה</h4>
-            <p class="text-slate-700"><strong>10:00–14:00 | רכבל טראנספגראשן ואגם בליה:</strong> נסיעה של כ-95 ק"מ (שעה ו-25 דקות) מרשנוב עד לתחנת הרכבל Bâlea Cascadă (דרך DN73A, DN1 ו-DN7C). כביש צבאי אסטרטגי שנבנה בשנות ה-70 ביוזמת צ'אושסקו לחציית הרי פגראש ("כביש הנהיגה הטוב בעולם" לפי Top Gear). עלייה ברכבל האדום (שעות: 09:00–17:00, תלוי רוחות) מעל מפל בליה אל <strong>אגם בליה (Lacul Bâlea)</strong> – אגם קרחוני צלול בגובה 2,034 מטר עם תצפית דרמטית על הסרפנטינות. ארוחת צהריים בבקתה האלפינית (להביא מעילים חמים).</p>
-            <p class="text-slate-700"><strong>15:30–18:30:</strong> בדרך חזרה, קפיצה לקניון Coresi בבראשוב או לפארק המים Paradisul Acvatic, וחזרה לוילה ברשנוב.</p>
-            <div class="mt-2 flex gap-2">
-              <a href="https://maps.google.com/?q=Telecabina+Balea+Cascada" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps</a>
-              <a href="https://waze.com/ul?q=Telecabina+Balea+Cascada" target="_blank" class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-bold">Waze</a>
+            <div class="flex justify-between items-center mb-1">
+              <strong class="text-xl text-sky-950">חלופה א' (במזג אוויר בהיר): רכבל טרנספגראשן ואגם בליה</strong>
+              <span class="badge-drive">נסיעה מהוילה: שעה ו-25 דק' (95 ק"מ)</span>
             </div>
+            <p class="mb-1"><strong>חניה מומלצת:</strong> מגרש החניה למרגלות תחנת הרכבל Parcare Telecabină Bâlea Cascadă.</p>
+            <p class="text-slate-700">כביש צבאי שנחצב בשנות ה-70 ביוזמת צ'אושסקו לחציית הרי פגראש. עלייה ברכבל האדום מעל מפל בליה אל אגם בליה (Lacul Bâlea) – אגם קרחוני בגובה 2,034 מטר עם תצפית דרמטית על הסרפנטינות. ארוחה בבקתה האלפינית וחזרה דרך קניון Coresi בבראשוב.</p>
           </div>
 
-          <!-- חלופה ב' -->
           <div class="p-5 bg-emerald-50 border border-emerald-300 rounded-2xl space-y-2">
-            <h4 class="text-xl font-bold text-emerald-950">חלופה ב' (ברוגע וקרבת מקום): הליכה קסומה בקניון זרנשט (Prăpăstiile Zărneștilor) ורוגע מקומי</h4>
-            <p class="text-slate-700"><strong>09:30–12:30 | קניון זרנשט:</strong> נסיעה של כ-12 ק"מ (18–20 דקות בלבד) מרשנוב. ערוץ קניוני צר ומרשים שנחצב בסלעי גיר בפארק הלאומי פיאטרה קראיולוי עם קירות סלע זקופים של עד 200 מטר (אתר צילום הסרט "קולד מאונטן"). שביל עפר כבוש, רחב, מוצל ומישורי לחלוטין (מתאים לכל גיל). הליכה של כ-1.5–2 שעות הלוך-חזור בקצב נינוח לאורך הנקיק הקריר.</p>
-            <p class="text-slate-700"><strong>13:00–18:00:</strong> ארוחת צהריים באזור זרנשט/רשנוב, ובילוי אחה"צ בפארק המים והספא המקורה <strong>Paradisul Acvatic</strong> בבראשוב (פתוח עד 21:00) או שופינג בקניון <strong>Coresi Shopping Resort</strong> (פתוח עד 22:00).</p>
-            <div class="mt-2 flex gap-2">
-              <a href="https://maps.google.com/?q=Fantana+lui+Botorog" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps קניון זרנשט</a>
-              <a href="https://maps.google.com/?q=Paradisul+Acvatic+Brasov" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps פארק מים</a>
+            <div class="flex justify-between items-center mb-1">
+              <strong class="text-xl text-emerald-950">חלופה ב' (ברוגע וקרבת מקום): קניון זרנשט וספא בבראשוב</strong>
+              <span class="badge-drive">נסיעה מהוילה: כ-18 דקות (12 ק"מ)</span>
             </div>
+            <p class="mb-1"><strong>חניה מומלצת:</strong> חניון עפר לצד מעיין Fântâna lui Botorog (שפך מסלול קניון זרנשט).</p>
+            <p class="text-slate-700">הליכה מישורית, מוצלת וקסומה בנקיק סלע קראסטי צר עם קירות של 200 מ' (אתר צילום הסרט "קולד מאונטן"). אחה"צ: בילוי רגוע בפארק המים Paradisul Acvatic או שופינג בקניון Coresi.</p>
           </div>
         </div>
       </article>
@@ -398,43 +419,46 @@
         <div class="flex flex-wrap items-center justify-between gap-3 border-b-2 border-sky-200 pb-4 mb-4">
           <div>
             <span class="text-amber-700 font-bold text-sm tracking-wider uppercase">מעבר עוקף פקקים לבוקרשט</span>
-            <h3 class="text-2xl md:text-3xl font-extrabold text-sky-950">יום 8 | שבת, 26/09: פארק החבלים בבראשוב, קניון דמבוביצ'וארה ומעבר לבוקרשט</h3>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-sky-950">יום 8 | שבת, 26/09: פארק החבלים, קניון דמבוביצ'וארה ונסיעה לבוקרשט</h3>
           </div>
-          <span class="bg-amber-100 text-amber-900 px-4 py-1.5 rounded-full text-base font-bold border border-amber-200">מרחק: כ-215 ק"מ</span>
+          <span class="bg-amber-100 text-amber-900 px-4 py-1.5 rounded-full text-base font-bold border border-amber-200">נסיעה מצטברת: כ-215 ק"מ</span>
         </div>
 
         <div class="space-y-4 text-base md:text-lg text-slate-800">
-          <p class="font-semibold text-slate-900 bg-amber-50 p-3 rounded-xl border border-amber-200">
-            ⚠️ <strong>הנחיית ניווט קריטית:</strong> בשבת בצהריים ובערב כביש DN1 הראשי מבראשוב לבוקרשט פקוק בצורה קיצונית. הנסיעה דרומה דרך מעבר רוקאר-בראן (DN73) והאוטוסטרדה A1 מפיטשט חוסכת שעות של עמידה בפקקים ומציעה נופי טבע נהדרים.
+          <p class="bg-amber-50 p-3.5 rounded-xl border border-amber-200 font-semibold text-amber-950">
+            ⚠️ <strong>הנחיית ניווט קריטית:</strong> בשבת כביש DN1 הראשי מבראשוב לבוקרשט פקוק בצורה קיצונית. הנסיעה דרומה דרך מעבר רוקאר-בראן (DN73) והאוטוסטרדה A1 מפיטשט חוסכת עמידה של שעות בפקקים וכוללת עצירת טבע מרהיבה.
           </p>
 
-          <ul class="list-disc list-inside space-y-4 mr-2">
-            <li>
-              <strong>09:30–12:30 | פארק החבלים Parc Aventura Brașov:</strong>
-              <p class="mr-4 mt-1 text-slate-700"><em>נסיעה:</em> כ-18 ק"מ (20 דקות) מרשנוב לשכונת נואה בבראשוב (שעות פתיחה בשבת: 10:00–18:30).</p>
-              <p class="mr-4 mt-1 text-slate-700"><em>פעילות:</em> פארק החבלים וההרפתקאות הגדול במזרח אירופה, בלב יער טבעי סביב אגם נואה, עם 16 מסלולי טיפוס ברמות קושי שונות ואומגות ארוכות מעל האגם.</p>
-              <div class="mr-4 mt-2 flex gap-2">
-                <a href="https://maps.google.com/?q=Parc+Aventura+Brasov" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps</a>
-                <a href="https://waze.com/ul?q=Parc+Aventura+Brasov" target="_blank" class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-bold">Waze</a>
-                <a href="https://parc-aventura.ro/" target="_blank" class="bg-sky-700 text-white text-sm px-3 py-1 rounded-lg font-bold">אתר רשמי</a>
+          <ul class="space-y-4">
+            <li class="bg-sky-50 p-4 rounded-2xl border border-sky-200">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                <strong class="text-xl text-sky-950">09:30–12:30 | פארק החבלים Parc Aventura Brașov</strong>
+                <span class="badge-drive">נסיעה מהוילה: כ-20 דקות (18 ק"מ)</span>
               </div>
+              <p class="mb-1"><strong>חניה מומלצת:</strong> מגרש החניה הצמוד לפארק ליד אגם נואה (Parcare Parc Aventura).</p>
+              <p>פארק האתגרים הגדול במזרח אירופה בלב יער טבעי סביב אגם נואה עם 16 מסלולי טיפוס ואומגות ארוכות מעל האגם.</p>
             </li>
 
-            <li>
-              <strong>13:30–15:30 | נסיעה במעבר רוקאר-בראן ועצירה בקניון דמבוביצ'וארה (Cheile Dâmbovicioarei):</strong>
-              <p class="mr-4 mt-1 text-slate-700"><em>נסיעה:</em> כ-35 ק"מ על כביש DN73 דרך מעבר ההרים ההיסטורי רוקאר-בראן. בצומת Podu Dâmboviței פונים ימינה לכביש צדדי צר (DC22) ונוסעים כ-2.5 ק"מ פנימה.</p>
-              <p class="mr-4 mt-1 text-slate-700"><em>רקע וטבע:</em> קניון טבעי וצר שנחצב באבן גיר ברכס פיאטרה קראיולוי, עם קירות סלע זקופים של 150–200 מ' ולאורכו נחל צלול ומפלים קטנים.</p>
-              <p class="mr-4 mt-1 text-slate-700"><em>איפה לחנות:</em> חונים במגרש החניה הצמוד ל<strong>מערת דמבוביצ'וארה (Peștera Dâmbovicioara)</strong>. אם עמוס בשבת, חונים ברחבות החניה ליד בתי ההארחה כ-400 מטר לפני המערה.</p>
-              <p class="mr-4 mt-1 text-slate-700"><em>מה עושים (משך ביקור: כ-1 שעה):</em> ביקור קצר ונוח של כ-15–20 דקות במערת הנטיפים המוארת (מתאים לילדים), הליכה רגלית קלה ומישורית לאורך פלג המים, והתרשמות מדוכני הכפר המוכרים דבש יער טהור, ריבות פירות יער וגבינות מעושנות מקומיות (Brânză de burduf).</p>
-              <div class="mr-4 mt-2 flex gap-2">
+            <li class="bg-sky-50 p-4 rounded-2xl border border-sky-200">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                <strong class="text-xl text-sky-950">14:15–15:30 | מעבר רוקאר-בראן וקניון דמבוביצ'וארה (Cheile Dâmbovicioarei)</strong>
+                <span class="badge-drive">נסיעה מבראשוב: כ-45 דקות (35 ק"מ)</span>
+              </div>
+              <p class="mb-1"><strong>חניה מומלצת:</strong> חניון מערת דמבוביצ'וארה (Parcare Peștera Dâmbovicioara) או ברחבות החניה של בתי ההארחה כ-400 מ' לפני המערה.</p>
+              <p class="mb-2"><strong>הליכה וטבע:</strong> קניון טבעי צר שנחצב באבן גיר ברכס פיאטרה קראיולוי עם קירות סלע של 150–200 מ' ולאורכו נחל צלול ומפלים. ביקור של 20 דקות במערת הנטיפים המוארת (מתאים מאוד לילדים), הליכה לאורך הנחל, והתרשמות מדוכני הכפר המוכרים דבש יער טהור וגבינות מעושנות מקומיות (Brânză de burduf).</p>
+              <div class="mt-2 flex gap-2">
                 <a href="https://maps.google.com/?q=Pestera+Dambovicioara" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps</a>
                 <a href="https://waze.com/ul?q=Pestera+Dambovicioara" target="_blank" class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-bold">Waze</a>
               </div>
             </li>
 
-            <li>
-              <strong>15:30–18:30 | המשך נסיעה חלקה ומהירה לבוקרשט:</strong>
-              <p class="mr-4 mt-1 text-slate-700">נסיעה דרך Câmpulung, התחברות ליד פיטשט לאוטוסטרדה המהירה <strong>A1</strong> ישירות לבוקרשט (כ-160 ק"מ | כ-2.5 שעות). הגעה למלון / דירה במרכז בוקרשט (Centrul Vechi), צ'ק-אין וארוחת ערב בסביבה.</p>
+            <li class="bg-sky-50 p-4 rounded-2xl border border-sky-200">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                <strong class="text-xl text-sky-950">15:30–18:30 | נסיעה חלקה באוטוסטרדה A1 לבוקרשט</strong>
+                <span class="badge-drive">נסיעה מדמבוביצ'וארה לבוקרשט: כ-2.5 שעות (160 ק"מ)</span>
+              </div>
+              <p class="mb-1"><strong>חניה מומלצת במרכז בוקרשט:</strong> חניון תת-קרקעי מוסדר ושמור Parcare Subterana Universitate או חניון Cocor ליד העיר העתיקה.</p>
+              <p>הגעה ישירה לבוקרשט, צ'ק-אין בדירה/מלון במרכז העיר וארוחת ערב.</p>
             </li>
           </ul>
         </div>
@@ -445,42 +469,39 @@
         <div class="flex flex-wrap items-center justify-between gap-3 border-b-2 border-sky-200 pb-4 mb-4">
           <div>
             <span class="text-sky-700 font-bold text-sm tracking-wider uppercase">בוקרשט ההיסטורית ושופינג</span>
-            <h3 class="text-2xl md:text-3xl font-extrabold text-sky-950">יום 9 | ראשון, 27/09: העיר העתיקה של בוקרשט, מוסדות קולינריים ושופינג באפי</h3>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-sky-950">יום 9 | ראשון, 27/09: העיר העתיקה, מוסדות קולינריים ושופינג באפי</h3>
           </div>
           <span class="bg-sky-100 text-sky-900 px-4 py-1.5 rounded-full text-base font-bold border border-sky-200">בוקרשט</span>
         </div>
 
         <div class="space-y-4 text-base md:text-lg text-slate-800">
-          <ul class="list-disc list-inside space-y-4 mr-2">
-            <li>
-              <strong>10:00–14:00 | סיור מקיף בעיר העתיקה (Centrul Vechi / Lipscani):</strong>
-              <p class="mr-4 mt-1 text-slate-700"><em>רקע והיסטוריה:</em> רובע המסחר ההיסטורי מהמאה ה-15 ששרד את ההריסות של צ'אושסקו ושוקם להפליא למדרחוב שוקק חיים.</p>
-              <p class="mr-4 mt-1 text-slate-700"><em>אתרי חובה בסיור:</em></p>
-              <ul class="list-circle list-inside mr-6 space-y-1 text-slate-700 text-sm md:text-base">
-                <li><strong>חצר הנסיכים הישנה (Curtea Veche):</strong> שרידי מבצר ולאד המשפד מ-1459 – תעודת הלידה ההיסטורית של בוקרשט.</li>
-                <li><strong>חנות הספרים Cărturești Carusel:</strong> (שעות: 10:00–22:00) מבנה היסטורי לבן ומפואר בן 6 קומות עם מרפסות מעוגלות ותאורה טבעית – אחת מחנויות הספרים היפות בעולם (נקודת צילום חובה).</li>
-                <li><strong>כנסיית סטוורופולאוס (Biserica Stavropoleos):</strong> (שעות: 08:00–18:00) פנינה אדריכלית מ-1724 בסגנון ברנקובני עם חצר עמודים ועציצים קסומה.</li>
-                <li><strong>שדרת הניצחון (Calea Victoriei):</strong> השדרה הוותיקה והיוקרתית שנסגרת בימי ראשון לרכבים והופכת למדרחוב תוסס של בתי קפה ואמנים.</li>
+          <ul class="space-y-4">
+            <li class="bg-sky-50 p-4 rounded-2xl border border-sky-200">
+              <strong class="text-xl text-sky-950 block mb-1">10:00–14:00 | סיור רגלי מקיף בעיר העתיקה (Centrul Vechi / Lipscani)</strong>
+              <p class="text-slate-700 mb-2">רובע המסחר ההיסטורי מהמאה ה-15 ששוקם להפליא למדרחוב תוסס. אתרי חובה:</p>
+              <ul class="list-disc list-inside mr-2 space-y-1 text-slate-700 text-sm md:text-base">
+                <li><strong>חצר הנסיכים הישנה (Curtea Veche):</strong> שרידי מבצר ולאד המשפד מ-1459 – מקום ייסוד העיר בוקרשט.</li>
+                <li><strong>חנות הספרים Cărturești Carusel:</strong> מבנה היסטורי לבן בן 6 קומות עם מרפסות מעוגלות ותאורה טבעית (נקודת צילום חובה).</li>
+                <li><strong>כנסיית סטוורופולאוס (Biserica Stavropoleos):</strong> פנינה אדריכלית מ-1724 בסגנון ברנקובני עם חצר עמודים קסומה.</li>
+                <li><strong>שדרת הניצחון (Calea Victoriei):</strong> השדרה הוותיקה שנסגרת בימי ראשון לרכבים והופכת למדרחוב אמנים.</li>
               </ul>
-              <div class="mr-4 mt-2 flex gap-2">
-                <a href="https://maps.google.com/?q=Carturesti+Carusel" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps חנות ספרים</a>
-                <a href="https://maps.google.com/?q=Stavropoleos+Monastery" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps כנסייה</a>
+            </li>
+
+            <li class="bg-sky-50 p-4 rounded-2xl border border-sky-200">
+              <strong class="text-xl text-sky-950 block mb-1">14:00–15:30 | ארוחת צהריים היסטורית</strong>
+              <p class="text-slate-700">במסעדת הבירה הניאו-גותית Caru' cu bere (מ-1879) או בחצר הגלריות ההיסטורית של Hanul lui Manuc (מ-1808).</p>
+            </li>
+
+            <li class="bg-sky-50 p-4 rounded-2xl border border-sky-200">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                <strong class="text-xl text-sky-950">16:00–20:00 | שופינג ובילוי ב-AFI Cotroceni</strong>
+                <span class="badge-drive">נסיעה מהמרכז: כ-15 דקות</span>
               </div>
-            </li>
-
-            <li>
-              <strong>14:00–15:30 | ארוחת צהריים באחת מנקודות הציון המפורסמות:</strong>
-              <p class="mr-4 mt-1 text-slate-700"><strong>קארו קו ברה (Caru' cu bere):</strong> מסעדת הבירה המפורסמת מ-1879 עם אדריכלות ניאו-גותית, ציורי קיר, ויטראז'ים ואווירה חיה (שעות: 09:00–24:00).</p>
-              <p class="mr-4 mt-1 text-slate-700"><em>או</em> <strong>חאנול לואי מנוק (Hanul lui Manuc):</strong> פונדק שיירות מ-1808 עם חצר גלריות עץ ענקית ומטבח מסורתי מעולה (שעות: 10:00–24:00).</p>
-            </li>
-
-            <li>
-              <strong>16:00–20:00 | שופינג ובילוי ב-AFI Cotroceni (קניון אפי):</strong>
-              <p class="mr-4 mt-1 text-slate-700"><em>שעות פתיחה:</em> 10:00–22:00. הקניון הגדול והמרשים ברומניה. מאות מותגים בינלאומיים במחירים מעולים, משטח החלקה על הקרח מקורה (Cotroceni On Ice), קארטינג ומתחם מסעדות ענק.</p>
-              <div class="mr-4 mt-2 flex gap-2">
+              <p class="mb-1"><strong>חניה מומלצת:</strong> חניון הקניון המקורה הענק Parcare AFI Cotroceni (חינם בשעות הראשונות, שפע חניה).</p>
+              <p>הקניון הגדול ברומניה עם מאות מותגים בינלאומיים, משטח החלקה על הקרח מקורה (Cotroceni On Ice), קארטינג ומתחם מסעדות.</p>
+              <div class="mt-2 flex gap-2">
                 <a href="https://maps.google.com/?q=AFI+Cotroceni" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps</a>
                 <a href="https://waze.com/ul?q=AFI+Cotroceni" target="_blank" class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-bold">Waze</a>
-                <a href="https://www.aficotroceni.ro/" target="_blank" class="bg-sky-700 text-white text-sm px-3 py-1 rounded-lg font-bold">אתר רשמי</a>
               </div>
             </li>
           </ul>
@@ -492,43 +513,44 @@
         <div class="flex flex-wrap items-center justify-between gap-3 border-b-2 border-sky-200 pb-4 mb-4">
           <div>
             <span class="text-sky-700 font-bold text-sm tracking-wider uppercase">ספא, קניות וסגירת לוגיסטיקה</span>
-            <h3 class="text-2xl md:text-3xl font-extrabold text-sky-950">יום 10 | שני, 28/09: מרחצאות טרמה, קניון בניאסה, החזרת רכב ולינה בהילטון</h3>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-sky-950">יום 10 | שני, 28/09: מרחצאות טרמה, קניון בניאסה ולינה בהילטון OTP</h3>
           </div>
-          <span class="bg-sky-100 text-sky-900 px-4 py-1.5 rounded-full text-base font-bold border border-sky-200">סגירת טיול ברוגע</span>
+          <span class="bg-sky-100 text-sky-900 px-4 py-1.5 rounded-full text-base font-bold border border-sky-200">סגירת טיול בנחת</span>
         </div>
 
         <div class="space-y-4 text-base md:text-lg text-slate-800">
-          <ul class="list-disc list-inside space-y-4 mr-2">
-            <li>
-              <strong>10:00–15:00 | טרמה בוקרשט (Therme București):</strong>
-              <p class="mr-4 mt-1 text-slate-700"><em>שעות פתיחה:</em> 10:00–23:00 בימי שני.</p>
-              <p class="mr-4 mt-1 text-slate-700"><em>רקע וחשיבות:</em> מרכז המרחצאות, הבריכות הטרמיות והספא המקורה הגדול באירופה, הניזון ממים גיאותרמיים בטמפרטורה של 33°C ומוקף ב-1,500 עצי דקל טבעיים.</p>
-              <p class="mr-4 mt-1 text-slate-700"><em>מתחמים:</em> <strong>The Palm</strong> (בריכות ענק מחוממות, ג'קוזי ובר מים), <strong>Elysium</strong> (6 סאונות נושאיות ובריכות מינרלים ייחודיות), ו-<strong>Galaxy</strong> (פארק מגלשות מים מקורה ענק ובריכת גלים).</p>
-              <div class="mr-4 mt-2 flex gap-2">
+          <ul class="space-y-4">
+            <li class="bg-sky-50 p-4 rounded-2xl border border-sky-200">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                <strong class="text-xl text-sky-950">10:00–15:00 | מרחצאות טרמה (Therme București)</strong>
+                <span class="badge-drive">נסיעה ממרכז בוקרשט: כ-25 דקות (20 ק"מ)</span>
+              </div>
+              <p class="mb-1"><strong>חניה מומלצת:</strong> חניון הספא הענק והמוסדר בכניסה Parcare Therme București (חינם לאורחים).</p>
+              <p class="mb-2"><strong>מתחמים ופינוק:</strong> מרכז המרחצאות והספא המקורה הגדול באירופה (33°C קבועים) מוקף 1,500 עצי דקל. מתחם <em>The Palm</em> (בריכות ענק וג'קוזי), <em>Elysium</em> (סאונות נושאיות ובריכות מינרלים), ו-<em>Galaxy</em> (פארק מגלשות מים ענק ובריכת גלים).</p>
+              <div class="mt-2 flex gap-2">
                 <a href="https://maps.google.com/?q=Therme+Bucuresti" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps</a>
                 <a href="https://waze.com/ul?q=Therme+Bucuresti" target="_blank" class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-bold">Waze</a>
                 <a href="https://therme.ro/en" target="_blank" class="bg-sky-700 text-white text-sm px-3 py-1 rounded-lg font-bold">אתר רשמי והזמנות</a>
               </div>
             </li>
 
-            <li>
-              <strong>15:30–18:30 | קניון בניאסה (Băneasa Shopping City):</strong>
-              <p class="mr-4 mt-1 text-slate-700"><em>נסיעה:</em> כ-15 דקות דרומה מטרמה על כביש DN1 (שעות פתיחה: 10:00–22:00). מרכז קניות פרימיום מרווח להשלמת קניות, מזכרות וסופרמרקט ענק.</p>
-              <div class="mr-4 mt-2 flex gap-2">
-                <a href="https://maps.google.com/?q=Baneasa+Shopping+City" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps</a>
-                <a href="https://waze.com/ul?q=Baneasa+Shopping+City" target="_blank" class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-bold">Waze</a>
+            <li class="bg-sky-50 p-4 rounded-2xl border border-sky-200">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                <strong class="text-xl text-sky-950">15:30–18:30 | קניות אחרונות ב-Băneasa Shopping City</strong>
+                <span class="badge-drive">נסיעה מטרמה דרומה: כ-15 דקות</span>
               </div>
+              <p class="mb-1"><strong>חניה מומלצת:</strong> חניון קניון בניאסה המוסדר Parcare Băneasa Shopping City.</p>
+              <p>קניון פרימיום מרווח להשלמת קניות, מזכרות וסופרמרקט ענק.</p>
             </li>
 
-            <li>
-              <strong>19:00–20:30 | ארוחת ערב קלה והתארגנות סופית לטיסה.</strong>
-            </li>
-
-            <li>
-              <strong>20:30–21:30 | צ'ק-אין בהילטון והחזרת הרכב השכור:</strong>
-              <p class="mr-4 mt-1 text-slate-700">הגעה למלון <strong>Hilton Garden Inn Bucharest Airport</strong> (ממש מול טרמינל OTP). פריקת המזוודות והמשפחה בלובי, ונסיעה של דקה להחזרת הרכב במגרש ההשכרה של נמל התעופה OTP בנחת בערב. צעד זה מונע לחץ, בידוקים ועיכובים לפנות בוקר.</p>
-              <div class="mr-4 mt-2 flex gap-2">
-                <a href="https://maps.google.com/?q=Hilton+Garden+Inn+Bucharest+Airport" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps מלון הילטון</a>
+            <li class="bg-emerald-50 p-4 rounded-2xl border-2 border-emerald-300">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                <strong class="text-xl text-emerald-950">20:30–21:30 | צ'ק-אין בהילטון שדה התעופה והחזרת הרכב השכור</strong>
+                <span class="badge-parking">לינה מול הטרמינל</span>
+              </div>
+              <p class="text-slate-800">הגעה למלון <strong>Hilton Garden Inn Bucharest Airport</strong> (ממש מול הטרמינל). פריקת המזוודות והמשפחה בלובי, ונסיעה של דקה להחזרת הרכב במגרש ההשכרה של שדה התעופה OTP בנחת בערב. צעד זה מונע לחץ ובידוקים לפנות בוקר.</p>
+              <div class="mt-2 flex gap-2">
+                <a href="https://maps.google.com/?q=Hilton+Garden+Inn+Bucharest+Airport" target="_blank" class="bg-emerald-600 text-white text-sm px-3 py-1 rounded-lg font-bold">Google Maps מלון</a>
                 <a href="https://waze.com/ul?q=Hilton+Garden+Inn+Bucharest+Airport" target="_blank" class="bg-blue-500 text-white text-sm px-3 py-1 rounded-lg font-bold">Waze</a>
               </div>
             </li>
@@ -541,25 +563,24 @@
         <div class="flex flex-wrap items-center justify-between gap-3 border-b-2 border-sky-200 pb-4 mb-4">
           <div>
             <span class="text-sky-700 font-bold text-sm tracking-wider uppercase">טיסה חזרה לישראל</span>
-            <h3 class="text-2xl md:text-3xl font-extrabold text-sky-950">יום 11 | שלישי, 29/09: טיסה מוקדמת חזרה לישראל (Wizz Air)</h3>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-sky-950">יום 11 | שלישי, 29/09: טיסה מוקדמת חזרה הביתה (Wizz Air)</h3>
           </div>
           <span class="bg-sky-100 text-sky-900 px-4 py-1.5 rounded-full text-base font-bold border border-sky-200">המראה ב-05:45</span>
         </div>
 
         <div class="space-y-3 text-base md:text-lg text-slate-800">
           <ul class="list-disc list-inside space-y-2 mr-2">
-            <li><strong>03:15–03:30 | הליכה רגלית ישירה לטרמינל:</strong> יציאה מלובי מלון הילטון – הליכה רגלית נוחה של 3–5 דקות בלבד ישירות לאולם הטיסות היוצאות ב-OTP (ללא צורך במוניות, שאטלים או התעסקות עם רכב).</li>
-            <li><strong>03:30–05:15 | בידוק ביטחוני ודלפקים:</strong> הפקדת מזוודות בדלפקי Wizz Air, בידוק ביטחוני וביקורת דרכונים (השער נסגר ב-05:15).</li>
-            <li><strong>05:45:</strong> המראה בטיסת Wizz Air ישירה חזרה לתל אביב. נחיתה בארץ.</li>
+            <li><strong>03:15–03:30 | הליכה רגלית ישירה לטרמינל:</strong> יציאה מלובי מלון הילטון – הליכה רגלית נוחה של 3–5 דקות בלבד ישירות לאולם הטיסות היוצאות ב-OTP (ללא צורך בהסעות, שאטלים או מוניות).</li>
+            <li><strong>03:30–05:15:</strong> הפקדת כבודה בדלפקי Wizz Air, בידוק ביטחוני וביקורת דרכונים (השער נסגר ב-05:15).</li>
+            <li><strong>05:45:</strong> המראה בטיסת Wizz Air ישירה לתל אביב. נחיתה בישראל.</li>
           </ul>
         </div>
       </article>
 
     </main>
 
-    <!-- סגירה חמה -->
     <footer class="text-center py-6 text-slate-600 font-semibold text-base">
-      🇷🇴 טיול מהנה, בטוח ומוצלח למשפחה ברומניה! 🚗🌲
+      🇷🇴 טיול משפחתי מוצלח, בטוח ומלא חוויות ברומניה! 🚗🌲
     </footer>
 
   </div>
