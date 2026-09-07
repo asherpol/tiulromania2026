@@ -3,88 +3,153 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>מפת מסלול רומניה 2026</title>
+  <title>מפת מסלול מפורטת רומניה 2026</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Assistant', sans-serif; background-color: #f0f9ff; }
+    
+    /* סמן רגיל לפי יום */
     .day-marker {
       width: 32px; height: 32px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      color: white; font-weight: 800; font-size: 15px;
-      border: 2px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+      color: white; font-weight: 800; font-size: 14px;
+      border: 2px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+    
+    /* סמן חלופה / אופציה - מסגרת מקווקוות */
+    .alt-marker {
+      width: 32px; height: 32px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 800; font-size: 12px;
+      border: 2px dashed #ffffff; box-shadow: 0 2px 6px rgba(0,0,0,0.45);
+    }
+
+    /* סמן חניה ייעודי - P עם גבול כחול כהה מקווקו */
+    .parking-marker {
+      width: 28px; height: 28px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      background-color: #1e3a8a; color: #ffffff; font-weight: 900; font-size: 15px;
+      border: 2px dashed #60a5fa; box-shadow: 0 2px 5px rgba(0,0,0,0.5);
     }
   </style>
 </head>
 <body class="text-slate-900 min-h-screen p-3 md:p-6 flex flex-col gap-4">
 
-  <!-- כותרת עליונה -->
-  <header class="bg-white border-2 border-sky-300 rounded-2xl p-4 md:p-6 shadow-md text-center">
-    <h1 class="text-2xl md:text-4xl font-extrabold text-sky-950 mb-1">🗺️ מפת אתרים וניווט – רומניה 2026</h1>
-    <p class="text-slate-700 text-base md:text-lg">סינון נקודות לפי ימי הטיול, צבעים ייחודיים וקישורי ניווט ישירים</p>
+  <!-- כותרת ראשית ומקרא -->
+  <header class="bg-white border-2 border-sky-300 rounded-2xl p-4 md:p-6 shadow-md">
+    <div class="text-center mb-4">
+      <h1 class="text-2xl md:text-4xl font-extrabold text-sky-950 mb-1">🗺️ מפת אתרים, חניות וחלופות – רומניה 2026</h1>
+      <p class="text-slate-700 text-base md:text-lg">כולל נקודות חניה מומלצות (🅿️), סימון חלופות (קו מקווקו) וסינון לפי ימים</p>
+    </div>
+
+    <!-- מקרא סימונים -->
+    <div class="flex flex-wrap justify-center items-center gap-4 bg-sky-50 p-3 rounded-xl border border-sky-200 text-sm md:text-base font-bold text-slate-800 mb-4">
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-6 h-6 rounded-full bg-blue-600 text-white text-xs flex items-center justify-center border border-white shadow">●</span>
+        <span>אתר ראשי</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-6 h-6 rounded-md bg-purple-600 text-white text-xs flex items-center justify-center border-2 border-dashed border-white shadow">Alt</span>
+        <span>חלופה / אופציה</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-6 h-6 rounded-md bg-blue-900 text-white text-xs flex items-center justify-center border-2 border-dashed border-blue-400 shadow">🅿️</span>
+        <span>חניה מומלצת</span>
+      </div>
+    </div>
     
     <!-- כפתורי סינון ימים -->
-    <div class="flex flex-wrap justify-center gap-2 mt-4" id="filter-buttons">
-      <button onclick="filterDay('all')" class="day-btn bg-sky-950 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:bg-sky-900 transition">הכל (11 ימים)</button>
-      <button onclick="filterDay(1)" class="day-btn bg-blue-600 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:opacity-90">יום 1</button>
-      <button onclick="filterDay(2)" class="day-btn bg-teal-600 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:opacity-90">יום 2</button>
-      <button onclick="filterDay(4)" class="day-btn bg-amber-600 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:opacity-90">יום 4</button>
-      <button onclick="filterDay(5)" class="day-btn bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:opacity-90">יום 5</button>
-      <button onclick="filterDay(6)" class="day-btn bg-purple-600 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:opacity-90">יום 6</button>
-      <button onclick="filterDay(7)" class="day-btn bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:opacity-90">יום 7</button>
-      <button onclick="filterDay(8)" class="day-btn bg-rose-600 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:opacity-90">יום 8</button>
-      <button onclick="filterDay(9)" class="day-btn bg-cyan-700 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:opacity-90">יום 9</button>
-      <button onclick="filterDay(10)" class="day-btn bg-orange-600 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:opacity-90">יום 10</button>
+    <div class="flex flex-wrap justify-center gap-2" id="filter-buttons">
+      <button onclick="filterDay('all')" class="bg-sky-950 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:bg-sky-900 transition">הכל</button>
+      <button onclick="filterDay(1)" class="bg-blue-600 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:opacity-90">יום 1</button>
+      <button onclick="filterDay(2)" class="bg-teal-600 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:opacity-90">יום 2</button>
+      <button onclick="filterDay(4)" class="bg-amber-600 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:opacity-90">יום 4</button>
+      <button onclick="filterDay(5)" class="bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:opacity-90">יום 5</button>
+      <button onclick="filterDay(6)" class="bg-purple-600 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:opacity-90">יום 6</button>
+      <button onclick="filterDay(7)" class="bg-indigo-600 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:opacity-90">יום 7</button>
+      <button onclick="filterDay(8)" class="bg-rose-600 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:opacity-90">יום 8</button>
+      <button onclick="filterDay(9)" class="bg-cyan-700 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:opacity-90">יום 9</button>
+      <button onclick="filterDay(10)" class="bg-orange-600 text-white px-3 py-1.5 rounded-lg text-base font-bold shadow hover:opacity-90">יום 10</button>
     </div>
   </header>
 
   <!-- מפה אינטראקטיבית -->
   <div class="bg-white border-2 border-sky-300 rounded-2xl p-2 shadow-md">
-    <div id="map" class="w-full h-[550px] md:h-[650px] rounded-xl"></div>
+    <div id="map" class="w-full h-[580px] md:h-[680px] rounded-xl"></div>
   </div>
 
   <script>
     const locations = [
-      { day: 1, name: "נמל תעופה OTP", lat: 44.5707, lng: 26.0844, color: "#2563eb", desc: "נחיתה, איסוף רכב שכור ויציאה צפונה.", waze: "https://waze.com/ul?q=Henri+Coanda+Airport" },
-      { day: 1, name: "קניון Shopping City Ploiești", lat: 44.9662, lng: 25.9922, color: "#2563eb", desc: "סים מקומי, כספומט והצטיידות ענקית ב-Carrefour.", waze: "https://waze.com/ul?q=Shopping+City+Ploiesti" },
-      { day: 1, name: "וילה כפרית ברשנוב", lat: 45.5900, lng: 25.4600, color: "#2563eb", desc: "בסיס הלינה שלכם בטרנסילבניה ל-7 לילות.", waze: "https://waze.com/ul?q=Rasnov" },
-      
-      { day: 2, name: "פויאנה בראשוב (רכבל פוסטווארול)", lat: 45.5947, lng: 25.5539, color: "#0d9488", desc: "עלייה בגונדולה לפסגה (1,799 מ') לתצפית 360 מעלות.", waze: "https://waze.com/ul?q=Telegondola+Postavarul" },
-      { day: 2, name: "בית חב\"ד בראשוב", lat: 45.6450, lng: 25.5920, color: "#0d9488", desc: "סעודה מפסקת לקראת יום כיפור.", waze: "https://waze.com/ul?q=Chabad+Brasov" },
-      { day: 2, name: "כנסיית המבצר בפרז'מר (חלופה א')", lat: 45.7222, lng: 25.7744, color: "#0d9488", desc: "אתר מורשת אונסק\"ו מהמאה ה-13 עם 270 תאי מגורים בחומה.", waze: "https://waze.com/ul?q=Prejmer+Fortified+Church" },
+      // יום 1
+      { day: 1, type: "site", name: "נמל תעופה OTP", lat: 44.5707, lng: 26.0844, color: "#2563eb", desc: "נחיתה, קבלת רכב שכור ויציאה צפונה.", waze: "https://waze.com/ul?q=Henri+Coanda+Airport" },
+      { day: 1, type: "site", name: "Shopping City Ploiești", lat: 44.9662, lng: 25.9922, color: "#2563eb", desc: "הצטיידות ענקית בסופר Carrefour, סים וכספומט.", waze: "https://waze.com/ul?q=Shopping+City+Ploiesti" },
+      { day: 1, type: "parking", name: "חניון Shopping City Ploiești", lat: 44.9655, lng: 25.9915, color: "#1e3a8a", desc: "חניון קרקע מרווח וחינמי מול הקניון.", waze: "https://waze.com/ul?q=Shopping+City+Ploiesti" },
+      { day: 1, type: "site", name: "וילה כפרית ברשנוב", lat: 45.5900, lng: 25.4600, color: "#2563eb", desc: "בסיס הלינה שלכם בטרנסילבניה (7 לילות).", waze: "https://waze.com/ul?q=Rasnov" },
 
-      { day: 4, name: "שמורת הדובים ליברטי (זרנשט)", lat: 45.5800, lng: 25.3350, color: "#d97706", desc: "סיור האכלה של דובים חומים ביער טבעי (להביא דרכונים).", waze: "https://waze.com/ul?q=Libearty+Bear+Sanctuary+Zarnesti" },
-      { day: 4, name: "טירת בראן (\"דרקולה\")", lat: 45.5152, lng: 25.3672, color: "#d97706", desc: "מבצר מהמאה ה-14, חצר גלריות עץ ושוק גבינות.", waze: "https://waze.com/ul?q=Bran+Castle" },
-      { day: 4, name: "מגלשת הרים בפונדטה", lat: 45.4540, lng: 25.3600, color: "#d97706", desc: "מגלשה אלפינית חדישה לאורך 1.6 ק\"מ מול הנוף.", waze: "https://waze.com/ul?q=Cheile+Gradistei+Fundata" },
-      { day: 4, name: "הכפרים פשטרה ומגורה (Amfiteatrul)", lat: 45.5050, lng: 25.2900, color: "#d97706", desc: "תצפיות פסטורליות עוצרות נשימה וקפה מול הרכסים.", waze: "https://waze.com/ul?q=Amfiteatrul+Transilvania" },
+      // יום 2
+      { day: 2, type: "site", name: "מבצר רשנוב ועמק גלז'ריה", lat: 45.5910, lng: 25.4700, color: "#0d9488", desc: "מבצר איכרים מהמאה ה-13 ובאר בעומק 146 מטר.", waze: "https://waze.com/ul?q=Cetatea+Rasnov" },
+      { day: 2, type: "parking", name: "חניון מבצר רשנוב (למטה)", lat: 45.5895, lng: 25.4715, color: "#1e3a8a", desc: "חניון מוסדר בתחתית הגבעה ליד המעלית/רכבת.", waze: "https://waze.com/ul?q=Parcare+Cetatea+Rasnov" },
+      { day: 2, type: "site", name: "גונדולה פוסטווארול (פויאנה בראשוב)", lat: 45.5947, lng: 25.5539, color: "#0d9488", desc: "עלייה ברכבל לפסגה (1,799 מ') לתצפית 360 מעלות.", waze: "https://waze.com/ul?q=Telegondola+Postavarul" },
+      { day: 2, type: "parking", name: "חניון גונדולה פויאנה בראשוב", lat: 45.5940, lng: 25.5530, color: "#1e3a8a", desc: "מגרש החניה המרכזי למרגלות הרכבל.", waze: "https://waze.com/ul?q=Telegondola+Postavarul" },
+      { day: 2, type: "site", name: "בית חב\"ד בראשוב", lat: 45.6450, lng: 25.5920, color: "#0d9488", desc: "סעודה מפסקת בערב יום כיפור.", waze: "https://waze.com/ul?q=Chabad+Brasov" },
+      { day: 2, type: "alt", name: "כנסיית פרז'מר (חלופה א')", lat: 45.7222, lng: 25.7744, color: "#0d9488", desc: "כנסייה מבוצרת אונסק\"ו מהמאה ה-13 (270 תאי מגורים).", waze: "https://waze.com/ul?q=Prejmer+Fortified+Church" },
 
-      { day: 5, name: "קניון 7 הסולמות", lat: 45.5650, lng: 25.6420, color: "#059669", desc: "מסלול מפלים וסולמות מתכת ואומגות ביער.", waze: "https://waze.com/ul?q=Canionul+7+Scari" },
-      { day: 5, name: "חוות הפורלים ברשנוב", lat: 45.5820, lng: 25.4450, color: "#059669", desc: "דייג עצמאי וארוחת דגים טריים עם ממליגה ומוז'דיי.", waze: "https://waze.com/ul?q=Pastravarie+Rasnov" },
-      { day: 5, name: "מסעדת Coliba Haiducilor (פויאנה בראשוב)", lat: 45.5980, lng: 25.5560, color: "#059669", desc: "מסעדת ציידים אותנטית מעוטרת עורות וקרניים עם פולקלור ופפנאש.", waze: "https://waze.com/ul?q=Coliba+Haiducilor+Poiana+Brasov" },
+      // יום 4
+      { day: 4, type: "site", name: "שמורת הדובים ליברטי", lat: 45.5800, lng: 25.3350, color: "#d97706", desc: "סיור האכלת בוקר לדובים חומים ביער (חובה דרכונים!).", waze: "https://waze.com/ul?q=Libearty+Bear+Sanctuary+Zarnesti" },
+      { day: 4, type: "parking", name: "חניון שמורת ליברטי", lat: 45.5805, lng: 25.3340, color: "#1e3a8a", desc: "חניון עפר מסודר וחינמי בכניסה לשמורה.", waze: "https://waze.com/ul?q=Libearty+Bear+Sanctuary+Zarnesti" },
+      { day: 4, type: "site", name: "טירת בראן (\"טירת דרקולה\")", lat: 45.5152, lng: 25.3672, color: "#d97706", desc: "מבצר מהמאה ה-14, מעון המלכה מריה ושוק גבינות.", waze: "https://waze.com/ul?q=Bran+Castle" },
+      { day: 4, type: "parking", name: "חניון טירת בראן", lat: 45.5140, lng: 25.3685, color: "#1e3a8a", desc: "חניון מוסדר בתשלום למרגלות הטירה ברח' Sextil Pușcariu.", waze: "https://waze.com/ul?q=Bran+Castle" },
+      { day: 4, type: "alt", name: "הכפרים פשטרה ומגורה (Amfiteatrul)", lat: 45.5050, lng: 25.2900, color: "#d97706", desc: "נוף אלפיני כפרי עוצר נשימה מול הרכסים.", waze: "https://waze.com/ul?q=Amfiteatrul+Transilvania" },
+      { day: 4, type: "alt", name: "מגלשת הרים בפונדטה (Cheile Grădiștei)", lat: 45.4540, lng: 25.3600, color: "#d97706", desc: "מגלשה אלפינית חדישה לאורך 1.6 ק\"מ בגובה 1,300 מ'.", waze: "https://waze.com/ul?q=Cheile+Gradistei+Fundata" },
 
-      { day: 6, name: "מצודת סיגישוארה (אונסק\"ו)", lat: 46.2197, lng: 24.7928, color: "#9333ea", desc: "עיר מבצר מימי הביניים, מגדל השעון ומדרגות התלמידים.", waze: "https://waze.com/ul?q=Sighisoara+Citadel" },
-      { day: 6, name: "מבצר רופאה", lat: 46.0375, lng: 25.2210, color: "#9333ea", desc: "מבצר ספירלי על סלע בזלת ענק עם תצפית 360 מעלות.", waze: "https://waze.com/ul?q=Cetatea+Rupea" },
-      { day: 6, name: "הכפר ויסקרי (אונסק\"ו)", lat: 46.0550, lng: 25.0900, color: "#9333ea", desc: "כנסייה מבוצרת וכפר סקסוני אותנטי בפטרונות המלך צ'ארלס.", waze: "https://waze.com/ul?q=Viscri+Fortified+Church" },
-      { day: 6, name: "ארמון פלש (חלופה ב')", lat: 45.3599, lng: 25.5426, color: "#9333ea", desc: "מעון הקיץ המלכותי המפואר של המלך קרול הראשון.", waze: "https://waze.com/ul?q=Peles+Castle" },
-      { day: 6, name: "אגם בולבוצ'י ומערת יאלומיצה (בוצ'ג'י)", lat: 45.3610, lng: 25.4380, color: "#9333ea", desc: "מנזר בפתח מערה, גשרי עץ בבטן ההר ואגם אלפיני בגובה 1,438 מ'.", waze: "https://waze.com/ul?q=Pestera+Ialomitei" },
+      // יום 5
+      { day: 5, type: "site", name: "קניון 7 הסולמות", lat: 45.5650, lng: 25.6420, color: "#059669", desc: "נקיק צר, 7 סולמות מתכת ליד מפלים ואומגות ביער.", waze: "https://waze.com/ul?q=Canionul+7+Scari" },
+      { day: 5, type: "parking", name: "חניון קניון 7 הסולמות (Dâmbu Morii)", lat: 45.5680, lng: 25.6380, color: "#1e3a8a", desc: "חניון מוצא המסלול ב-Dâmbu Morii (בתשלום קל).", waze: "https://waze.com/ul?q=Canionul+7+Scari" },
+      { day: 5, type: "site", name: "חוות הפורלים ברשנוב", lat: 45.5820, lng: 25.4450, color: "#059669", desc: "דייג עצמאי וארוחת דגים טריים עם ממליגה ומוז'דיי.", waze: "https://waze.com/ul?q=Pastravarie+Rasnov" },
+      { day: 5, type: "site", name: "מסעדת Coliba Haiducilor", lat: 45.5980, lng: 25.5560, color: "#059669", desc: "בקתת ציידים אותנטית עם נגנים עממיים ואוכל רומני משובח.", waze: "https://waze.com/ul?q=Coliba+Haiducilor+Poiana+Brasov" },
+      { day: 5, type: "parking", name: "חניון Coliba Haiducilor", lat: 45.5975, lng: 25.5555, color: "#1e3a8a", desc: "חניה נוחה הצמודה למסעדה בפויאנה בראשוב.", waze: "https://waze.com/ul?q=Coliba+Haiducilor+Poiana+Brasov" },
 
-      { day: 7, name: "רכבל בליה ואגם בליה (טרנספגראשן)", lat: 45.6025, lng: 24.6175, color: "#4f46e5", desc: "רכבל מעל מפל בליה אל אגם קרחוני בגובה 2,034 מ'.", waze: "https://waze.com/ul?q=Telecabina+Balea+Cascada" },
-      { day: 7, name: "קניון זרנשט (חלופה ב')", lat: 45.5480, lng: 25.2860, color: "#4f46e5", desc: "הליכה מישורית מוצלת בנקיק גיר צר עם קירות סלע של 200 מ'.", waze: "https://waze.com/ul?q=Fantana+lui+Botorog" },
+      // יום 6
+      { day: 6, type: "site", name: "מצודת סיגישוארה (אונסק\"ו)", lat: 46.2197, lng: 24.7928, color: "#9333ea", desc: "עיר מבצר מימי הביניים, מגדל השעון ומדרגות התלמידים.", waze: "https://waze.com/ul?q=Sighisoara+Citadel" },
+      { day: 6, type: "parking", name: "חניון מצודת סיגישוארה", lat: 46.2185, lng: 24.7905, color: "#1e3a8a", desc: "חניון בתחתית המצודה ברח' Anton Pann.", waze: "https://waze.com/ul?q=Sighisoara+Citadel" },
+      { day: 6, type: "site", name: "מבצר רופאה (Cetatea Rupea)", lat: 46.0375, lng: 25.2210, color: "#9333ea", desc: "מבצר ספירלי על סלע בזלת ענק עם תצפית 360 מעלות.", waze: "https://waze.com/ul?q=Cetatea+Rupea" },
+      { day: 6, type: "parking", name: "חניון מבצר רופאה", lat: 46.0368, lng: 25.2200, color: "#1e3a8a", desc: "חניה מסודרת וחינמית בשער המבצר.", waze: "https://waze.com/ul?q=Cetatea+Rupea" },
+      { day: 6, type: "site", name: "הכפר ויסקרי (Viscri)", lat: 46.0550, lng: 25.0900, color: "#9333ea", desc: "כפר סקסוני אונסק\"ו אותנטי וכנסייה מבוצרת לבנה.", waze: "https://waze.com/ul?q=Viscri+Fortified+Church" },
+      { day: 6, type: "parking", name: "חניון הכפר ויסקרי", lat: 46.0535, lng: 25.0880, color: "#1e3a8a", desc: "חניון הכניסה לכפר (הכניסה לרחובות ברכב מוגבלת).", waze: "https://waze.com/ul?q=Viscri+Fortified+Church" },
+      { day: 6, type: "alt", name: "ארמון פלש בסינאיה (חלופה ב')", lat: 45.3599, lng: 25.5426, color: "#9333ea", desc: "מעון הקיץ המלכותי המפואר של המלך קרול הראשון.", waze: "https://waze.com/ul?q=Peles+Castle" },
+      { day: 6, type: "parking", name: "חניון ארמון פלש", lat: 45.3580, lng: 25.5445, color: "#1e3a8a", desc: "חניון רחוב Furnica בתשלום מתחת לשביל הארמון.", waze: "https://waze.com/ul?q=Peles+Castle" },
+      { day: 6, type: "alt", name: "אגם בולבוצ'י ומערת יאלומיצה", lat: 45.3610, lng: 25.4380, color: "#9333ea", desc: "מנזר בפתח מערה, גשרי עץ בבטן ההר ואגם אלפיני.", waze: "https://waze.com/ul?q=Pestera+Ialomitei" },
+      { day: 6, type: "alt", name: "ספא ופארק מים Paradisul Acvatic", lat: 45.6710, lng: 25.5750, color: "#9333ea", desc: "מתחם בריכות מקורה מחומם, ג'קוזי וסאונות בבראשוב.", waze: "https://waze.com/ul?q=Paradisul+Acvatic+Brasov" },
 
-      { day: 8, name: "פארק חבלים Parc Aventura Brașov", lat: 45.6150, lng: 25.6400, color: "#e11d48", desc: "16 מסלולי טיפוס ואומגות ענק סביב אגם נואה.", waze: "https://waze.com/ul?q=Parc+Aventura+Brasov" },
-      { day: 8, name: "קניון ומערת דמבוביצ'וארה", lat: 45.4430, lng: 25.2220, color: "#e11d48", desc: "מערת נטיפים מוארת, נקיק מים ודוכני גבינות במעבר רוקאר-בראן.", waze: "https://waze.com/ul?q=Pestera+Dambovicioara" },
+      // יום 7
+      { day: 7, type: "site", name: "רכבל בליה ואגם בליה (טרנספגראשן)", lat: 45.6025, lng: 24.6175, color: "#4f46e5", desc: "עלייה ברכבל אל אגם קרחוני בגובה 2,034 מטר.", waze: "https://waze.com/ul?q=Telecabina+Balea+Cascada" },
+      { day: 7, type: "parking", name: "חניון רכבל בליה קסקדה", lat: 45.6020, lng: 24.6170, color: "#1e3a8a", desc: "חניון מוסדר בתשלום למרגלות תחנת הרכבל.", waze: "https://waze.com/ul?q=Telecabina+Balea+Cascada" },
+      { day: 7, type: "alt", name: "קניון זרנשט (חלופה ב')", lat: 45.5480, lng: 25.2860, color: "#4f46e5", desc: "הליכה מוצלת ומישורית בנקיק גיר צר (קירות של 200 מ').", waze: "https://waze.com/ul?q=Fantana+lui+Botorog" },
+      { day: 7, type: "parking", name: "חניון קניון זרנשט (Botorog)", lat: 45.5510, lng: 25.2920, color: "#1e3a8a", desc: "חניון עפר לצד מעיין Fântâna lui Botorog.", waze: "https://waze.com/ul?q=Fantana+lui+Botorog" },
 
-      { day: 9, name: "העיר העתיקה וקרטורשטי (בוקרשט)", lat: 44.4320, lng: 26.1000, color: "#0e7490", desc: "רובע ליפקאני, חנות הספרים הלבנה ומסעדת Caru' cu Bere.", waze: "https://waze.com/ul?q=Carturesti+Carusel" },
-      { day: 9, name: "קניון AFI Cotroceni", lat: 44.4300, lng: 26.0530, color: "#0e7490", desc: "הקניון הגדול ברומניה עם משטח החלקה על הקרח וקניות.", waze: "https://waze.com/ul?q=AFI+Cotroceni" },
+      // יום 8
+      { day: 8, type: "site", name: "פארק חבלים Parc Aventura בראשוב", lat: 45.6150, lng: 25.6400, color: "#e11d48", desc: "16 מסלולי טיפוס ואומגות ענק סביב אגם נואה.", waze: "https://waze.com/ul?q=Parc+Aventura+Brasov" },
+      { day: 8, type: "parking", name: "חניון Parc Aventura", lat: 45.6145, lng: 25.6390, color: "#1e3a8a", desc: "חניון האגם והפארק בשכונת נואה בבראשוב.", waze: "https://waze.com/ul?q=Parc+Aventura+Brasov" },
+      { day: 8, type: "site", name: "קניון ומערת דמבוביצ'וארה", lat: 45.4430, lng: 25.2220, color: "#e11d48", desc: "מערת נטיפים מוארת, נקיק מים ודוכני גבינות במעבר רוקאר-בראן.", waze: "https://waze.com/ul?q=Pestera+Dambovicioara" },
+      { day: 8, type: "parking", name: "חניון מערת דמבוביצ'וארה", lat: 45.4425, lng: 25.2215, color: "#1e3a8a", desc: "מגרש החניה הצמוד לפתח המערה.", waze: "https://waze.com/ul?q=Pestera+Dambovicioara" },
 
-      { day: 10, name: "מרחצאות טרמה (Therme București)", lat: 44.6050, lng: 26.0820, color: "#ea580c", desc: "ספא ענק, 1,500 דקלים, בריכות תרמיות ומגלשות מים.", waze: "https://waze.com/ul?q=Therme+Bucuresti" },
-      { day: 10, name: "קניון בניאסה (Băneasa Shopping City)", lat: 44.5070, lng: 26.0860, color: "#ea580c", desc: "מתחם קניות יוקרתי, מזכרות וסופרמרקט ענק.", waze: "https://waze.com/ul?q=Baneasa+Shopping+City" },
-      { day: 10, name: "מלון Hilton Garden Inn OTP", lat: 44.5715, lng: 26.0815, color: "#ea580c", desc: "לינה מול הטרמינל והחזרת הרכב השכור בנחת בערב.", waze: "https://waze.com/ul?q=Hilton+Garden+Inn+Bucharest+Airport" }
+      // יום 9
+      { day: 9, type: "site", name: "העיר העתיקה וקרטורשטי (בוקרשט)", lat: 44.4320, lng: 26.1000, color: "#0e7490", desc: "חנות הספרים Cărturești Carusel, חצר הנסיכים ושדרת הניצחון.", waze: "https://waze.com/ul?q=Carturesti+Carusel" },
+      { day: 9, type: "parking", name: "חניון תת-קרקעי Universitate בוקרשט", lat: 44.4355, lng: 26.1020, color: "#1e3a8a", desc: "חניון תת-קרקעי מודרני ושמור בלב מרכז העיר.", waze: "https://waze.com/ul?q=Parcare+Universitate" },
+      { day: 9, type: "site", name: "קניון AFI Cotroceni", lat: 44.4300, lng: 26.0530, color: "#0e7490", desc: "הקניון הגדול ברומניה עם החלקה על הקרח ושופינג.", waze: "https://waze.com/ul?q=AFI+Cotroceni" },
+      { day: 9, type: "parking", name: "חניון מקורה AFI Cotroceni", lat: 44.4310, lng: 26.0520, color: "#1e3a8a", desc: "חניון ענק מקורה של הקניון (חינם בשעות ראשונות).", waze: "https://waze.com/ul?q=AFI+Cotroceni" },
+
+      // יום 10
+      { day: 10, type: "site", name: "מרחצאות טרמה (Therme București)", lat: 44.6050, lng: 26.0820, color: "#ea580c", desc: "ספא ענק, 1,500 דקלים, מים גיאותרמיים ומגלשות.", waze: "https://waze.com/ul?q=Therme+Bucuresti" },
+      { day: 10, type: "parking", name: "חניון מרחצאות טרמה", lat: 44.6045, lng: 26.0810, color: "#1e3a8a", desc: "חניון ענק מוסדר וחינמי בכניסה למתחם.", waze: "https://waze.com/ul?q=Therme+Bucuresti" },
+      { day: 10, type: "site", name: "קניון Băneasa Shopping City", lat: 44.5070, lng: 26.0860, color: "#ea580c", desc: "מתחם קניות יוקרתי, מזכרות וסופרמרקט ענק.", waze: "https://waze.com/ul?q=Baneasa+Shopping+City" },
+      { day: 10, type: "site", name: "מלון Hilton Garden Inn OTP", lat: 44.5715, lng: 26.0815, color: "#ea580c", desc: "מלון הלילה האחרון מול הטרמינל (החזרת רכב בערב).", waze: "https://waze.com/ul?q=Hilton+Garden+Inn+Bucharest+Airport" }
     ];
 
-    const map = L.map('map').setView([45.2, 25.5], 8);
+    const map = L.map('map').setView([45.25, 25.5], 8);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
       attribution: '© OpenStreetMap'
@@ -98,20 +163,37 @@
 
       locations.forEach(loc => {
         if (selectedDay === 'all' || loc.day === selectedDay) {
+          let iconHtml = '';
+          let iconSize = [32, 32];
+          let iconAnchor = [16, 16];
+
+          if (loc.type === 'parking') {
+            iconHtml = `<div class="parking-marker">P</div>`;
+            iconSize = [28, 28];
+            iconAnchor = [14, 14];
+          } else if (loc.type === 'alt') {
+            iconHtml = `<div class="alt-marker" style="background-color: ${loc.color};">Alt</div>`;
+          } else {
+            iconHtml = `<div class="day-marker" style="background-color: ${loc.color};">${loc.day}</div>`;
+          }
+
           const icon = L.divIcon({
             className: 'custom-div-icon',
-            html: `<div class="day-marker" style="background-color: ${loc.color};">${loc.day}</div>`,
-            iconSize: [32, 32],
-            iconAnchor: [16, 16]
+            html: iconHtml,
+            iconSize: iconSize,
+            iconAnchor: iconAnchor
           });
 
+          const typeLabel = loc.type === 'parking' ? '🅿️ נקודת חניה' : (loc.type === 'alt' ? '🔄 חלופה / אופציה' : '📍 אתר ראשי');
+
           const popupContent = `
-            <div style="font-family: 'Assistant', sans-serif; direction: rtl; text-align: right; min-width: 200px;">
-              <h3 style="margin: 0 0 5px; font-size: 17px; font-weight: 800; color: ${loc.color};">יום ${loc.day}: ${loc.name}</h3>
-              <p style="margin: 0 0 10px; font-size: 14px; color: #334155; line-height: 1.3;">${loc.desc}</p>
+            <div style="font-family: 'Assistant', sans-serif; direction: rtl; text-align: right; min-width: 210px;">
+              <span style="font-size: 11px; font-weight: 700; color: #64748b;">${typeLabel} (יום ${loc.day})</span>
+              <h3 style="margin: 2px 0 6px; font-size: 16px; font-weight: 800; color: ${loc.color};">${loc.name}</h3>
+              <p style="margin: 0 0 10px; font-size: 13.5px; color: #334155; line-height: 1.3;">${loc.desc}</p>
               <div style="display: flex; gap: 6px;">
-                <a href="https://maps.google.com/?q=${loc.lat},${loc.lng}" target="_blank" style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: bold;">Google Maps</a>
-                <a href="${loc.waze}" target="_blank" style="background: #0284c7; color: white; padding: 4px 8px; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: bold;">Waze</a>
+                <a href="https://maps.google.com/?q=${loc.lat},${loc.lng}" target="_blank" style="background: #059669; color: white; padding: 4px 8px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold;">Google Maps</a>
+                <a href="${loc.waze}" target="_blank" style="background: #0284c7; color: white; padding: 4px 8px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold;">Waze</a>
               </div>
             </div>
           `;
